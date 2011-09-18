@@ -1,9 +1,13 @@
 from exceptions import Exception
 
 class Property:
-    def __init__(self, price, location):
-        self.monthlyPrice = self._monthlyPriceFor(price[0], price[1])
+    def __init__(self, agent, price, location, link, agentId, publicationDateTime):
+        self.price = price
         self.address = location
+        self.agent = agent
+        self.agentId = agentId
+        self.publicationDateTime = publicationDateTime
+        self.link = link
 
     def _monthlyPriceFor(self, amount, period):
         if period == 'week':
@@ -12,7 +16,18 @@ class Property:
             return int(amount)
 
     def __str__(self):
-        return str(self.address) + " at " + str(self.monthlyPrice)
+        return str(self.address) + " at " + str(self.price)
+
+class Price:
+    def __init__(self, amount, period):
+        self.amount = amount
+        self.period = period
+
+    def monthlyPrice(self):
+        if self.period == 'week':
+            return int(self.amount) * 52 / 12
+        else:
+            return int(self.amount)
 
 class Address:
     LondonPostCodes = ("E1", "E1W", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "E11", "E12", "E13", "E14", "E15", "E16", "E17", "E18", "E19", "E20",
