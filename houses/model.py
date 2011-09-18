@@ -18,6 +18,16 @@ class Property:
     def __str__(self):
         return str(self.address) + " at " + str(self.price)
 
+    # TODO: add a valuetype superclass that provides equality methods
+    def __eq__(self, other):
+        if not isinstance(other, Property):
+            return False
+
+        return self.price == other.price and self.address == other.address and self.agent == other.agent and self.agentId == other.agentId and self.publicationDateTime == other.publicationDateTime and self.link == other.link
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 class Price:
     def __init__(self, amount, period):
         self.amount = amount
@@ -28,6 +38,16 @@ class Price:
             return int(self.amount) * 52 / 12
         else:
             return int(self.amount)
+
+    # TODO: add a valuetype superclass that provides equality methods
+    def __eq__(self, other):
+        if not isinstance(other, Price):
+            return False
+
+        return self.amount == other.amount and self.period == other.period
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
 
 class Address:
     LondonPostCodes = ("E1", "E1W", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "E11", "E12", "E13", "E14", "E15", "E16", "E17", "E18", "E19", "E20",
@@ -52,3 +72,13 @@ class Address:
         code = postcode if postcode[len(postcode) - 1:].isdigit() else postcode[:len(postcode) - 1]
         if code not in self.LondonPostCodes:
             raise Exception, postcode + " is not a valid London post code"
+
+    # TODO: add a valuetype superclass that provides equality methods
+    def __eq__(self, other):
+        if not isinstance(other, Address):
+            return False
+
+        return self.address == other.address and self.postcode == other.postcode
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
