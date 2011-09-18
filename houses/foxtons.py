@@ -2,7 +2,7 @@
 import urllib2
 import xml.etree.ElementTree as xml
 
-from houses.model import Property, Address
+from houses.model import Property, Address, monthlyPriceFor
 
 class Foxtons:
     def __init__(self):
@@ -21,7 +21,7 @@ class Foxtons:
         title = item.find("title").text
         matches = self.pattern.findall(title)[0]
 
-        return Property((matches[0], matches[1]), Address(matches[2], matches[3]))
+        return Property(monthlyPriceFor(matches[0], matches[1]), Address(matches[2], matches[3]))
 
 def main():
     for p in Foxtons().properties():
