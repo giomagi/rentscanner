@@ -5,7 +5,7 @@ from houses.model import Property, Price, Address
 from houses.persistence import Librarian
 
 class TestPersistence(unittest.TestCase):
-    def tearDown(self):
+    def setUp(self):
         self.cleanLibrary()
 
     def testRoundtripsAProperty(self):
@@ -38,4 +38,5 @@ class TestPersistence(unittest.TestCase):
         self.assertTrue(propertyThree in properties)
 
     def cleanLibrary(self):
-        os.remove(Librarian.LIBRARY_LOCATION)
+        if os.path.exists(Librarian.LIBRARY_LOCATION):
+            os.remove(Librarian.LIBRARY_LOCATION)

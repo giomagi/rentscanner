@@ -42,6 +42,9 @@ class Price:
         else:
             return int(self.amount)
 
+    def __str__(self):
+        return str(self.monthlyPrice())
+
     # TODO: add a valuetype superclass that provides equality methods
     def __eq__(self, other):
         if not isinstance(other, Price):

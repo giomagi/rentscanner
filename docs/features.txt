@@ -1,0 +1,9 @@
+- every item contains address, price, agent and link
+- the link is clickable and opens in the same window
+- css and niceties
+- allows deletion of items
+- property acquisition imports only newly added items
+- property acquisition refreshes data for existing items
+- property acquisition doesn't re-import discarded items
+- css and niceties
+- properties are scored based on postcode
