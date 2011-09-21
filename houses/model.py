@@ -14,6 +14,9 @@ class Property:
             return int(amount) * 52 / 12
         else:
             return int(amount)
+    
+    def key(self):
+        return self.agent + "_" + self.agentId
 
     def __str__(self):
         return str(self.address) + " at " + str(self.price)
