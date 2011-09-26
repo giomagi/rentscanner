@@ -1,6 +1,6 @@
 import unittest
 
-from houses.model import Address, Price
+from main.houses.model import Address, Price
 
 class TestModel(unittest.TestCase):
     def testPricesAreAlwaysDecodedAsMonthly(self):

@@ -2,7 +2,7 @@ from datetime import datetime
 import unittest
 import xml.etree.ElementTree as xml
 
-from houses.foxtons import Foxtons
+from main.houses.foxtons import Foxtons
 
 class TestFoxtons(unittest.TestCase):
     def testDecodesAFoxtonsItem(self):

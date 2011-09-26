@@ -1,8 +1,8 @@
 from datetime import datetime
 import os
 import unittest
-from houses.model import Property, Price, Address
-from houses.persistence import Librarian
+from main.houses.model import Property, Price, Address
+from main.houses.persistence import Librarian
 
 class TestPersistence(unittest.TestCase):
     def setUp(self):

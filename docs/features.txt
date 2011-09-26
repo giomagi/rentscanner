@@ -5,5 +5,4 @@
 - property acquisition imports only newly added items
 - property acquisition refreshes data for existing items
 - property acquisition doesn't re-import discarded items
-- css and niceties
 - properties are scored based on postcode

@@ -2,9 +2,8 @@
 import re
 import urllib2
 import xml.etree.ElementTree as xml
-import time
 
-from houses.model import Property, Address, Price
+from main.houses.model import Property, Address, Price
 
 class Foxtons:
     def __init__(self):
