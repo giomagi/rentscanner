@@ -1,5 +1,3 @@
-- every item contains address, price, agent and link
-- the link is clickable and opens in the same window
 - css and niceties
 - allows deletion of items
 - property acquisition imports only newly added items
