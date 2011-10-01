@@ -1,6 +1,8 @@
-- css and niceties
-- allows deletion of items
+- scripts for starting acquisition and web
 - property acquisition imports only newly added items
 - property acquisition refreshes data for existing items
 - property acquisition doesn't re-import discarded items
+- css and niceties
+- allows deletion of items from ui
+- allows rating of items from ui
 - properties are scored based on postcode
