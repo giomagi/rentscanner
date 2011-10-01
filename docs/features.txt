@@ -1,4 +1,3 @@
-- scripts for starting acquisition and web
 - property acquisition imports only newly added items
 - property acquisition refreshes data for existing items
 - property acquisition doesn't re-import discarded items
