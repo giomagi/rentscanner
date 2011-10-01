@@ -37,6 +37,24 @@ class TestPersistence(unittest.TestCase):
         self.assertTrue(propertyTwo in properties)
         self.assertTrue(propertyThree in properties)
 
+    def testAcquiringAnExistingPropertyUpdatesTheInformation(self):
+        propertyOne = Property("AGENT", Price(1000, "month"), Address("some place", "SW6"), "http://property_link",
+                             "123abc", datetime(2011, 9, 18, 21, 54, 32))
+
+        librarian = Librarian()
+        librarian.archiveProperties([propertyOne])
+
+        propertyTwo = Property("AGENT", Price(1250, "month"), Address("some place", "SW6"), "http://property_link",
+                             "123abc", datetime(2011, 9, 18, 22, 54, 32))
+
+        librarian = Librarian()
+        librarian.archiveProperties([propertyTwo])
+
+        properties = librarian.retrieveProperties()
+
+        self.assertEqual(1, len(properties))
+        self.assertEqual(propertyTwo, properties[0])
+
     def cleanLibrary(self):
         if os.path.exists(Librarian.LIBRARY_LOCATION):
             os.remove(Librarian.LIBRARY_LOCATION)

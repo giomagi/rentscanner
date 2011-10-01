@@ -1,7 +1,7 @@
-- property acquisition imports only newly added items
-- property acquisition refreshes data for existing items
-- property acquisition doesn't re-import discarded items
-- css and niceties
 - allows deletion of items from ui
 - allows rating of items from ui
+- property acquisition maintains user rating associated with it
+- css and niceties
 - properties are scored based on postcode
+
+- remove properties the agent has removed from the listing?
