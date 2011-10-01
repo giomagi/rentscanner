@@ -19,7 +19,8 @@ class Renderer:
             <tr>
                 <td>$agent</td>
                 <td>$price</td>
-                <td><a href="$link">$address</a></td>
+                <td><a href="$agentlink">$address</a></td>
+                <td><a href="$removelink">not interested</a></td>
             </tr>
     ''')
 
@@ -31,5 +32,6 @@ class Renderer:
             'agent' : property.agent,
             'price' : property.price.monthlyPrice(),
             'address' : property.address,
-            'link' : property.link
+            'agentlink' : property.link,
+            'removelink' : '/'.join(['rate', property.agent, str(property.agentId), 'remove'])
         })

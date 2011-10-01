@@ -3,7 +3,7 @@ import sys
 import datetime
 from main.houses.foxtons import Foxtons
 from main.houses.persistence import Librarian
-from main.web.webserver import GetPropertiesHandler
+from main.web.webserver import PropertiesHandler
 
 def startDataAcquisition():
     print 'Start Data Acquisition @ ' + str(datetime.datetime.now())
@@ -12,7 +12,7 @@ def startDataAcquisition():
 
 def startWeb():
     server_class = BaseHTTPServer.HTTPServer
-    webserver = server_class(('192.168.1.2', 1234), GetPropertiesHandler)
+    webserver = server_class(('192.168.1.2', 1234), PropertiesHandler)
 
     print "Web Server UP"
     try:

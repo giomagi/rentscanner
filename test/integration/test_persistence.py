@@ -55,6 +55,12 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual(1, len(properties))
         self.assertEqual(propertyTwo, properties[0])
 
+    def testUpdatesAPropertyWithUserPreferences(self):
+        raise Exception
+
+    def testUpdatingARatesPropertyMaintainsUserPreferences(self):
+        raise Exception
+
     def cleanLibrary(self):
         if os.path.exists(Librarian.LIBRARY_LOCATION):
             os.remove(Librarian.LIBRARY_LOCATION)

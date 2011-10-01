@@ -3,5 +3,6 @@
 - property acquisition maintains user rating associated with it
 - css and niceties
 - properties are scored based on postcode
+- use test resources (db) for testing
 
 - remove properties the agent has removed from the listing?
