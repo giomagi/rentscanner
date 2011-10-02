@@ -64,20 +64,3 @@ class TestWebServer(unittest.TestCase):
     def responseFor(self, conn, method, path = '/'):
         conn.request(method, path)
         return conn.getresponse()
-
-class TestFullPage(unittest.TestCase):
-    def testAGetRequestOnTheRootReturnsTheReport(self):
-        expectedHtml = 'expected HTML'
-        renderer = MockRenderer()
-
-        renderer.mockedResponse = expectedHtml
-        actualHtml = FullPage(renderer, MockLibrarian()).allProperties()
-
-        self.assertEqual(actualHtml, expectedHtml)
-
-class TestUserPreferences(unittest.TestCase):
-    def testARemoveRequestIsPassedThroughToTheLibrarian(self):
-        librarian = MockLibrarian()
-        UserPreferences(MockRenderer(), librarian).removeProperty('AGENT', 'id')
-
-        self.assertEqual(librarian.capturedRequest, ('remove', 'AGENT', 'id'))
