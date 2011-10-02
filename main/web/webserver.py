@@ -4,17 +4,14 @@ from main.houses.persistence import Librarian
 from main.web.renderer import Renderer
 
 class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
-    renderer = Renderer()
-    librarian = Librarian()
-
     def do_GET(self):
         if self.path != '/':
             self.notFound('Unknown resource ' + self.path)
 
-        self.success(self.renderer.render(self.librarian.retrieveProperties()))
+        self.success(FullPage().allProperties())
 
     def do_POST(self):
-        callArgs = self.path.split('/')
+        callArgs = self.path.split('/')[1:]
         if len(callArgs) != 4 or callArgs[0] != 'rate':
             self.badRequest('Expecting a rating update in the form /rate/agent/id/action, received ' + self.path)
 
@@ -35,4 +32,19 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(result)
 
+class FullPage():
+    def __init__(self, renderer = Renderer(), librarian = Librarian()):
+        self.renderer = renderer
+        self.librarian = librarian
 
+    def allProperties(self):
+        return self.renderer.render(self.librarian.retrieveProperties())
+
+
+class UserPreferences():
+    def __init__(self, renderer = Renderer(), librarian = Librarian()):
+        self.renderer = renderer
+        self.librarian = librarian
+
+    def removeProperty(self, agentName, agentId):
+        self.librarian.markAsNotInteresting(agentName, agentId)

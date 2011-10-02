@@ -1,5 +1,14 @@
 from exceptions import Exception
 
+class Rating:
+    @classmethod
+    def NOT_RATED(cls):
+        return 'NOT_RATED'
+
+    @classmethod
+    def NOT_INTERESTING(cls):
+        return 'NOT_INTERESTING'
+
 class Property:
     def __init__(self, agent, price, location, link, agentId, publicationDateTime):
         self.price = price
@@ -8,6 +17,7 @@ class Property:
         self.agentId = agentId
         self.publicationDateTime = publicationDateTime
         self.link = link
+        self.rating = Rating.NOT_RATED()
 
     def _monthlyPriceFor(self, amount, period):
         if period == 'week':

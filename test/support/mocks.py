@@ -9,9 +9,15 @@ class MockRenderer(Renderer):
 
 class MockLibrarian(Librarian):
     mockedPropertiesList = []
+    capturedRequest = None
 
     def retrieveProperties(self):
         return self.mockedPropertiesList
 
     def archiveProperties(self, properties):
         pass
+
+    def markAsNotInteresting(self, agent, agentId):
+        self.capturedRequest = ('remove', agent, agentId)
+
+

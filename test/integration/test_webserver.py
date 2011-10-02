@@ -2,7 +2,8 @@ import httplib
 import BaseHTTPServer
 import threading
 import unittest
-from main.web.webserver import PropertiesHandler
+from main.web.webserver import PropertiesHandler, FullPage, UserPreferences
+from test.support.mocks import MockRenderer, MockLibrarian
 
 class Server(threading.Thread):
 
@@ -34,16 +35,9 @@ class TestWebServer(unittest.TestCase):
         self.assertEqual(self.statusFor(conn, 'GET', '/something'), httplib.NOT_FOUND)
 
     #noinspection PyArgumentEqualDefault
-    def testAGetRequestOnTheRootReturnsTheReport(self):
+    def testAGetRequestOnTheRootReturnsOk(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
-        response = self.responseFor(conn, 'GET', '/')
-
-        self.assertEqual(response.status, httplib.OK)
-        
-        data = response.read()
-        self.assertEqual('<html>', data.strip()[:6])
-        self.assertEqual('</html>', data[len(data) - 7:])
-        self.assertTrue('Properties' in data)
+        self.assertEqual(self.statusFor(conn, 'GET', '/'), httplib.OK)
 
     def testPostRequestsThatDontSpecifyARatingUpdateReturnBadRequest(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
@@ -51,8 +45,9 @@ class TestWebServer(unittest.TestCase):
         self.assertEqual(self.statusFor(conn, 'POST', '/rate/id/remove'), httplib.BAD_REQUEST)
         self.assertEqual(self.statusFor(conn, 'POST', '/zzz'), httplib.BAD_REQUEST)
 
-    def testAPostRequestGetsPassedThroughToThePersistenceLayer(self):
-        raise Exception
+    def testAWellFormedPostRequestReturnsOK(self):
+        conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
+        self.assertEqual(self.statusFor(conn, 'POST', '/rate/agent/id/remove'), httplib.OK)
 
     def testRequestOnMethodsOtherThanGetAndPostReturnMethodNotSupported(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
@@ -69,3 +64,20 @@ class TestWebServer(unittest.TestCase):
     def responseFor(self, conn, method, path = '/'):
         conn.request(method, path)
         return conn.getresponse()
+
+class TestFullPage(unittest.TestCase):
+    def testAGetRequestOnTheRootReturnsTheReport(self):
+        expectedHtml = 'expected HTML'
+        renderer = MockRenderer()
+
+        renderer.mockedResponse = expectedHtml
+        actualHtml = FullPage(renderer, MockLibrarian()).allProperties()
+
+        self.assertEqual(actualHtml, expectedHtml)
+
+class TestUserPreferences(unittest.TestCase):
+    def testARemoveRequestIsPassedThroughToTheLibrarian(self):
+        librarian = MockLibrarian()
+        UserPreferences(MockRenderer(), librarian).removeProperty('AGENT', 'id')
+
+        self.assertEqual(librarian.capturedRequest, ('remove', 'AGENT', 'id'))
