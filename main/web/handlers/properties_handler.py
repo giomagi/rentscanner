@@ -1,21 +1,29 @@
 import BaseHTTPServer
 import httplib
+import os
 from main.houses.persistence import Librarian
 from main.web.renderer import Renderer
 
 class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path != '/':
-            self.notFound('Unknown resource ' + self.path)
+        if self.path == '/':
+            self.success(FullPage().allProperties())
+        elif self.path.startswith('/resources/'):
+            resourcePath = self.resourcePath()
 
-        self.success(FullPage().allProperties())
+            if os.path.isfile(resourcePath):
+                self.success(open(resourcePath).read())
+            else:
+                self.notFound('Unknown resource ' + self.path)
+        else:
+            self.notFound('Unknown resource ' + self.path)
 
     def do_POST(self):
         callArgs = self.path.split('/')[1:]
         if len(callArgs) != 4 or callArgs[0] != 'rate':
             self.badRequest('Expecting a rating update in the form /rate/agent/id/action, received ' + self.path)
-
-        self.sendResponse(httplib.OK, '')
+        else:
+            self.sendResponse(httplib.OK, '')
 
     def notFound(self, reason = ''):
         self.sendResponse(httplib.NOT_FOUND, reason)
@@ -31,6 +39,9 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/html")
         self.end_headers()
         self.wfile.write(result)
+
+    def resourcePath(self):
+        return os.path.join(os.path.dirname(__file__), '..' + self.path)
 
 class FullPage():
     def __init__(self, renderer = Renderer(), librarian = Librarian()):
