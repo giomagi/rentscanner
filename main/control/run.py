@@ -4,6 +4,7 @@ import datetime
 from main.houses.foxtons import Foxtons
 from main.houses.persistence import Librarian
 from main.web.webserver import PropertiesHandler
+from main.web.web_server import Server
 
 def startDataAcquisition():
     print 'Start Data Acquisition @ ' + str(datetime.datetime.now())
@@ -11,21 +12,10 @@ def startDataAcquisition():
     print 'Data Acquisition Completed @ ' + str(datetime.datetime.now())
 
 def startWeb():
-    server_class = BaseHTTPServer.HTTPServer
-    webserver = server_class(('192.168.1.2', 1234), PropertiesHandler)
-
-    print "Web Server UP"
-    try:
-        webserver.serve_forever()
-    except KeyboardInterrupt:
-        pass
-    
-    webserver.server_close()
-    print "Web Server DOWN"
+    Server().start()
 
 def stopWeb():
     raise Exception, 'Web stop supported yet through keyboard interrupt (for the time being)'
-
 
 def fail():
     raise Exception, 'Expected run <start|stop> <data|web>, obtained ' + str(sys.argv[1:])

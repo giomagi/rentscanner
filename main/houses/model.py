@@ -17,7 +17,6 @@ class Property:
         self.agentId = agentId
         self.publicationDateTime = publicationDateTime
         self.link = link
-        self.rating = Rating.NOT_RATED()
 
     def _monthlyPriceFor(self, amount, period):
         if period == 'week':
