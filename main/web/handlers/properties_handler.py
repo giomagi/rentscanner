@@ -20,10 +20,14 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     def do_POST(self):
         callArgs = self.path.split('/')[1:]
-        if len(callArgs) != 4 or callArgs[0] != 'rate':
-            self.badRequest('Expecting a rating update in the form /rate/agent/id/action, received ' + self.path)
+        if len(callArgs) != 3 or callArgs[0] != 'rate':
+            self.badRequest('Expecting a rating update in the form /rate/property_id/action, received ' + self.path)
         else:
-            self.sendResponse(httplib.OK, '')
+            if callArgs[2] != 'remove':
+                self.badRequest('Supporting only remove at the moment')
+            else:
+                UserPreferences().removeProperty(callArgs[1])
+                self.sendResponse(httplib.OK, '')
 
     def notFound(self, reason = ''):
         self.sendResponse(httplib.NOT_FOUND, reason)
@@ -57,5 +61,5 @@ class UserPreferences():
         self.renderer = renderer
         self.librarian = librarian
 
-    def removeProperty(self, agentName, agentId):
-        self.librarian.markAsNotInteresting(agentName, agentId)
+    def removeProperty(self, propertyId):
+        self.librarian.markAsNotInteresting(propertyId)

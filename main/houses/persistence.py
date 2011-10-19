@@ -5,17 +5,25 @@ class Librarian:
     PROPERTIES_LOCATION = "/var/gio/rentscanner/properties.data"
     RATINGS_LOCATION = "/var/gio/rentscanner/ratings.data"
 
-    def __init__(self):
-        self.propertiesRegister = shelve.open(self.PROPERTIES_LOCATION)
-        self.ratingsRegister = shelve.open(self.RATINGS_LOCATION)
-
     def archiveProperties(self, properties):
+        propertiesRegister = shelve.open(self.PROPERTIES_LOCATION)
         for property in properties:
-            self.propertiesRegister[property.key()] = property
+            propertiesRegister[property.key()] = property
+
+        propertiesRegister.close()
 
     def retrieveInterestingProperties(self):
-        return [p for p in self.propertiesRegister.values() if p.key() not in self.ratingsRegister.keys()]
+        propertiesRegister = shelve.open(self.PROPERTIES_LOCATION)
+        ratingsRegister = shelve.open(self.RATINGS_LOCATION)
 
-    def markAsNotInteresting(self, agent, agentId):
-        key = agent + "_" + agentId
-        self.ratingsRegister[key] = Rating.NOT_INTERESTING()
+        res = [p for p in propertiesRegister.values() if p.key() not in ratingsRegister.keys()]
+
+        propertiesRegister.close()
+        ratingsRegister.close()
+
+        return res
+
+    def markAsNotInteresting(self, propertyId):
+        ratingsRegister = shelve.open(self.RATINGS_LOCATION)
+        ratingsRegister[propertyId] = Rating.NOT_INTERESTING()
+        ratingsRegister.close()

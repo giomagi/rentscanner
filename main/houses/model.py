@@ -25,7 +25,7 @@ class Property:
             return int(amount)
     
     def key(self):
-        return self.agent + "_" + self.agentId
+        return self.agent + "_" + str(self.agentId)
 
     def __str__(self):
         return str(self.address) + " at " + str(self.price)

@@ -6,6 +6,7 @@ class Renderer:
     <head>
         <title>Gio's little experiment for flat search</title>
 		<script type="text/javascript" src="resources/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="resources/rentscanner.js"></script>
     </head>
 
     <body>
@@ -17,11 +18,11 @@ class Renderer:
 </html>''')
 
     htmlForItem = Template('''
-            <tr>
+            <tr id=$key>
                 <td>$agent</td>
                 <td>$price</td>
                 <td><a href="$agentlink">$address</a></td>
-                <td><a href="$removelink">not interested</a></td>
+                <td><button type="button" onclick="removeProperty('$key')">not interested</button></td>
             </tr>
     ''')
 
@@ -30,9 +31,9 @@ class Renderer:
 
     def _renderProperty(self, property):
         return self.htmlForItem.substitute({
+            'key' : property.key(),
             'agent' : property.agent,
             'price' : property.price.monthlyPrice(),
             'address' : property.address,
-            'agentlink' : property.link,
-            'removelink' : '/'.join(['rate', property.agent, str(property.agentId), 'remove'])
+            'agentlink' : property.link
         })

@@ -1,7 +1,5 @@
-- server setup and startup in ad-hoc class (allow to mount different handler in various locations - e.g. resources)
-- allows deletion of items from ui
+- make persistence layer work on a real db (or at least keeping the shelve open)
 - allows rating of items from ui
-- property acquisition maintains user rating associated with it
 - make rating storage user-based
 - css and niceties
 - properties are scored based on postcode

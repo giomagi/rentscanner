@@ -56,23 +56,23 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual(propertyTwo, properties[0])
 
     def testAPropertyMarkedAsNotInterestingDoesntGetRetrieved(self):
-        propertyOne = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
+        property = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
                                '123abc', datetime(2011, 9, 18, 21, 54, 32))
 
         librarian = Librarian()
-        librarian.archiveProperties([propertyOne])
-        librarian.markAsNotInteresting('AGENT', '123abc')
+        librarian.archiveProperties([property])
+        librarian.markAsNotInteresting(property.key())
 
         properties = librarian.retrieveInterestingProperties()
         self.assertEqual(0, len(properties))
 
     def testUpdatingARatedPropertyMaintainsUserPreferences(self):
         librarian = Librarian()
-        librarian.archiveProperties([
-            (Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                      '123abc', datetime(2011, 9, 18, 21, 54, 32)))])
+        property = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
+                            '123abc', datetime(2011, 9, 18, 21, 54, 32))
 
-        librarian.markAsNotInteresting('AGENT', '123abc')
+        librarian.archiveProperties([property])
+        librarian.markAsNotInteresting(property.key())
 
         librarian.archiveProperties([
             (Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
