@@ -14,7 +14,7 @@ class TestPersistence(unittest.TestCase):
 
         librarian = Librarian()
         librarian.archiveProperties([aProperty])
-        properties = librarian.retrieveProperties()
+        properties = librarian.retrieveInterestingProperties()
 
         self.assertEqual(1, len(properties))
         self.assertEqual(aProperty, properties[0])
@@ -30,7 +30,7 @@ class TestPersistence(unittest.TestCase):
         librarian = Librarian()
         librarian.archiveProperties([propertyOne, propertyTwo])
         librarian.archiveProperties([propertyThree])
-        properties = librarian.retrieveProperties()
+        properties = librarian.retrieveInterestingProperties()
 
         self.assertEqual(3, len(properties))
         self.assertTrue(propertyOne in properties)
@@ -50,7 +50,7 @@ class TestPersistence(unittest.TestCase):
         librarian = Librarian()
         librarian.archiveProperties([propertyTwo])
 
-        properties = librarian.retrieveProperties()
+        properties = librarian.retrieveInterestingProperties()
 
         self.assertEqual(1, len(properties))
         self.assertEqual(propertyTwo, properties[0])
@@ -63,7 +63,7 @@ class TestPersistence(unittest.TestCase):
         librarian.archiveProperties([propertyOne])
         librarian.markAsNotInteresting('AGENT', '123abc')
 
-        properties = librarian.retrieveProperties()
+        properties = librarian.retrieveInterestingProperties()
         self.assertEqual(0, len(properties))
 
     def testUpdatingARatedPropertyMaintainsUserPreferences(self):
@@ -78,9 +78,13 @@ class TestPersistence(unittest.TestCase):
             (Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
                       '123abc', datetime(2011, 9, 18, 21, 54, 32)))])
         
-        properties = librarian.retrieveProperties()
+        properties = librarian.retrieveInterestingProperties()
         self.assertEqual(0, len(properties))
 
     def cleanLibrary(self):
-        if os.path.exists(Librarian.LIBRARY_LOCATION):
-            os.remove(Librarian.LIBRARY_LOCATION)
+        self.cleanPersistenceFile(Librarian.PROPERTIES_LOCATION)
+        self.cleanPersistenceFile(Librarian.RATINGS_LOCATION)
+
+    def cleanPersistenceFile(self, file):
+        if os.path.exists(file):
+            os.remove(file)

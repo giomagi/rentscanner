@@ -2,7 +2,6 @@
 - allows deletion of items from ui
 - allows rating of items from ui
 - property acquisition maintains user rating associated with it
-- separate properties and rating storage
 - make rating storage user-based
 - css and niceties
 - properties are scored based on postcode

@@ -38,7 +38,7 @@ class FullPage():
         self.librarian = librarian
 
     def allProperties(self):
-        return self.renderer.render(self.librarian.retrieveProperties())
+        return self.renderer.render(self.librarian.retrieveInterestingProperties())
 
 
 class UserPreferences():

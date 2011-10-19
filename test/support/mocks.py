@@ -11,7 +11,7 @@ class MockLibrarian(Librarian):
     mockedPropertiesList = []
     capturedRequest = None
 
-    def retrieveProperties(self):
+    def retrieveInterestingProperties(self):
         return self.mockedPropertiesList
 
     def archiveProperties(self, properties):
