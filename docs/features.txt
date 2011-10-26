@@ -1,8 +1,11 @@
-- make persistence layer work on a real db (or at least keeping the shelve open)
-- allows rating of items from ui
-- make rating storage user-based
+- post process properties at the end of loading to auto-generate ratings
+- agent coverage: prioritise on volumes
+- one command for load properties and startup service
 - css and niceties
-- properties are scored based on postcode
+- look at hosting solutions
+- automate deployment
+- allows rating of items from ui
+- remove properties (and associated ratings) once removed from the agent
+- make persistence layer work on a real db (or at least keeping the shelve open)
+- make rating storage user-based
 - use test resources (db) for testing
-
-- remove properties the agent has removed from the listing?
