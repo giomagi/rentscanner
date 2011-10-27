@@ -26,4 +26,4 @@ class TestLoader(unittest.TestCase):
         self.assertFalse(bad in filtered)
         
     def property(self, monthlyPrice, postcode):
-        return Property("AGENT", Price(monthlyPrice, 'month'), Address('address', postcode), 'link', '123', datetime.datetime.now())
+        return Property("AGENT", Price(monthlyPrice, 'month'), Address('address', postcode), 'link', '123', datetime.datetime.now(), 'description')

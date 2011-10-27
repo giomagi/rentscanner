@@ -22,6 +22,7 @@ class Renderer:
                 <td>$agent</td>
                 <td>$price</td>
                 <td><a href="$agentlink">$address</a></td>
+                <td>$description</td>
                 <td><button type="button" onclick="removeProperty('$key')">not interested</button></td>
             </tr>
     ''')
@@ -35,5 +36,6 @@ class Renderer:
             'agent' : property.agent,
             'price' : property.price.monthlyPrice(),
             'address' : property.address,
-            'agentlink' : property.link
+            'agentlink' : property.link,
+            'description' : property.description
         })

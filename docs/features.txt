@@ -1,8 +1,8 @@
-- post process properties at the end of loading to auto-generate ratings
-- description in the web report
 - agent coverage: prioritise on volumes
 - one command for load properties and startup service
+- nice description
 - css and niceties
+- web address and port parametric
 - separate agent and id in the key
 - look at hosting solutions
 - automate deployment

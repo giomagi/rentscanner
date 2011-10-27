@@ -10,7 +10,8 @@ class TestRenderer(unittest.TestCase):
                                            Address('some place', 'SW6'),
                                            'http://some/url.go',
                                            123,
-                                           datetime.datetime(2011, 9, 27))])
+                                           datetime.datetime(2011, 9, 27),
+                                           'description')])
 
         # TODO: use xpath
         self.assertTrue('AGENT' in html)
@@ -18,3 +19,4 @@ class TestRenderer(unittest.TestCase):
         self.assertTrue('SW6' in html)
         self.assertTrue('100' in html)
         self.assertTrue('<a href="http://some/url.go">' in html)
+        self.assertTrue('description' in html)

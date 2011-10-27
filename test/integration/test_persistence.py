@@ -10,7 +10,7 @@ class TestPersistence(unittest.TestCase):
 
     def testRoundtripsAProperty(self):
         aProperty = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                             '123abc', datetime(2011, 9, 18, 21, 54, 32))
+                             '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
 
         librarian = Librarian()
         librarian.archiveProperties([aProperty])
@@ -21,11 +21,11 @@ class TestPersistence(unittest.TestCase):
 
     def testRoundtripsMultipleProperties(self):
         propertyOne = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                               '123abc', datetime(2011, 9, 18, 21, 54, 32))
+                               '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
         propertyTwo = Property('AGENT', Price(1200, 'month'), Address('another place', 'NW1'), 'http://property_link_2',
-                               '333111', datetime(2011, 9, 18, 21, 54, 36))
+                               '333111', datetime(2011, 9, 18, 21, 54, 36), 'description')
         propertyThree = Property('AGENT', Price(1000, 'week'), Address('a different place', 'WC1N'), 'http://linkz',
-                                 'zza12ff', datetime(2011, 9, 18, 22, 54, 32))
+                                 'zza12ff', datetime(2011, 9, 18, 22, 54, 32), 'description')
 
         librarian = Librarian()
         librarian.archiveProperties([propertyOne, propertyTwo])
@@ -39,13 +39,13 @@ class TestPersistence(unittest.TestCase):
 
     def testAcquiringAnExistingPropertyUpdatesTheInformation(self):
         propertyOne = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                               '123abc', datetime(2011, 9, 18, 21, 54, 32))
+                               '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
 
         librarian = Librarian()
         librarian.archiveProperties([propertyOne])
 
         propertyTwo = Property('AGENT', Price(1250, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                               '123abc', datetime(2011, 9, 18, 22, 54, 32))
+                               '123abc', datetime(2011, 9, 18, 22, 54, 32), 'description')
 
         librarian = Librarian()
         librarian.archiveProperties([propertyTwo])
@@ -57,7 +57,7 @@ class TestPersistence(unittest.TestCase):
 
     def testAPropertyMarkedAsNotInterestingDoesntGetRetrieved(self):
         property = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                               '123abc', datetime(2011, 9, 18, 21, 54, 32))
+                               '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
 
         librarian = Librarian()
         librarian.archiveProperties([property])
@@ -69,14 +69,14 @@ class TestPersistence(unittest.TestCase):
     def testUpdatingARatedPropertyMaintainsUserPreferences(self):
         librarian = Librarian()
         property = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                            '123abc', datetime(2011, 9, 18, 21, 54, 32))
+                            '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
 
         librarian.archiveProperties([property])
         librarian.markAsNotInteresting(property.key())
 
         librarian.archiveProperties([
             (Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                      '123abc', datetime(2011, 9, 18, 21, 54, 32)))])
+                      '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description'))])
         
         properties = librarian.retrieveInterestingProperties()
         self.assertEqual(0, len(properties))
