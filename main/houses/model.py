@@ -18,12 +18,6 @@ class Property:
         self.publicationDateTime = publicationDateTime
         self.link = link
 
-    def _monthlyPriceFor(self, amount, period):
-        if period == 'week':
-            return int(amount) * 52 / 12
-        else:
-            return int(amount)
-    
     def key(self):
         return self.agent + "_" + str(self.agentId)
 
