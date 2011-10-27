@@ -1,11 +1,15 @@
 - post process properties at the end of loading to auto-generate ratings
+- description in the web report
 - agent coverage: prioritise on volumes
 - one command for load properties and startup service
 - css and niceties
+- separate agent and id in the key
 - look at hosting solutions
 - automate deployment
+- login screen
+- make rating storage user-based
+- move to a web framework (django?)
 - allows rating of items from ui
 - remove properties (and associated ratings) once removed from the agent
 - make persistence layer work on a real db (or at least keeping the shelve open)
-- make rating storage user-based
 - use test resources (db) for testing
