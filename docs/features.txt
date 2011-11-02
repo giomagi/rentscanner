@@ -1,5 +1,5 @@
 - agent coverage: prioritise on volumes
-    - winkworth 100+ (rss based)
+    - winkworth (description and refactor for commonalities w/ foxtons)
     - lawson rutter 40 + chard 60 + dexters 40 (html based) - difficult to parse
     - knight frank 40 (rss-based)
     - kfh ? (rss-based)
