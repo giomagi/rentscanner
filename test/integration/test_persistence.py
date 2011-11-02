@@ -3,14 +3,14 @@ import os
 import unittest
 from main.houses.model import Property, Price, Address
 from main.houses.persistence import Librarian
+from test.support.test_utils import PropertyMaker
 
-class TestPersistence(unittest.TestCase):
+class TestPersistence(PropertyMaker):
     def setUp(self):
         self.cleanLibrary()
 
     def testRoundtripsAProperty(self):
-        aProperty = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                             '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
+        aProperty = self.aProperty()
 
         librarian = Librarian()
         librarian.archiveProperties([aProperty])
@@ -20,12 +20,9 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual(aProperty, properties[0])
 
     def testRoundtripsMultipleProperties(self):
-        propertyOne = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                               '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
-        propertyTwo = Property('AGENT', Price(1200, 'month'), Address('another place', 'NW1'), 'http://property_link_2',
-                               '333111', datetime(2011, 9, 18, 21, 54, 36), 'description')
-        propertyThree = Property('AGENT', Price(1000, 'week'), Address('a different place', 'WC1N'), 'http://linkz',
-                                 'zza12ff', datetime(2011, 9, 18, 22, 54, 32), 'description')
+        propertyOne = self.aProperty(propId='123abc')
+        propertyTwo = self.aProperty(propId='333111')
+        propertyThree = self.aProperty(propId='zza12ff')
 
         librarian = Librarian()
         librarian.archiveProperties([propertyOne, propertyTwo])
@@ -38,14 +35,12 @@ class TestPersistence(unittest.TestCase):
         self.assertTrue(propertyThree in properties)
 
     def testAcquiringAnExistingPropertyUpdatesTheInformation(self):
-        propertyOne = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                               '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
+        propertyOne = self.aProperty(price=1000, pubTime=datetime(2011, 9, 18, 21, 54, 32))
 
         librarian = Librarian()
         librarian.archiveProperties([propertyOne])
 
-        propertyTwo = Property('AGENT', Price(1250, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                               '123abc', datetime(2011, 9, 18, 22, 54, 32), 'description')
+        propertyTwo = self.aProperty(price=1250, pubTime=datetime(2011, 9, 18, 22, 54, 32))
 
         librarian = Librarian()
         librarian.archiveProperties([propertyTwo])
@@ -56,8 +51,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual(propertyTwo, properties[0])
 
     def testAPropertyMarkedAsNotInterestingDoesntGetRetrieved(self):
-        property = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                               '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
+        property = self.aProperty()
 
         librarian = Librarian()
         librarian.archiveProperties([property])
@@ -68,15 +62,12 @@ class TestPersistence(unittest.TestCase):
 
     def testUpdatingARatedPropertyMaintainsUserPreferences(self):
         librarian = Librarian()
-        property = Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                            '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description')
+        property = self.aProperty()
 
         librarian.archiveProperties([property])
         librarian.markAsNotInteresting(property.key())
 
-        librarian.archiveProperties([
-            (Property('AGENT', Price(1000, 'month'), Address('some place', 'SW6'), 'http://property_link',
-                      '123abc', datetime(2011, 9, 18, 21, 54, 32), 'description'))])
+        librarian.archiveProperties([(self.aProperty())])
         
         properties = librarian.retrieveInterestingProperties()
         self.assertEqual(0, len(properties))

@@ -9,7 +9,7 @@ class Server(threading.Thread):
 
     def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, verbose=None):
         super(Server, self).__init__(group, target, name, args, kwargs, verbose)
-        self.host = '192.168.1.2'
+        self.host = '192.168.1.77'
         self.port = 1234
         server_class = BaseHTTPServer.HTTPServer
         self.webserver = server_class((self.host, self.port), PropertiesHandler)
