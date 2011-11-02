@@ -1,4 +1,38 @@
 - agent coverage: prioritise on volumes
+    - winkworth 100+ (rss based)
+    - lawson rutter 40 + chard 60 + dexters 40 (html based) - difficult to parse
+    - knight frank 40 (rss-based)
+    - kfh ? (rss-based)
+    - douglas and gordon 35 (included let agreed + under offer)
+    - marsh and parsons 50? (html based)
+    - sequence 60-all london (barnard marcus) (html based)
+    - tates 40 (html based)
+    - shaws 35 (incl. let agreed + under offer) - specialised w14 (html-based)
+    - john d wood 30 (html based)
+    - aspire 30 (html based)
+    - faron sutaria 25 (html based) - difficult to parse
+    - we! westbourne estates (rss based)
+    - brompton 20? (html based) - positional parsing
+    - john hollingsworth 20 (html based)
+    - hamptons 20? (html based), properties not in page source (dynamically loaded via js)
+    - martin & co ?? (html based)
+    - domus nova 10- (html based)
+    - cluttons 10? (html based)
+    - chesterton and humbert ?? (html based) - very difficult, params not in url
+    - alexander lewis 10 (html based)
+    - benham and reeves 10 (html based)
+    - jac stratton 10? (html based)
+    - coutts de lisle 10 (html based)
+    - bushells 10 (html based)
+    - may and co 10 (html based)
+    - mountgrange heritage 10? (html based)
+    - lhh residential 10- (html based) positional parsing
+    - edmund cude 10- (html based) - bloomsbury only
+    - anscombes 40 (html based) - hampstead
+    - living residentials 40 (html based) - hampstead
+    - carter jonas 10- (html based)
+    - vantage realty 10 (html based)
+    - brik 10-- (html based)
 - one command for load properties and startup service
 - nice description
 - css and niceties

@@ -10,6 +10,7 @@ class Foxtons:
     def __init__(self):
         self._titlePattern = re.compile(r'.(\d+)\s+per\s+(week|month)\s+(.*),\s+(\S+)')
         self._idPattern = re.compile(r'(\w+)$')
+        self._descPattern = re.compile(r'img src="([^"]*)".*>(.*)\. Contact Foxtons')
 
     def _feedURI(self):
         return 'http://www.foxtons.co.uk/feeds/foxtons_feed.rss?bedrooms_from=2&bedrooms_to=2&result_view=rss&search_type=LL&submit_type=search'
@@ -24,6 +25,7 @@ class Foxtons:
         try:
             titleMatches = self._titlePattern.findall(item.find('title').text)[0]
             idMatch = self._idPattern.findall(item.find('guid').text)[0]
+            descMatches = self._descPattern.findall(item.find('description').text)[0]
 
             return Property('Foxtons',
                             Price(titleMatches[0], titleMatches[1]),
@@ -31,7 +33,7 @@ class Foxtons:
                             item.findall('link')[0].text,
                             idMatch,
                             datetime.strptime(item.findall('pubDate')[0].text, '%a, %d %b %Y %H:%M:%S -0000'),
-                            item.findall('description')[0].text)
+                            descMatches[1] + '.',
+                            descMatches[0])
         except Exception, e:
             print 'Failed extraction: %s' % e
-

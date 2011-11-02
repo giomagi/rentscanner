@@ -10,7 +10,7 @@ class Rating:
         return 'NOT_INTERESTING'
 
 class Property:
-    def __init__(self, agent, price, location, link, agentId, publicationDateTime, description):
+    def __init__(self, agent, price, location, link, agentId, publicationDateTime, description, image):
         self.price = price
         self.address = location
         self.agent = agent
@@ -18,6 +18,7 @@ class Property:
         self.publicationDateTime = publicationDateTime
         self.link = link
         self.description = description
+        self.image = image
 
     def key(self):
         return self.agent + "_" + str(self.agentId)

@@ -16,3 +16,5 @@ class TestFoxtons(unittest.TestCase):
         self.assertEqual("http://www.foxtons.co.uk/rental-property-in-kensington/chpk0260124", property.link)
         self.assertEqual("chpk0260124", property.agentId)
         self.assertEqual(datetime(2011, 9, 16, 14, 17, 51), property.publicationDateTime)
+        self.assertEqual("This stunning third floor one bedroomed flat offers a spacious interior with a high standard of decor throughout, modern fittings and fixtures, bright rooms and a superb location for shops, services and transport links.", property.description)
+        self.assertEqual("http://r.yhd.net/1316192650/chpk0260124_small-1.jpg", property.image)
