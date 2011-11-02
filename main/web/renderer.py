@@ -10,7 +10,7 @@ class Renderer:
     </head>
 
     <body>
-        <div>Properties</div>
+        <h1>Properties</h1>
         <table>
             $properties
         </table>

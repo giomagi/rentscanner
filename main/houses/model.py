@@ -39,7 +39,7 @@ class Property:
 class Price:
     def __init__(self, amount, period):
         self.amount = amount
-        self.period = period
+        self.period = self._validatePeriod(period)
 
     def monthlyPrice(self):
         if self.period == 'week':
@@ -47,10 +47,18 @@ class Price:
         else:
             return int(self.amount)
 
+    def _validatePeriod(self, period):
+        if period in ('week', 'p/w'):
+            return 'week'
+        elif period in ('month', 'pcm'):
+            return 'month'
+        else:
+            raise Exception, 'Period not supported: ' + period
+
+    # TODO: add a valuetype superclass that provides equality methods
     def __str__(self):
         return str(self.monthlyPrice())
 
-    # TODO: add a valuetype superclass that provides equality methods
     def __eq__(self, other):
         if not isinstance(other, Price):
             return False
@@ -60,18 +68,17 @@ class Price:
     def __ne__(self, other):
         return not self.__eq__(other)
 
+
 class Address:
     def __init__(self, address, postcode):
-        self._validate(postcode)
-
-        self.postcode = postcode
+        self.postcode = self._validate(postcode)
         self.address = address
 
     def __str__(self):
         return self.address + " (" + self.postcode + ")"
 
     def _validate(self, postcode):
-        code = postcode if postcode[len(postcode) - 1:].isdigit() else postcode[:len(postcode) - 1]
+        return postcode if postcode[len(postcode) - 1:].isdigit() else postcode[:len(postcode) - 1]
 
     # TODO: add a valuetype superclass that provides equality methods
     def __eq__(self, other):
