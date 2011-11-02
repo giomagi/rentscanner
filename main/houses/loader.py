@@ -1,4 +1,5 @@
 from main.houses.foxtons import Foxtons
+from main.houses.agents.winkworth import Winkworth
 from main.houses.persistence import Librarian
 
 class Loader():
@@ -7,6 +8,9 @@ class Loader():
 
     def loadAll(self):
         newProperties = Foxtons().properties()
+        Librarian().archiveProperties(self.filter(newProperties))
+
+        newProperties = Winkworth().properties()
         Librarian().archiveProperties(self.filter(newProperties))
 
     def filter(self, properties):

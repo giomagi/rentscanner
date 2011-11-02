@@ -33,6 +33,7 @@
     - carter jonas 10- (html based)
     - vantage realty 10 (html based)
     - brik 10-- (html based)
+- loader dynamically loads all the modules in /houses/agents
 - one command for load properties and startup service
 - nice description
 - css and niceties
