@@ -42,7 +42,7 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.send_response(code)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(result)
+        self.wfile.write(result.encode('ascii', 'xmlcharrefreplace'))
 
     def resourcePath(self):
         return os.path.join(os.path.dirname(__file__), '..' + self.path)

@@ -13,4 +13,4 @@ class Loader():
         return [p for p in properties if self.isInteresting(p)]
 
     def isInteresting(self, property):
-        return property.price.monthlyPrice() > 1400 and property.price.monthlyPrice() < 2100 and property.address.postcode in self.interestingZones
+        return property.price.monthlyPrice() > 1300 and property.price.monthlyPrice() < 2200 and property.address.postcode in self.interestingZones
