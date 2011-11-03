@@ -12,7 +12,7 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             resourcePath = self.resourcePath()
 
             if os.path.isfile(resourcePath):
-                self.success(open(resourcePath).read())
+                self.sendResource(open(resourcePath).read())
             else:
                 self.notFound('Unknown resource ' + self.path)
         else:
@@ -38,14 +38,18 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def success(self, result):
         self.sendResponse(httplib.OK, result)
 
-    def sendResponse(self, code, result):
+    def sendResource(self, resourceContent):
+        self.sendResponse(httplib.OK, resourceContent, False)
+
+    def sendResponse(self, code, result, encode=True):
         self.send_response(code)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(result.encode('ascii', 'xmlcharrefreplace'))
+        self.wfile.write(result.encode('ascii', 'xmlcharrefreplace') if encode else result)
 
     def resourcePath(self):
         return os.path.join(os.path.dirname(__file__), '..' + self.path)
+
 
 class FullPage():
     def __init__(self, renderer = Renderer(), librarian = Librarian()):
