@@ -1,4 +1,3 @@
-- loading stats
 - agent coverage: prioritise on volumes
     - winkworth (description and refactor for commonalities w/ foxtons)
     - lawson rutter 40 + chard 60 + dexters 40 (html based) - difficult to parse
