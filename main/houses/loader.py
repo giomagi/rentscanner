@@ -7,14 +7,15 @@ class Loader():
         self.interestingZones = ("NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2")
 
     def loadAll(self):
-        newProperties = Foxtons().properties()
-        Librarian().archiveProperties(self.filter(newProperties))
-
-        newProperties = Winkworth().properties()
-        Librarian().archiveProperties(self.filter(newProperties))
+        for agent in [Foxtons, Winkworth]:
+            newProperties = agent().properties()
+            print 'Found ' + str(len(newProperties)) + ' properties for ' + str(agent)
+            Librarian().archiveProperties(self.filter(newProperties))
 
     def filter(self, properties):
-        return [p for p in properties if self.isInteresting(p)]
+        filtered = [p for p in properties if self.isInteresting(p)]
+        print 'Left ' + str(len(filtered)) + ' properties after filtering'
+        return filtered
 
     def isInteresting(self, property):
         return property.price.monthlyPrice() > 1300 and property.price.monthlyPrice() < 2200 and property.address.postcode in self.interestingZones

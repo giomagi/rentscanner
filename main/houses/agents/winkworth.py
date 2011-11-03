@@ -20,7 +20,7 @@ class Winkworth:
     
     def properties(self):
         xmlString = urllib2.build_opener().open(urllib2.Request(self._feedURI())).read()
-        tree = xml.fromstring(unicode(xmlString, errors='replace'))
+        tree = xml.fromstring(xmlString.decode('utf-8'))
 
         return [self._buildProperty(item) for item in tree.findall('channel/item')]
 
