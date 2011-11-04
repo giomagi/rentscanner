@@ -1,4 +1,5 @@
 from main.houses.foxtons import Foxtons
+from main.houses.agents.knight_frank import KnightFrank
 from main.houses.agents.winkworth import Winkworth
 from main.houses.persistence import Librarian
 
@@ -7,7 +8,7 @@ class Loader():
         self.interestingZones = ("NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2")
 
     def loadAll(self):
-        for agent in [Foxtons, Winkworth]:
+        for agent in [Foxtons, Winkworth, KnightFrank]:
             newProperties = agent().properties()
             print 'Found ' + str(len(newProperties)) + ' properties for ' + str(agent)
             Librarian().archiveProperties(self.filter(newProperties))

@@ -5,8 +5,7 @@ from main.houses.agents.base_extractors import RssBasedExtractor
 
 class Winkworth(RssBasedExtractor):
     def __init__(self):
-        locale.setlocale(locale.LC_ALL, '')
-
+        RssBasedExtractor.__init__(self)
         self._titlePattern = re.compile(r'([^,]*,[^,]*).*\s+(\S+)\s+-\s+GBP\s+(\S+)\s+(\S+)')
         self._descPattern = re.compile(r'<img\s+.*\s+src="(.*)"/>.*\[REF:(\w+)\]')
 
@@ -35,7 +34,8 @@ class Winkworth(RssBasedExtractor):
         return self._descPattern.findall(item.find('description').text)[0][1]
 
     def publicationTime(self, item):
-        return datetime.strptime(item.findall('pubDate')[0].text, '%a, %d %b %Y %H:%M:%S +0000')
+        pubDateAsString = item.findall('pubDate')[0].text
+        return datetime.strptime(pubDateAsString[:len(pubDateAsString)-6], '%a, %d %b %Y %H:%M:%S')
 
     def description(self, item):
         return 'WINKWORTH DEL CAZZO'

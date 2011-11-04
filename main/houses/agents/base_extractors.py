@@ -1,8 +1,12 @@
+import locale
 import urllib2
 import xml.etree.ElementTree as xml
 from main.houses.model import Property, Price, Address
 
 class RssBasedExtractor:
+    def __init__(self):
+        locale.setlocale(locale.LC_ALL, '')
+
     def properties(self):
         xmlString = urllib2.build_opener().open(urllib2.Request(self._feedURI())).read()
         tree = xml.fromstring(unicode(xmlString, errors='replace'))

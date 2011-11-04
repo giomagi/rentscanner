@@ -1,5 +1,6 @@
 - winkworth description
 - extract bedrooms
+- "most-recents" load for rss-based feeds
 - agent coverage: prioritise on volumes
     - lawson rutter 40 + chard 60 + dexters 40 (html based) - difficult to parse
     - knight frank 40 (rss-based)
@@ -38,6 +39,7 @@
 - one command for load properties and startup service
 - nice description
 - css and niceties
+- images for agents
 - web address and port parametric
 - separate agent and id in the key
 - look at hosting solutions

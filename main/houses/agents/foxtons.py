@@ -4,12 +4,13 @@ from main.houses.agents.base_extractors import RssBasedExtractor
 
 class Foxtons(RssBasedExtractor):
     def __init__(self):
+        RssBasedExtractor.__init__(self)
         self._titlePattern = re.compile(r'.(\d+)\s+per\s+(week|month)\s+(.*),\s+(\S+)')
         self._idPattern = re.compile(r'(\w+)$')
         self._descPattern = re.compile(r'img src="([^"]*)".*>(.*)\. Contact Foxtons')
 
     def _feedURI(self):
-        return 'http://www.foxtons.co.uk/feeds/foxtons_feed.rss?bedrooms_from=2&bedrooms_to=2&result_view=rss&search_type=LL&submit_type=search'
+        return 'http://www.foxtons.co.uk/search?search_type=LL&managed=&openhouse=&oh_date_from=&oh_date_to=&stoppress=&sp_max_days=&submit_type=search&search_form=map&prop_type=&bedrooms=2&bedrooms_max=2&price_from=300&price_to=550&location_ids=290&new_homes_id=&dev_op=&result_view=&per_page=10&order_by=price_desc'
     
     def agent(self):
         return 'Foxtons'
@@ -33,7 +34,8 @@ class Foxtons(RssBasedExtractor):
         return self._idPattern.findall(item.find('guid').text)[0]
 
     def publicationTime(self, item):
-        return datetime.strptime(item.findall('pubDate')[0].text, '%a, %d %b %Y %H:%M:%S -0000')
+        pubDateAsString = item.findall('pubDate')[0].text
+        return datetime.strptime(pubDateAsString[:len(pubDateAsString)-6], '%a, %d %b %Y %H:%M:%S')
 
     def description(self, item):
         return self._descPattern.findall(item.find('description').text)[0][1] + '.'
