@@ -20,7 +20,8 @@ class KnightFrank(RssBasedExtractor):
         return locale.atoi(self._titlePattern.findall(item.find('title').text)[0][0])
 
     def pricePeriod(self, item):
-        return 'month'
+        # ugly as hell, but knight frank doesn't publish the price period
+        return 'month' if self.priceAmount(item) > 1000 else 'week'
 
     def fullAddress(self, item):
         return self._titlePattern.findall(item.find('title').text)[0][1]
