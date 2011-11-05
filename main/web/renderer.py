@@ -22,7 +22,7 @@ class Renderer:
                 <td>$agent</td>
                 <td>$price</td>
                 <td><a href="$agentlink">$address</a></td>
-                <td><img src="$imagelink" /></td>
+                <td><img width="200" src="$imagelink" /></td>
                 <td>$description</td>
                 <td><button type="button" onclick="removeProperty('$key')">not interested</button></td>
             </tr>

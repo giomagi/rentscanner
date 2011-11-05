@@ -10,15 +10,15 @@ class Loader():
     def loadAll(self):
         for agent in [Foxtons, Winkworth, KnightFrank]:
             print 'Start ' + str(agent)
+
             newProperties = agent().properties()
-            print 'Found ' + str(len(newProperties)) + ' properties'
-            Librarian().archiveProperties(self.filter(newProperties))
-            print 'Done ' + str(agent)
+            filteredProperties = self.filter(newProperties)
+            Librarian().archiveProperties(filteredProperties)
+
+            print 'Loaded ' + str(len(filteredProperties)) + '/' + str(len(newProperties))
 
     def filter(self, properties):
-        filtered = [p for p in properties if self.isInteresting(p)]
-        print 'Left ' + str(len(filtered)) + ' properties after filtering'
-        return filtered
+        return [p for p in properties if self.isInteresting(p)]
 
     def isInteresting(self, property):
         return property.price.monthlyPrice() > 1300 and property.price.monthlyPrice() < 2200 and property.address.postcode in self.interestingZones
