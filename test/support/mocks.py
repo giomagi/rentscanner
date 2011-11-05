@@ -17,7 +17,7 @@ class MockLibrarian(Librarian):
     def archiveProperties(self, properties):
         pass
 
-    def markAsNotInteresting(self, agent, agentId):
-        self.capturedRequest = ('remove', agent, agentId)
+    def markAsNotInteresting(self, propertyId):
+        self.capturedRequest = ('remove', propertyId)
 
 

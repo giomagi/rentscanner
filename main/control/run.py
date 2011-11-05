@@ -1,10 +1,6 @@
-import BaseHTTPServer
 import sys
 import datetime
-from main.houses.foxtons import Foxtons
 from main.houses.loader import Loader
-from main.houses.persistence import Librarian
-from main.web.webserver import PropertiesHandler
 from main.web.web_server import Server
 
 def startDataAcquisition():

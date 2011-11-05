@@ -13,4 +13,4 @@ class TestRenderer(PropertyMaker):
         self.assertTrue('1000' in html)
         self.assertTrue('<a href="http://some/url.go">' in html)
         self.assertTrue('description' in html)
-        self.assertTrue('<img src="http://image.link" />' in html)
+        self.assertTrue('<img width="200" src="http://image.link" />' in html)

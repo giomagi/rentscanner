@@ -2,8 +2,7 @@ import httplib
 import BaseHTTPServer
 import threading
 import unittest
-from main.web.webserver import PropertiesHandler, FullPage, UserPreferences
-from test.support.mocks import MockRenderer, MockLibrarian
+from main.web.handlers.properties_handler import PropertiesHandler
 
 class Server(threading.Thread):
 
@@ -41,13 +40,13 @@ class TestWebServer(unittest.TestCase):
 
     def testPostRequestsThatDontSpecifyARatingUpdateReturnBadRequest(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
-        # expected request /rate/agent/id/action
-        self.assertEqual(self.statusFor(conn, 'POST', '/rate/id/remove'), httplib.BAD_REQUEST)
+        # expected request /rate/agent_id/action
+        self.assertEqual(self.statusFor(conn, 'POST', '/rate/remove'), httplib.BAD_REQUEST)
         self.assertEqual(self.statusFor(conn, 'POST', '/zzz'), httplib.BAD_REQUEST)
 
     def testAWellFormedPostRequestReturnsOK(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
-        self.assertEqual(self.statusFor(conn, 'POST', '/rate/agent/id/remove'), httplib.OK)
+        self.assertEqual(self.statusFor(conn, 'POST', '/rate/agent_id/remove'), httplib.OK)
 
     def testRequestOnMethodsOtherThanGetAndPostReturnMethodNotSupported(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
