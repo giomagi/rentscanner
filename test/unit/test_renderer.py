@@ -7,7 +7,7 @@ class TestRenderer(PropertyMaker):
         html = Renderer().render([self.aProperty(link='http://some/url.go', img='http://image.link')])
 
         # TODO: use xpath
-        self.assertTrue('AGENT' in html)
+        self.assertTrue('<img width="100" src="/resources/agent.jpeg" alt="AGENT" />' in html)
         self.assertTrue('some place' in html)
         self.assertTrue('SW6' in html)
         self.assertTrue('1000' in html)

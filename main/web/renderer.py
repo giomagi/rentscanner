@@ -19,7 +19,7 @@ class Renderer:
 
     htmlForItem = Template('''
             <tr id=$key>
-                <td>$agent</td>
+                <td><img width="100" src="$agentimage" alt="$agent" /></td>
                 <td>$price</td>
                 <td><a href="$agentlink">$address</a></td>
                 <td><img width="200" src="$imagelink" /></td>
@@ -34,6 +34,7 @@ class Renderer:
     def _renderProperty(self, property):
         return self.htmlForItem.substitute({
             'key' : property.key(),
+            'agentimage' : self.imageFor(property.agent),
             'agent' : property.agent,
             'price' : property.price.monthlyPrice(),
             'address' : property.address,
@@ -41,3 +42,6 @@ class Renderer:
             'description' : property.description,
             'imagelink' : property.image
         })
+
+    def imageFor(self, agent):
+        return '/resources/' + agent.lower() + ('.gif' if agent.lower() == 'knightfrank' else '.jpeg')
