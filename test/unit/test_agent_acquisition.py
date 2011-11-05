@@ -54,9 +54,9 @@ class TestAgentAcquisition(unittest.TestCase):
         sample = open("sample_kfh.xml", "r")
         property = KFH().propertyFrom(xml.fromstring(sample.read()).find("channel/item"))
 
-        self.assertEqual("Ranelagh Garden Mansions, Fulham", property.address.address)
-        self.assertEqual("SW6", property.address.postcode)
-        self.assertEqual(1820, property.price.monthlyPrice())
+        self.assertEqual("Fellows Road, Swiss Cottage", property.address.address)
+        self.assertEqual("NW3", property.address.postcode)
+        self.assertEqual(2145, property.price.monthlyPrice())
         self.assertEqual("KFH", property.agent)
         self.assertEqual("http://www.kfh.co.uk/residential/flats-to-rent/london-fulham-sw6-ranelagh-garden-mansions/34538/", property.link)
         self.assertEqual("34538", property.agentId)
