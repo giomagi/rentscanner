@@ -11,7 +11,7 @@ class Foxtons(RssBasedExtractor):
         self._descPattern = re.compile(r'img src="([^"]*)".*>(.*)\. Contact Foxtons')
 
     def agentURI(self):
-        return 'http://www.foxtons.co.uk/search?search_type=LL&managed=&openhouse=&oh_date_from=&oh_date_to=&stoppress=&sp_max_days=&submit_type=search&search_form=map&prop_type=&bedrooms=2&bedrooms_max=2&price_from=300&price_to=550&location_ids=290&new_homes_id=&dev_op=&result_view=&per_page=10&order_by=price_desc'
+        return 'http://www.foxtons.co.uk/feeds/foxtons_feed.rss?bedrooms_from=2&bedrooms_to=2&location_ids=290&price_from=300&price_to=550&result_view=rss&search_type=LL&submit_type=search'
     
     def agent(self):
         return 'Foxtons'
