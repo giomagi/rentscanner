@@ -13,12 +13,6 @@ class RssBasedExtractor:
 
         return [prop for prop in [self.propertyFrom(item) for item in tree.findall('channel/item')] if prop is not None]
 
-    def charThatILikeFor(self, ch):
-        try:
-            return ch.decode('ascii', 'replace')
-        except:
-            return '?'
-
     def propertyFrom(self, item):
         try:
             return Property(self.agent(),

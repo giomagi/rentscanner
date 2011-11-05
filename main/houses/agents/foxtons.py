@@ -6,7 +6,7 @@ from main.houses.agents.base_extractors import RssBasedExtractor
 class Foxtons(RssBasedExtractor):
     def __init__(self):
         RssBasedExtractor.__init__(self)
-        self._titlePattern = re.compile(r'(\d?,?\d+)\s+per\s+(week|month)\s+(.*),\s+(\S+)')
+        self._titlePattern = re.compile(r'(\d?,?\d+)\.?.*\s+per\s+(week|month)\s+(.*),\s+(\S+)')
         self._idPattern = re.compile(r'(\w+)$')
         self._descPattern = re.compile(r'img src="([^"]*)".*>(.*)\. Contact Foxtons')
 
