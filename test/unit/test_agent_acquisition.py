@@ -42,7 +42,7 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("Albemarle, Wimbledon Park Side, Wimbledon", property.address.address)
         self.assertEqual("SW19", property.address.postcode)
         self.assertEqual(2200, property.price.monthlyPrice())
-        self.assertEqual("Knight Frank", property.agent)
+        self.assertEqual("KnightFrank", property.agent)
         self.assertEqual("http://search.knightfrank.com/asp147225", property.link)
         self.assertEqual("asp147225", property.agentId)
         self.assertEqual(datetime(2011, 5, 25, 11, 02, 00), property.publicationDateTime)

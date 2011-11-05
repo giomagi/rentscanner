@@ -1,5 +1,3 @@
-- winkworth description
-- extract bedrooms
 - "most-recents" load for rss-based feeds
 - agent coverage: prioritise on volumes
     - lawson rutter 40 + chard 60 + dexters 40 (html based) - difficult to parse
@@ -34,8 +32,12 @@
     - carter jonas 10- (html based)
     - vantage realty 10 (html based)
     - brik 10-- (html based)
+- 2 page logic (new / interested)
+- undo last rating action
 - loader dynamically loads all the modules in /houses/agents
 - one command for load properties and startup service
+- extract bedrooms
+- winkworth description
 - nice description
 - css and niceties
 - images for agents

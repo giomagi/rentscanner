@@ -14,7 +14,7 @@ class KnightFrank(RssBasedExtractor):
         return 'http://search.knightfrank.com/feeds/feedhandler.ashx?buyrent=rent&locale=en&locids=1978&minbed=2&maxbed=255&minprice=1300&maxprice=2200&curr=gbp&format=rss'
 
     def agent(self):
-        return 'Knight Frank'
+        return 'KnightFrank'
 
     def priceAmount(self, item):
         return locale.atoi(self._titlePattern.findall(item.find('title').text)[0][0])
