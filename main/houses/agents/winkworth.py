@@ -10,7 +10,7 @@ class Winkworth(RssBasedExtractor):
         self._descPattern = re.compile(r'<img\s+.*\s+src="(.*)"/>.*\[REF:(\w+)\]')
 
     def agentURI(self):
-        return 'http://www.winkworth.co.uk/rss/searchproperty?choose_type_letting=1&locality=London&radius=&ptype=&beds=2&price_min=&price=&under_offer=1'
+        return 'http://www.winkworth.co.uk/rss/searchproperty?choose_type_letting=1&locality=London&radius=&ptype=&beds=2&price_min=300&price=550&under_offer=1'
 
     def agent(self):
         return 'Winkworth'
