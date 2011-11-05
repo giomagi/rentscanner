@@ -39,7 +39,7 @@ class Property:
 class Price:
     def __init__(self, amount, period):
         self.amount = amount
-        self.period = self._validatePeriod(period)
+        self.period = self._validatePeriod(period.lower())
 
     def monthlyPrice(self):
         if self.period == 'week':

@@ -5,7 +5,7 @@ from main.houses.persistence import Librarian
 
 class Loader():
     def __init__(self):
-        self.interestingZones = ("NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2")
+        self.interestingZones = Filter.interestingZones()
 
     def loadAll(self):
         for agent in [Foxtons, Winkworth, KnightFrank]:
@@ -22,3 +22,8 @@ class Loader():
 
     def isInteresting(self, property):
         return property.price.monthlyPrice() > 1300 and property.price.monthlyPrice() < 2200 and property.address.postcode in self.interestingZones
+
+class Filter:
+    @classmethod
+    def interestingZones(cls):
+        return "NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2"
