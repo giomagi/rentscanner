@@ -9,9 +9,11 @@ class Loader():
 
     def loadAll(self):
         for agent in [Foxtons, Winkworth, KnightFrank]:
+            print 'Start ' + str(agent)
             newProperties = agent().properties()
-            print 'Found ' + str(len(newProperties)) + ' properties for ' + str(agent)
+            print 'Found ' + str(len(newProperties)) + ' properties'
             Librarian().archiveProperties(self.filter(newProperties))
+            print 'Done ' + str(agent)
 
     def filter(self, properties):
         filtered = [p for p in properties if self.isInteresting(p)]

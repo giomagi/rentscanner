@@ -8,12 +8,18 @@ class RssBasedExtractor:
         locale.setlocale(locale.LC_ALL, '')
 
     def properties(self):
-        xmlString = urllib2.build_opener().open(urllib2.Request(self._feedURI())).read()
-        tree = xml.fromstring(unicode(xmlString, errors='replace'))
+        xmlString = urllib2.build_opener().open(urllib2.Request(self.agentURI())).read()
+        tree = xml.fromstring(xmlString)
 
-        return [self._buildProperty(item) for item in tree.findall('channel/item')]
+        return [prop for prop in [self.propertyFrom(item) for item in tree.findall('channel/item')] if prop is not None]
 
-    def _buildProperty(self, item):
+    def charThatILikeFor(self, ch):
+        try:
+            return ch.decode('ascii', 'replace')
+        except:
+            return '?'
+
+    def propertyFrom(self, item):
         try:
             return Property(self.agent(),
                             Price(self.priceAmount(item), self.pricePeriod(item)),
@@ -26,7 +32,7 @@ class RssBasedExtractor:
         except Exception, e:
             print 'Failed extraction: %s' % e
 
-    def _feedURI(self):
+    def agentURI(self):
         raise NotImplementedError("Must be specified by the subclass")
 
     def agent(self):

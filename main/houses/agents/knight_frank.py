@@ -10,7 +10,7 @@ class KnightFrank(RssBasedExtractor):
         self._idPattern = re.compile(r'(\w+)$')
         self._descPattern = re.compile(r'img src="([^"]*)".*>(.*)')
 
-    def _feedURI(self):
+    def agentURI(self):
         return 'http://search.knightfrank.com/feeds/feedhandler.ashx?buyrent=rent&locale=en&locids=1978&minbed=2&maxbed=255&minprice=1300&maxprice=2200&curr=gbp&format=rss'
 
     def agent(self):
@@ -36,7 +36,7 @@ class KnightFrank(RssBasedExtractor):
 
     def publicationTime(self, item):
         pubDateAsString = item.findall('pubDate')[0].text
-        return datetime.strptime(pubDateAsString[:len(pubDateAsString)-6], '%a, %d %b %Y %H:%M:%S')
+        return datetime.strptime(pubDateAsString[:pubDateAsString.rfind(' ') - 1], '%a, %d %b %Y %H:%M:%S')
 
     def description(self, item):
         return self._descPattern.findall(self.descriptionText(item))[0][1]

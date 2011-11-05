@@ -8,7 +8,7 @@ from main.houses.agents.winkworth import Winkworth
 class TestAgentAcquisition(unittest.TestCase):
     def testDecodesAFoxtonsItem(self):
         sample = open("sample_foxtons.xml", "r")
-        property = Foxtons()._buildProperty(xml.fromstring(sample.read()).find("channel/item"))
+        property = Foxtons().propertyFrom(xml.fromstring(sample.read()).find("channel/item"))
 
         self.assertEqual("Lexham Gardens, Kensington", property.address.address)
         self.assertEqual("W8", property.address.postcode)
@@ -22,7 +22,7 @@ class TestAgentAcquisition(unittest.TestCase):
 
     def testDecodesAWinkworthItem(self):
         sample = open("sample_winkworth.xml", "r")
-        property = Winkworth()._buildProperty(xml.fromstring(sample.read()).find("channel/item"))
+        property = Winkworth().propertyFrom(xml.fromstring(sample.read()).find("channel/item"))
 
         self.assertEqual("Norfolk Road, St John's Wood", property.address.address)
         self.assertEqual("NW8", property.address.postcode)
@@ -37,7 +37,7 @@ class TestAgentAcquisition(unittest.TestCase):
 
     def testDecodesAKnightFrankItem(self):
         sample = open("sample_knight_frank.xml", "r")
-        property = KnightFrank()._buildProperty(xml.fromstring(sample.read()).find("channel/item"))
+        property = KnightFrank().propertyFrom(xml.fromstring(sample.read()).find("channel/item"))
 
         self.assertEqual("Albemarle, Wimbledon Park Side, Wimbledon", property.address.address)
         self.assertEqual("SW19", property.address.postcode)
