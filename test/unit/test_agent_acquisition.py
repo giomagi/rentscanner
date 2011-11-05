@@ -12,7 +12,7 @@ class TestAgentAcquisition(unittest.TestCase):
 
         self.assertEqual("Lexham Gardens, Kensington", property.address.address)
         self.assertEqual("W8", property.address.postcode)
-        self.assertEqual(450 * 52 / 12, property.price.monthlyPrice())
+        self.assertEqual(1450 * 52 / 12, property.price.monthlyPrice())
         self.assertEqual("Foxtons", property.agent)
         self.assertEqual("http://www.foxtons.co.uk/rental-property-in-kensington/chpk0260124", property.link)
         self.assertEqual("chpk0260124", property.agentId)

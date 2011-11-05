@@ -1,11 +1,12 @@
 ﻿from datetime import datetime
+import locale
 import re
 from main.houses.agents.base_extractors import RssBasedExtractor
 
 class Foxtons(RssBasedExtractor):
     def __init__(self):
         RssBasedExtractor.__init__(self)
-        self._titlePattern = re.compile(r'.(\d+)\s+per\s+(week|month)\s+(.*),\s+(\S+)')
+        self._titlePattern = re.compile(r'(\d?,?\d+)\s+per\s+(week|month)\s+(.*),\s+(\S+)')
         self._idPattern = re.compile(r'(\w+)$')
         self._descPattern = re.compile(r'img src="([^"]*)".*>(.*)\. Contact Foxtons')
 
@@ -16,7 +17,7 @@ class Foxtons(RssBasedExtractor):
         return 'Foxtons'
 
     def priceAmount(self, item):
-        return self._titlePattern.findall(item.find('title').text)[0][0]
+        return locale.atoi(self._titlePattern.findall(item.find('title').text)[0][0])
 
     def pricePeriod(self, item):
         return self._titlePattern.findall(item.find('title').text)[0][1]
