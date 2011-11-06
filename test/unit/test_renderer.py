@@ -21,6 +21,13 @@ class TestRenderer(PropertyMaker):
         self.assertTrue('description' in html)
         self.assertTrue('<img width="200" src="http://image.link" />' in html)
 
+    def testRendersRatingButtons(self):
+        html = Renderer().renderFullPage([self.aProperty(agent='AG', propId='xy')])
+
+        # TODO: use xpath
+        self.assertTrue('removeProperty(\'AG_xy\')' in html)
+        self.assertTrue('saveProperty(\'AG_xy\')' in html)
+
     def testRendersTheFullPageIfRequested(self):
         html = Renderer().renderFullPage([self.aProperty(link='some_link')])
 

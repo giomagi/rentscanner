@@ -33,6 +33,7 @@ class Renderer:
                 <td><a href="$agentlink">$address</a></td>
                 <td><img width="200" src="$imagelink" /></td>
                 <td>$description</td>
+                <td><button type="button" onclick="saveProperty('$key')">interested</button></td>
                 <td><button type="button" onclick="removeProperty('$key')">not interested</button></td>
             </tr>
     ''')

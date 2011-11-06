@@ -29,11 +29,14 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         if len(callArgs) != 3 or callArgs[0] != 'rate':
             self.badRequest('Expecting a rating update in the form /rate/property_id/action, received ' + self.path)
         else:
-            if callArgs[2] != 'remove':
-                self.badRequest('Supporting only remove at the moment')
-            else:
+            if callArgs[2] == 'remove':
                 UserPreferences().removeProperty(callArgs[1])
                 self.sendResponse(httplib.OK, '')
+            elif callArgs[2] == 'save':
+                UserPreferences().saveProperty(callArgs[1])
+                self.sendResponse(httplib.OK, '')
+            else:
+                self.badRequest('Unsupported request, allowed: /rate/PROPERTY_ID/[save|remove]')
 
     def notFound(self, reason = ''):
         self.sendResponse(httplib.NOT_FOUND, reason)
@@ -83,3 +86,6 @@ class UserPreferences:
 
     def removeProperty(self, propertyId):
         self.librarian.markAsNotInteresting(propertyId)
+
+    def saveProperty(self, propertyId):
+        self.librarian.markAsInteresting(propertyId)

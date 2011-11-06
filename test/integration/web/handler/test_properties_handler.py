@@ -52,6 +52,7 @@ class TestWebServer(unittest.TestCase):
     def testAWellFormedPostRequestReturnsOK(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
         self.assertEqual(self.statusFor(conn, 'POST', '/rate/agent_id/remove'), httplib.OK)
+        self.assertEqual(self.statusFor(conn, 'POST', '/rate/agent_id/save'), httplib.OK)
 
     def testRequestOnMethodsOtherThanGetAndPostReturnMethodNotSupported(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)

@@ -6,6 +6,14 @@ function removeProperty(propertykey) {
     });
 }
 
+function saveProperty(propertykey) {
+    $.ajax({
+      type: 'POST',
+      url: '/rate/' + propertykey + '/save',
+      success: handleSuccessFor(propertykey)
+    });
+}
+
 function handleSuccessFor(propertykey) {
     return function(data) {
         $('#' + propertykey).remove();
