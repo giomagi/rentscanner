@@ -5,8 +5,9 @@ class Renderer:
 <html>
     <head>
         <title>Gio's little experiment for flat search</title>
-		<script type="text/javascript" src="resources/jquery-1.6.4.min.js"></script>
-		<script type="text/javascript" src="resources/rentscanner.js"></script>
+        <link rel="shortcut icon" href="/resources/favicon.jpg" />
+		<script type="text/javascript" src="/resources/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="/resources/rentscanner.js"></script>
     </head>
 
     <body>
