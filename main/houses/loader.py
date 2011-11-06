@@ -3,6 +3,7 @@ from main.houses.agents.kfh import KFH
 from main.houses.agents.knight_frank import KnightFrank
 from main.houses.agents.winkworth import Winkworth
 from main.houses.persistence import Librarian
+import sys
 
 class Loader:
     def __init__(self):
@@ -10,13 +11,14 @@ class Loader:
 
     def loadAll(self):
         for agent in [KFH, Foxtons, Winkworth, KnightFrank]:
-            print 'Start ' + str(agent)
+            sys.stdout.write(str(agent)[str(agent).rindex('.')+1:] + ': ')
+            sys.stdout.flush()
 
             newProperties = agent().properties()
             filteredProperties = self.filter(newProperties)
             Librarian().archiveProperties(filteredProperties)
 
-            print 'Loaded ' + str(len(filteredProperties)) + '/' + str(len(newProperties))
+            sys.stdout.write(str(len(filteredProperties)) + '/' + str(len(newProperties)) + '\n')
 
     def filter(self, properties):
         return [p for p in properties if self.isInteresting(p)]

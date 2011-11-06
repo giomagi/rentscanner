@@ -45,7 +45,10 @@ class Renderer:
         return self.renderPropertiesOnTemplate(self.htmlForFragment, properties)
 
     def renderPropertiesOnTemplate(self, template, properties):
-        return template.substitute({'properties': ''.join([self._renderProperty(p) for p in properties])})
+        if not len(properties):
+            return template.substitute({'properties': 'No properties found'})
+        else:
+            return template.substitute({'properties': ''.join([self._renderProperty(p) for p in properties])})
 
     def _renderProperty(self, property):
         return self.htmlForItem.substitute({
