@@ -37,4 +37,13 @@ if __name__ == '__main__':
         else:
             raise Exception, 'Web supports only start and stop commands'
 
+    elif what == 'all':
+        if command == 'start':
+            startDataAcquisition()
+            startWeb()
+        elif command == 'stop':
+            stopWeb()
+        else:
+            raise Exception, 'Only start and stop commands supported'
+
     else: fail()
