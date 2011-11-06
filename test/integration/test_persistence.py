@@ -14,7 +14,7 @@ class TestPersistence(PropertyMaker):
 
         librarian = Librarian()
         librarian.archiveProperties([aProperty])
-        properties = librarian.retrieveInterestingProperties()
+        properties = librarian.retrieveNewProperties()
 
         self.assertEqual(1, len(properties))
         self.assertEqual(aProperty, properties[0])
@@ -27,7 +27,7 @@ class TestPersistence(PropertyMaker):
         librarian = Librarian()
         librarian.archiveProperties([propertyOne, propertyTwo])
         librarian.archiveProperties([propertyThree])
-        properties = librarian.retrieveInterestingProperties()
+        properties = librarian.retrieveNewProperties()
 
         self.assertEqual(3, len(properties))
         self.assertTrue(propertyOne in properties)
@@ -45,7 +45,7 @@ class TestPersistence(PropertyMaker):
         librarian = Librarian()
         librarian.archiveProperties([propertyTwo])
 
-        properties = librarian.retrieveInterestingProperties()
+        properties = librarian.retrieveNewProperties()
 
         self.assertEqual(1, len(properties))
         self.assertEqual(propertyTwo, properties[0])
@@ -57,8 +57,19 @@ class TestPersistence(PropertyMaker):
         librarian.archiveProperties([property])
         librarian.markAsNotInteresting(property.key())
 
-        properties = librarian.retrieveInterestingProperties()
+        properties = librarian.retrieveNewProperties()
         self.assertEqual(0, len(properties))
+    
+    def testAPropertyMarkedAsInterestingIsRetrievedWithTheInterestingOnes(self):
+        aProperty = self.aProperty()
+
+        librarian = Librarian()
+        librarian.archiveProperties([aProperty])
+        librarian.markAsInteresting(aProperty.key())
+        properties = librarian.retrieveSavedProperties()
+
+        self.assertEqual(1, len(properties))
+        self.assertEqual(aProperty, properties[0])
 
     def testUpdatingARatedPropertyMaintainsUserPreferences(self):
         librarian = Librarian()
@@ -69,7 +80,7 @@ class TestPersistence(PropertyMaker):
 
         librarian.archiveProperties([(self.aProperty())])
         
-        properties = librarian.retrieveInterestingProperties()
+        properties = librarian.retrieveNewProperties()
         self.assertEqual(0, len(properties))
 
     def cleanLibrary(self):

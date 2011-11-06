@@ -6,17 +6,23 @@ from main.web.renderer import Renderer
 
 class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == '/':
-            self.success(FullPage().allProperties())
-        elif self.path.startswith('/resources/'):
+        reqPath = self.path.lower()
+
+        if reqPath == '/':
+            self.success(FullPage().newProperties())
+        elif reqPath == '/newproperties':
+            self.success(Fragment().newProperties())
+        elif reqPath == '/savedproperties':
+            self.success(Fragment().savedProperties())
+        elif reqPath.startswith('/resources/'):
             resourcePath = self.resourcePath()
 
             if os.path.isfile(resourcePath):
                 self.sendResource(open(resourcePath).read())
             else:
-                self.notFound('Unknown resource ' + self.path)
+                self.notFound('Unknown resource ' + reqPath)
         else:
-            self.notFound('Unknown resource ' + self.path)
+            self.notFound('Unknown resource ' + reqPath)
 
     def do_POST(self):
         callArgs = self.path.split('/')[1:]
@@ -50,17 +56,27 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def resourcePath(self):
         return os.path.join(os.path.dirname(__file__), '..' + self.path)
 
-
-class FullPage():
+class Fragment:
     def __init__(self, renderer = Renderer(), librarian = Librarian()):
         self.renderer = renderer
         self.librarian = librarian
 
-    def allProperties(self):
-        return self.renderer.render(self.librarian.retrieveInterestingProperties())
+    def newProperties(self):
+        return self.renderer.renderFragment(self.librarian.retrieveNewProperties())
+
+    def savedProperties(self):
+        return self.renderer.renderFragment(self.librarian.retrieveSavedProperties())
+
+class FullPage:
+    def __init__(self, renderer = Renderer(), librarian = Librarian()):
+        self.renderer = renderer
+        self.librarian = librarian
+
+    def newProperties(self):
+        return self.renderer.renderFullPage(self.librarian.retrieveNewProperties())
 
 
-class UserPreferences():
+class UserPreferences:
     def __init__(self, renderer = Renderer(), librarian = Librarian()):
         self.renderer = renderer
         self.librarian = librarian

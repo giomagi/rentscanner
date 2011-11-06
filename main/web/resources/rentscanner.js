@@ -11,3 +11,23 @@ function handleSuccessFor(propertykey) {
         $('#' + propertykey).remove();
     }
 }
+
+function showNewProperties() {
+    $.ajax({
+      type: 'GET',
+      url: '/newProperties',
+      success: function(data) {
+            $('#properties').replaceWith(data);
+        }
+    });
+}
+
+function showSavedProperties() {
+    $.ajax({
+      type: 'GET',
+      url: '/savedProperties',
+      success: function(data) {
+            $('#properties').replaceWith(data);
+        }
+    });
+}

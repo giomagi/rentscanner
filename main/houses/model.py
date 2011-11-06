@@ -9,6 +9,10 @@ class Rating:
     def NOT_INTERESTING(cls):
         return 'NOT_INTERESTING'
 
+    @classmethod
+    def INTERESTING(cls):
+        return 'INTERESTING'
+
 class Property:
     def __init__(self, agent, price, location, link, agentId, publicationDateTime, description, image):
         self.price = price

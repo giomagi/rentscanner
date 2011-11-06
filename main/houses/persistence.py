@@ -12,7 +12,7 @@ class Librarian:
 
         propertiesRegister.close()
 
-    def retrieveInterestingProperties(self):
+    def retrieveNewProperties(self):
         propertiesRegister = shelve.open(self.PROPERTIES_LOCATION)
         ratingsRegister = shelve.open(self.RATINGS_LOCATION)
 
@@ -23,7 +23,25 @@ class Librarian:
 
         return res
 
-    def markAsNotInteresting(self, propertyId):
+    def retrieveSavedProperties(self):
+        propertiesRegister = shelve.open(self.PROPERTIES_LOCATION)
         ratingsRegister = shelve.open(self.RATINGS_LOCATION)
-        ratingsRegister[propertyId] = Rating.NOT_INTERESTING()
+
+        interestingIds = [id for id, rating in ratingsRegister.iteritems() if rating == Rating.INTERESTING()]
+        res = [p for p in propertiesRegister.values() if p.key() in interestingIds]
+
+        propertiesRegister.close()
+        ratingsRegister.close()
+
+        return res
+
+    def markAsNotInteresting(self, propertyId):
+        self.markAs(propertyId, Rating.NOT_INTERESTING())
+
+    def markAsInteresting(self, propertyId):
+        self.markAs(propertyId, Rating.INTERESTING())
+
+    def markAs(self, propertyId, rating):
+        ratingsRegister = shelve.open(self.RATINGS_LOCATION)
+        ratingsRegister[propertyId] = rating
         ratingsRegister.close()

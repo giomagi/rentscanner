@@ -29,9 +29,14 @@ class TestWebServer(unittest.TestCase):
     def tearDown(self):
         self.webServerThread.stop()
 
-    def testGetRequestsOnAnySubpathReturnNotFound(self):
+    def testGetRequestsOnAnInvalidSubpathReturnNotFound(self):
         conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
         self.assertEqual(self.statusFor(conn, 'GET', '/something'), httplib.NOT_FOUND)
+
+    def testAGetRequestOnAValidSubpathReturnsOk(self):
+        conn = httplib.HTTPConnection(self.webServerThread.host, self.webServerThread.port)
+        self.assertEqual(self.statusFor(conn, 'GET', '/newProperties'), httplib.OK)
+        self.assertEqual(self.statusFor(conn, 'GET', '/savedProperties'), httplib.OK)
 
     #noinspection PyArgumentEqualDefault
     def testAGetRequestOnTheRootReturnsOk(self):

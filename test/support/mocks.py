@@ -4,14 +4,14 @@ from main.web.renderer import Renderer
 class MockRenderer(Renderer):
     mockedResponse = ''
 
-    def render(self, properties):
+    def renderFullPage(self, properties):
         return self.mockedResponse
 
 class MockLibrarian(Librarian):
     mockedPropertiesList = []
     capturedRequest = None
 
-    def retrieveInterestingProperties(self):
+    def retrieveNewProperties(self):
         return self.mockedPropertiesList
 
     def archiveProperties(self, properties):

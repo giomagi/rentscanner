@@ -8,7 +8,7 @@ class TestFullPage(unittest.TestCase):
         renderer = MockRenderer()
 
         renderer.mockedResponse = expectedHtml
-        actualHtml = FullPage(renderer, MockLibrarian()).allProperties()
+        actualHtml = FullPage(renderer, MockLibrarian()).newProperties()
 
         self.assertEqual(actualHtml, expectedHtml)
 

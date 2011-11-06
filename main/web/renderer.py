@@ -11,12 +11,20 @@ class Renderer:
     </head>
 
     <body>
-        <h1>Properties</h1>
-        <table>
+        <div>
+            <button type="button" onclick="showNewProperties()">show new</button>
+            <button type="button" onclick="showSavedProperties()">show saved</button>
+        </div>
+        <table id="properties">
             $properties
         </table>
     </body>
 </html>''')
+
+    htmlForFragment = Template('''
+        <table id="properties">
+            $properties
+        </table>''')
 
     htmlForItem = Template('''
             <tr id=$key>
@@ -29,8 +37,14 @@ class Renderer:
             </tr>
     ''')
 
-    def render(self, properties):
-        return self.htmlForPage.substitute({'properties' : ''.join([self._renderProperty(p) for p in properties])})
+    def renderFullPage(self, properties):
+        return self.renderPropertiesOnTemplate(self.htmlForPage, properties)
+
+    def renderFragment(self, properties):
+        return self.renderPropertiesOnTemplate(self.htmlForFragment, properties)
+
+    def renderPropertiesOnTemplate(self, template, properties):
+        return template.substitute({'properties': ''.join([self._renderProperty(p) for p in properties])})
 
     def _renderProperty(self, property):
         return self.htmlForItem.substitute({
