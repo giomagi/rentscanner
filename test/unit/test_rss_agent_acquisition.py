@@ -1,16 +1,21 @@
 from datetime import datetime
+import os
 import unittest
+import urllib2
 import xml.etree.ElementTree as xml
 from main.houses.agents.foxtons import Foxtons
 from main.houses.agents.kfh import KFH
 from main.houses.agents.knight_frank import KnightFrank
+from main.houses.agents.lawson_rutter import LawsonRutter
 from main.houses.agents.winkworth import Winkworth
 
 class TestAgentAcquisition(unittest.TestCase):
     def testDecodesAFoxtonsItem(self):
-        sample = open("sample_foxtons.xml", "r")
-        property = Foxtons().propertyFrom(xml.fromstring(sample.read()).find("channel/item"))
+        properties = Foxtons().properties(['File:sample_foxtons.xml'])
 
+        self.assertEqual(2, len(properties))
+
+        property = properties[0]
         self.assertEqual("Lexham Gardens, Kensington", property.address.address)
         self.assertEqual("W8", property.address.postcode)
         self.assertEqual(1450 * 52 / 12, property.price.monthlyPrice())
@@ -22,9 +27,11 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("http://r.yhd.net/1316192650/chpk0260124_small-1.jpg", property.image)
 
     def testDecodesAWinkworthItem(self):
-        sample = open("sample_winkworth.xml", "r")
-        property = Winkworth().propertyFrom(xml.fromstring(sample.read()).find("channel/item"))
+        properties = Winkworth().properties(['File:sample_winkworth.xml'])
 
+        self.assertEqual(2, len(properties))
+
+        property = properties[0]
         self.assertEqual("Norfolk Road, St John's Wood", property.address.address)
         self.assertEqual("NW8", property.address.postcode)
         self.assertEqual(8000 * 52 / 12, property.price.monthlyPrice())
@@ -37,9 +44,11 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("http://media2.winkworth.com/properties/f2a40c61-78f9-44f2-9078-e1ee0dd91f68/Listing/8v495J47X6.jpg", property.image)
 
     def testDecodesAKnightFrankItem(self):
-        sample = open("sample_knight_frank.xml", "r")
-        property = KnightFrank().propertyFrom(xml.fromstring(sample.read()).find("channel/item"))
+        properties = KnightFrank().properties(['File:sample_knight_frank.xml'])
 
+        self.assertEqual(2, len(properties))
+
+        property = properties[0]
         self.assertEqual("Albemarle, Wimbledon Park Side, Wimbledon", property.address.address)
         self.assertEqual("SW19", property.address.postcode)
         self.assertEqual(2200, property.price.monthlyPrice())
@@ -51,9 +60,11 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("http://resources.knightfrank.com/GetRes.ashx?ref=ASP147225&type=20&order=1", property.image)
 
     def testDecodesAKFHItem(self):
-        sample = open("sample_kfh.xml", "r")
-        property = KFH().propertyFrom(xml.fromstring(sample.read()).find("channel/item"))
+        properties = KFH().properties(['File:sample_kfh.xml'])
 
+        self.assertEqual(2, len(properties))
+
+        property = properties[0]
         self.assertEqual("Fellows Road, Swiss Cottage", property.address.address)
         self.assertEqual("NW3", property.address.postcode)
         self.assertEqual(2145, property.price.monthlyPrice())

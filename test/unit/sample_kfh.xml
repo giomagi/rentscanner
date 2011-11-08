@@ -4,11 +4,17 @@
     <link>http://www.kfh.co.uk</link>
     <description>KFH RSS property search feed</description>
     <language>en-gb</language>
-    <item>
+      <item>
 
-      <title runat="server" id="PageTitle" visible="False">Fellows Road, Swiss Cottage, NW3 - £2,145.00 - Per Month To Let</title>
-      <link>http://www.kfh.co.uk/residential/flats-to-rent/london-fulham-sw6-ranelagh-garden-mansions/34538/</link>
-      <description>A well presented mansion block flat to rent located in an excellent location next to Putney Bridge underground station and the river.</description>
-    </item>
+        <title runat="server" id="PageTitle" visible="False">Fellows Road, Swiss Cottage, NW3 - £2,145.00 - Per Month To Let</title>
+        <link>http://www.kfh.co.uk/residential/flats-to-rent/london-fulham-sw6-ranelagh-garden-mansions/34538/</link>
+        <description>A well presented mansion block flat to rent located in an excellent location next to Putney Bridge underground station and the river.</description>
+      </item>
+      <item>
+
+        <title runat="server" id="PageTitle" visible="False">Fellows Road, Swiss Cottage, NW3 - £2,145.00 - Per Month To Let</title>
+        <link>http://www.kfh.co.uk/residential/flats-to-rent/london-fulham-sw6-ranelagh-garden-mansions/34538/</link>
+        <description>A well presented mansion block flat to rent located in an excellent location next to Putney Bridge underground station and the river.</description>
+      </item>
   </channel>
 </rss>

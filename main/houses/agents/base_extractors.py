@@ -7,17 +7,22 @@ class RssBasedExtractor:
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
 
-    def properties(self):
+    def properties(self, uris):
         allprops = []
-        for uri in self.agentURIs():
+        for uri in uris:
             xmlString = urllib2.build_opener().open(urllib2.Request(uri)).read()
             tree = xml.fromstring(xmlString)
-            allprops += [prop for prop in [self.propertyFrom(item) for item in tree.findall('channel/item')] if prop is not None]
+
+            for item in tree.findall('channel/item'):
+                try:
+                    allprops.append(self.propertyFrom(item))
+                except Exception, e:
+                    print 'Failed extraction: %s' % e
 
         return allprops
 
+    # TODO: push this down to the subclasses
     def propertyFrom(self, item):
-        try:
             return Property(self.agent(),
                             Price(self.priceAmount(item), self.pricePeriod(item)),
                             Address(self.fullAddress(item), self.postcode(item)),
@@ -26,8 +31,6 @@ class RssBasedExtractor:
                             self.publicationTime(item),
                             self.description(item),
                             self.imageLink(item))
-        except Exception, e:
-            print 'Failed extraction: %s' % e
 
     def agentURIs(self):
         raise NotImplementedError("Must be specified by the subclass")
