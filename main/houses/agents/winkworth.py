@@ -2,12 +2,23 @@
 from datetime import datetime
 import re
 from main.houses.agents.base_extractors import RssBasedExtractor
+from main.houses.model import Address, Price, Property
 
 class Winkworth(RssBasedExtractor):
     def __init__(self):
         RssBasedExtractor.__init__(self)
         self._titlePattern = re.compile(r'([^,]*,[^,]*).*\s+(\S+)\s+-\s+GBP\s+(\S+)\s+(\S+)')
         self._descPattern = re.compile(r'<img\s+.*\s+src="(.*)"/>.*\[REF:(\w+)\]')
+
+    def propertyFrom(self, item):
+            return Property(self.agent(),
+                            Price(self.priceAmount(item), self.pricePeriod(item)),
+                            Address(self.fullAddress(item), self.postcode(item)),
+                            self.link(item),
+                            self.propertyId(item),
+                            self.publicationTime(item),
+                            self.description(item),
+                            self.imageLink(item))
 
     def agentURIs(self):
         return ['http://www.winkworth.co.uk/rss/searchproperty?choose_type_letting=1&locality=London&radius=&ptype=&beds=2&price_min=300&price=550&under_offer=1']

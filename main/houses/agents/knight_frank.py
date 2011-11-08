@@ -2,6 +2,7 @@ import locale
 import re
 from datetime import datetime
 from main.houses.agents.base_extractors import RssBasedExtractor
+from main.houses.model import Address, Price, Property
 
 class KnightFrank(RssBasedExtractor):
     def __init__(self):
@@ -9,6 +10,16 @@ class KnightFrank(RssBasedExtractor):
         self._titlePattern = re.compile(r'GBP\s+.([\d,]+)\s+(.*),\s+.*,\s+(\S+)')
         self._idPattern = re.compile(r'(\w+)$')
         self._descPattern = re.compile(r'img src="([^"]*)".*>(.*)')
+
+    def propertyFrom(self, item):
+            return Property(self.agent(),
+                            Price(self.priceAmount(item), self.pricePeriod(item)),
+                            Address(self.fullAddress(item), self.postcode(item)),
+                            self.link(item),
+                            self.propertyId(item),
+                            self.publicationTime(item),
+                            self.description(item),
+                            self.imageLink(item))
 
     def agentURIs(self):
         return ['http://search.knightfrank.com/feeds/feedhandler.ashx?buyrent=rent&locale=en&locids=1978&minbed=2&maxbed=255&minprice=1300&maxprice=2200&curr=gbp&format=rss']

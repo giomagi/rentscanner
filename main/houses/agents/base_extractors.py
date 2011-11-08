@@ -7,6 +7,7 @@ class RssBasedExtractor:
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
 
+    # TODO: this shouldn't be a superclass for the agents (the way the uris and the properties are handled is inconsistent)
     def properties(self, uris):
         allprops = []
         for uri in uris:
@@ -21,46 +22,5 @@ class RssBasedExtractor:
 
         return allprops
 
-    # TODO: push this down to the subclasses
     def propertyFrom(self, item):
-            return Property(self.agent(),
-                            Price(self.priceAmount(item), self.pricePeriod(item)),
-                            Address(self.fullAddress(item), self.postcode(item)),
-                            self.link(item),
-                            self.propertyId(item),
-                            self.publicationTime(item),
-                            self.description(item),
-                            self.imageLink(item))
-
-    def agentURIs(self):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def agent(self):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def priceAmount(self, item):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def pricePeriod(self, item):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def fullAddress(self, item):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def postcode(self, item):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def link(self, item):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def propertyId(self, item):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def publicationTime(self, item):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def description(self, item):
-        raise NotImplementedError("Must be specified by the subclass")
-
-    def imageLink(self, item):
         raise NotImplementedError("Must be specified by the subclass")

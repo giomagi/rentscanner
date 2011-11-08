@@ -2,6 +2,7 @@
 import locale
 import re
 from main.houses.agents.base_extractors import RssBasedExtractor
+from main.houses.model import Address, Price, Property
 
 class Foxtons(RssBasedExtractor):
     def __init__(self):
@@ -9,6 +10,16 @@ class Foxtons(RssBasedExtractor):
         self._titlePattern = re.compile(r'(\d?,?\d+)\.?.*\s+per\s+(week|month)\s+(.*),\s+(\S+)')
         self._idPattern = re.compile(r'(\w+)$')
         self._descPattern = re.compile(r'img src="([^"]*)".*>(.*)\. Contact Foxtons')
+
+    def propertyFrom(self, item):
+            return Property(self.agent(),
+                            Price(self.priceAmount(item), self.pricePeriod(item)),
+                            Address(self.fullAddress(item), self.postcode(item)),
+                            self.link(item),
+                            self.propertyId(item),
+                            self.publicationTime(item),
+                            self.description(item),
+                            self.imageLink(item))
 
     def agentURIs(self):
         return ['http://www.foxtons.co.uk/feeds/foxtons_feed.rss?bedrooms_from=2&bedrooms_to=2&location_ids=290&price_from=300&price_to=550&result_view=rss&search_type=LL&submit_type=search']

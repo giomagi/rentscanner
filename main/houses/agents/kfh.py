@@ -1,11 +1,22 @@
 import locale
 import re
 from main.houses.agents.base_extractors import RssBasedExtractor
+from main.houses.model import Address, Price, Property
 
 class KFH(RssBasedExtractor):
     def __init__(self):
         RssBasedExtractor.__init__(self)
         self._titlePattern = re.compile(r'([^,]*,[^,]*).*\s+(\S+)\s+-\s+.(\d?,?\d+)\.\d+\s+-\s+\S+\s+(\S+)')
+
+    def propertyFrom(self, item):
+            return Property(self.agent(),
+                            Price(self.priceAmount(item), self.pricePeriod(item)),
+                            Address(self.fullAddress(item), self.postcode(item)),
+                            self.link(item),
+                            self.propertyId(item),
+                            self.publicationTime(item),
+                            self.description(item),
+                            self.imageLink(item))
 
     def interestingZones(self):
         return "NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2"
