@@ -3,20 +3,18 @@ import urllib2
 import xml.etree.ElementTree as xml
 from main.houses.model import Property, Price, Address
 
-class RssBasedExtractor:
+class PropertyExtractor:
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
 
-    # TODO: this shouldn't be a superclass for the agents (the way the uris and the properties are handled is inconsistent)
     def properties(self, uris):
         allprops = []
         for uri in uris:
-            xmlString = urllib2.build_opener().open(urllib2.Request(uri)).read()
-            tree = xml.fromstring(xmlString)
+            content = urllib2.build_opener().open(urllib2.Request(uri)).read()
 
-            for item in tree.findall('channel/item'):
+            for singleItemRepresentation in self.breakDownIntoItems(content):
                 try:
-                    allprops.append(self.propertyFrom(item))
+                    allprops.append(self.propertyFrom(singleItemRepresentation))
                 except Exception, e:
                     print 'Failed extraction: %s' % e
 
@@ -24,3 +22,21 @@ class RssBasedExtractor:
 
     def propertyFrom(self, item):
         raise NotImplementedError("Must be specified by the subclass")
+
+    def breakDownIntoItems(self, resourceContent):
+        raise NotImplementedError("Must be specified by the subclass")
+
+class RssBasedExtractor(PropertyExtractor):
+    def __init__(self):
+        PropertyExtractor.__init__(self)
+
+    def breakDownIntoItems(self, resourceContent):
+        return xml.fromstring(resourceContent).findall('channel/item')
+
+class HtmlBasedExtractor(PropertyExtractor):
+    def __init__(self):
+        PropertyExtractor.__init__(self)
+
+    def breakDownIntoItems(self, resourceContent):
+        # do something with beautiful soup
+        pass
