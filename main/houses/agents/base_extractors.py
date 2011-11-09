@@ -1,19 +1,20 @@
 import locale
 import urllib2
-from libs.BeautifulSoup import BeautifulSoup
+import xml.etree.ElementTree as xml
+from main.houses.model import Property, Price, Address
 
-# TODO: i don't like the inconsistent way the uris and the properties are handled
 class RssBasedExtractor:
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
 
+    # TODO: this shouldn't be a superclass for the agents (the way the uris and the properties are handled is inconsistent)
     def properties(self, uris):
         allprops = []
         for uri in uris:
-            content = urllib2.build_opener().open(urllib2.Request(uri)).read()
-            soup = BeautifulSoup(content)
+            xmlString = urllib2.build_opener().open(urllib2.Request(uri)).read()
+            tree = xml.fromstring(xmlString)
 
-            for item in soup.findAll('item'):
+            for item in tree.findall('channel/item'):
                 try:
                     allprops.append(self.propertyFrom(item))
                 except Exception, e:
