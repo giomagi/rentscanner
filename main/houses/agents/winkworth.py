@@ -11,45 +11,21 @@ class Winkworth(RssBasedExtractor):
         self._descPattern = re.compile(r'<img\s+.*\s+src="(.*)"/>.*\[REF:(\w+)\]')
 
     def propertyFrom(self, item):
-            return Property(self.agent(),
-                            Price(self.priceAmount(item), self.pricePeriod(item)),
-                            Address(self.fullAddress(item), self.postcode(item)),
-                            self.link(item),
-                            self.propertyId(item),
-                            self.publicationTime(item),
-                            self.description(item),
-                            self.imageLink(item))
+        titleMatches = self._titlePattern.findall(item.find('title').text)[0]
+        descMatches = self._descPattern.findall(item.find('description').text)[0]
+
+        return Property('Winkworth',
+                        Price(locale.atoi(titleMatches[2]), titleMatches[3]),
+                        Address(titleMatches[0], titleMatches[1]),
+                        item.find('link').text,
+                        descMatches[1],
+                        self.publicationTime(item),
+                        'WINKWORTH DEL CAZZO',
+                        descMatches[0])
 
     def agentURIs(self):
         return ['http://www.winkworth.co.uk/rss/searchproperty?choose_type_letting=1&locality=London&radius=&ptype=&beds=2&price_min=300&price=550&under_offer=1']
 
-    def agent(self):
-        return 'Winkworth'
-
-    def priceAmount(self, item):
-        return locale.atoi(self._titlePattern.findall(item.find('title').text)[0][2])
-
-    def pricePeriod(self, item):
-        return self._titlePattern.findall(item.find('title').text)[0][3]
-
-    def fullAddress(self, item):
-        return self._titlePattern.findall(item.find('title').text)[0][0]
-
-    def postcode(self, item):
-        return self._titlePattern.findall(item.find('title').text)[0][1]
-
-    def link(self, item):
-        return item.find('link').text
-
-    def propertyId(self, item):
-        return self._descPattern.findall(item.find('description').text)[0][1]
-
     def publicationTime(self, item):
         pubDateAsString = item.findall('pubDate')[0].text
         return datetime.strptime(pubDateAsString[:len(pubDateAsString)-6], '%a, %d %b %Y %H:%M:%S')
-
-    def description(self, item):
-        return 'WINKWORTH DEL CAZZO'
-
-    def imageLink(self, item):
-        return self._descPattern.findall(item.find('description').text)[0][0]
