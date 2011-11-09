@@ -1,8 +1,5 @@
 from datetime import datetime
-import os
 import unittest
-import urllib2
-import xml.etree.ElementTree as xml
 from main.houses.agents.foxtons import Foxtons
 from main.houses.agents.kfh import KFH
 from main.houses.agents.knight_frank import KnightFrank
