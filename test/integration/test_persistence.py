@@ -6,15 +6,23 @@ from main.houses.persistence import Librarian
 from test.support.test_utils import PropertyMaker
 
 class TestPersistence(PropertyMaker):
+
     def setUp(self):
-        self.cleanLibrary()
+        propertiesFile = '/var/gio/rentscanner/test//properties.data'
+        ratingsFile = '/var/gio/rentscanner/test/ratings.data'
+
+        self.removeIfExists(propertiesFile)
+        self.removeIfExists(ratingsFile)
+
+        self.librarian = Librarian()
+        self.librarian.propertiesArchive = propertiesFile
+        self.librarian.ratingsArchive = ratingsFile
 
     def testRoundtripsAProperty(self):
         aProperty = self.aProperty()
 
-        librarian = Librarian()
-        librarian.archiveProperties([aProperty])
-        properties = librarian.retrieveNewProperties()
+        self.librarian.archiveProperties([aProperty])
+        properties = self.librarian.retrieveNewProperties()
 
         self.assertEqual(1, len(properties))
         self.assertEqual(aProperty, properties[0])
@@ -24,10 +32,9 @@ class TestPersistence(PropertyMaker):
         propertyTwo = self.aProperty(propId='333111')
         propertyThree = self.aProperty(propId='zza12ff')
 
-        librarian = Librarian()
-        librarian.archiveProperties([propertyOne, propertyTwo])
-        librarian.archiveProperties([propertyThree])
-        properties = librarian.retrieveNewProperties()
+        self.librarian.archiveProperties([propertyOne, propertyTwo])
+        self.librarian.archiveProperties([propertyThree])
+        properties = self.librarian.retrieveNewProperties()
 
         self.assertEqual(3, len(properties))
         self.assertTrue(propertyOne in properties)
@@ -37,15 +44,13 @@ class TestPersistence(PropertyMaker):
     def testAcquiringAnExistingPropertyUpdatesTheInformation(self):
         propertyOne = self.aProperty(price=1000, pubTime=datetime(2011, 9, 18, 21, 54, 32))
 
-        librarian = Librarian()
-        librarian.archiveProperties([propertyOne])
+        self.librarian.archiveProperties([propertyOne])
 
         propertyTwo = self.aProperty(price=1250, pubTime=datetime(2011, 9, 18, 22, 54, 32))
 
-        librarian = Librarian()
-        librarian.archiveProperties([propertyTwo])
+        self.librarian.archiveProperties([propertyTwo])
 
-        properties = librarian.retrieveNewProperties()
+        properties = self.librarian.retrieveNewProperties()
 
         self.assertEqual(1, len(properties))
         self.assertEqual(propertyTwo, properties[0])
@@ -53,40 +58,33 @@ class TestPersistence(PropertyMaker):
     def testAPropertyMarkedAsNotInterestingDoesntGetRetrieved(self):
         property = self.aProperty()
 
-        librarian = Librarian()
-        librarian.archiveProperties([property])
-        librarian.markAsNotInteresting(property.key())
+        self.librarian.archiveProperties([property])
+        self.librarian.markAsNotInteresting(property.key())
 
-        properties = librarian.retrieveNewProperties()
+        properties = self.librarian.retrieveNewProperties()
         self.assertEqual(0, len(properties))
-    
+
     def testAPropertyMarkedAsInterestingIsRetrievedWithTheInterestingOnes(self):
         aProperty = self.aProperty()
 
-        librarian = Librarian()
-        librarian.archiveProperties([aProperty])
-        librarian.markAsInteresting(aProperty.key())
-        properties = librarian.retrieveSavedProperties()
+        self.librarian.archiveProperties([aProperty])
+        self.librarian.markAsInteresting(aProperty.key())
+        properties = self.librarian.retrieveSavedProperties()
 
         self.assertEqual(1, len(properties))
         self.assertEqual(aProperty, properties[0])
 
     def testUpdatingARatedPropertyMaintainsUserPreferences(self):
-        librarian = Librarian()
         property = self.aProperty()
 
-        librarian.archiveProperties([property])
-        librarian.markAsNotInteresting(property.key())
+        self.librarian.archiveProperties([property])
+        self.librarian.markAsNotInteresting(property.key())
 
-        librarian.archiveProperties([(self.aProperty())])
-        
-        properties = librarian.retrieveNewProperties()
+        self.librarian.archiveProperties([(self.aProperty())])
+
+        properties = self.librarian.retrieveNewProperties()
         self.assertEqual(0, len(properties))
 
-    def cleanLibrary(self):
-        self.cleanPersistenceFile(Librarian.PROPERTIES_LOCATION)
-        self.cleanPersistenceFile(Librarian.RATINGS_LOCATION)
-
-    def cleanPersistenceFile(self, file):
+    def removeIfExists(self, file):
         if os.path.exists(file):
             os.remove(file)
