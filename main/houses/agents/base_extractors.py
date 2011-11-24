@@ -20,6 +20,9 @@ class PropertyExtractor:
 
         return allprops
 
+    def agentURIs(self):
+        raise NotImplementedError("Must be specified by the subclass")
+
     def propertyFrom(self, item):
         raise NotImplementedError("Must be specified by the subclass")
 
