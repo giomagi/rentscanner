@@ -1,8 +1,9 @@
+import unittest
 from main.houses.model import   Address
 from main.web.renderer import Renderer
 from test.support.test_utils import PropertyMaker
 
-class TestRenderer(PropertyMaker):
+class TestRenderer(unittest.TestCase, PropertyMaker):
     def testRendersMenuControls(self):
         html = Renderer().renderFullPage([self.aProperty(link='http://some/url.go', img='http://image.link')])
 

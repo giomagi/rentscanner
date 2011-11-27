@@ -1,10 +1,11 @@
 from datetime import datetime
 import os
+import unittest
 from main.domain.configuration import Configuration
 from main.houses.persistence import Librarian
 from test.support.test_utils import PropertyMaker
 
-class TestPersistence(PropertyMaker):
+class TestPersistence(unittest.TestCase, PropertyMaker):
 
     def setUp(self):
         config = Configuration.test()

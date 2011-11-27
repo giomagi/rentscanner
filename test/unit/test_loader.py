@@ -1,8 +1,9 @@
+import unittest
 from main.domain.configuration import Configuration
 from main.houses.loader import Loader
 from test.support.test_utils import PropertyMaker
 
-class TestLoader(PropertyMaker):
+class TestLoader(unittest.TestCase, PropertyMaker):
 
     def setUp(self):
         super(TestLoader, self).setUp()
