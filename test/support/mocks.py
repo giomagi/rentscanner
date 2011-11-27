@@ -1,3 +1,4 @@
+from main.domain.configuration import Configuration
 from main.houses.persistence import Librarian
 from main.web.renderer import Renderer
 
@@ -10,6 +11,9 @@ class MockRenderer(Renderer):
 class MockLibrarian(Librarian):
     mockedPropertiesList = []
     capturedRequest = None
+
+    def __init__(self):
+        Librarian.__init__(self, Configuration.dummy())
 
     def retrieveNewProperties(self):
         return self.mockedPropertiesList

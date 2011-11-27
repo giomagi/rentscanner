@@ -2,9 +2,13 @@ import BaseHTTPServer
 from main.web.handlers.properties_handler import PropertiesHandler
 
 class Server:
+    def __init__(self, config):
+        self.address = config.webServerAddress()
+        self.port = config.webServerPort()
+
     def start(self):
         server_class = BaseHTTPServer.HTTPServer
-        webserver = server_class(('192.168.1.77', 1234), PropertiesHandler)
+        webserver = server_class((self.address, self.port), PropertiesHandler)
 
         print "Web Server UP"
         try:

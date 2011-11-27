@@ -1,22 +1,17 @@
 from datetime import datetime
 import os
-import unittest
-from main.houses.model import Property, Price, Address
+from main.domain.configuration import Configuration
 from main.houses.persistence import Librarian
 from test.support.test_utils import PropertyMaker
 
 class TestPersistence(PropertyMaker):
 
     def setUp(self):
-        propertiesFile = '/var/gio/rentscanner/test//properties.data'
-        ratingsFile = '/var/gio/rentscanner/test/ratings.data'
+        config = Configuration.test()
+        self.removeIfExists(config.propertiesArchive())
+        self.removeIfExists(config.ratingsArchive())
 
-        self.removeIfExists(propertiesFile)
-        self.removeIfExists(ratingsFile)
-
-        self.librarian = Librarian()
-        self.librarian.propertiesArchive = propertiesFile
-        self.librarian.ratingsArchive = ratingsFile
+        self.librarian = Librarian(config)
 
     def testRoundtripsAProperty(self):
         aProperty = self.aProperty()

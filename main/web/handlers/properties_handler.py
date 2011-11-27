@@ -1,19 +1,23 @@
 import BaseHTTPServer
 import httplib
 import os
+from main.domain.configuration import Configuration
 from main.houses.persistence import Librarian
 from main.web.renderer import Renderer
 
 class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+    # TODO: inject this
+    config = Configuration.prod()
+    
     def do_GET(self):
         reqPath = self.path.lower()
 
         if reqPath == '/':
-            self.success(FullPage().newProperties())
+            self.success(FullPage(Renderer(), Librarian(self.config)).newProperties())
         elif reqPath == '/newproperties':
-            self.success(Fragment().newProperties())
+            self.success(Fragment(Renderer(), Librarian(self.config)).newProperties())
         elif reqPath == '/savedproperties':
-            self.success(Fragment().savedProperties())
+            self.success(Fragment(Renderer(), Librarian(self.config)).savedProperties())
         elif reqPath.startswith('/resources/'):
             resourcePath = self.resourcePath()
 
@@ -30,10 +34,10 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.badRequest('Expecting a rating update in the form /rate/property_id/action, received ' + self.path)
         else:
             if callArgs[2] == 'remove':
-                UserPreferences().removeProperty(callArgs[1])
+                UserPreferences(Renderer(), Librarian(self.config)).removeProperty(callArgs[1])
                 self.sendResponse(httplib.OK, '')
             elif callArgs[2] == 'save':
-                UserPreferences().saveProperty(callArgs[1])
+                UserPreferences(Renderer(), Librarian(self.config)).saveProperty(callArgs[1])
                 self.sendResponse(httplib.OK, '')
             else:
                 self.badRequest('Unsupported request, allowed: /rate/PROPERTY_ID/[save|remove]')
@@ -59,31 +63,25 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def resourcePath(self):
         return os.path.join(os.path.dirname(__file__), '..' + self.path)
 
-class Fragment:
-    def __init__(self, renderer = Renderer(), librarian = Librarian()):
+# TODO: rename to something sensible
+class ConfigBasedResource:
+    def __init__(self, renderer, librarian):
         self.renderer = renderer
         self.librarian = librarian
 
+class Fragment(ConfigBasedResource):
     def newProperties(self):
         return self.renderer.renderFragment(self.librarian.retrieveNewProperties())
 
     def savedProperties(self):
         return self.renderer.renderFragment(self.librarian.retrieveSavedProperties())
 
-class FullPage:
-    def __init__(self, renderer = Renderer(), librarian = Librarian()):
-        self.renderer = renderer
-        self.librarian = librarian
-
+class FullPage(ConfigBasedResource):
     def newProperties(self):
         return self.renderer.renderFullPage(self.librarian.retrieveNewProperties())
 
 
-class UserPreferences:
-    def __init__(self, renderer = Renderer(), librarian = Librarian()):
-        self.renderer = renderer
-        self.librarian = librarian
-
+class UserPreferences(ConfigBasedResource):
     def removeProperty(self, propertyId):
         self.librarian.markAsNotInteresting(propertyId)
 

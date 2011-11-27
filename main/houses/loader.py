@@ -6,8 +6,10 @@ from main.houses.persistence import Librarian
 import sys
 
 class Loader:
-    def __init__(self):
+    # TODO: interesting zones to config
+    def __init__(self, config):
         self.interestingZones = "NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2"
+        self.config = config
 
     def agents(self):
         return [KFH, Foxtons, Winkworth, KnightFrank]
@@ -20,7 +22,7 @@ class Loader:
             agentInstance = agent()
             newProperties = agentInstance.properties(agentInstance.agentURIs())
             filteredProperties = self.filter(newProperties)
-            Librarian().archiveProperties(filteredProperties)
+            Librarian(self.config).archiveProperties(filteredProperties)
 
             sys.stdout.write(str(len(filteredProperties)) + '/' + str(len(newProperties)) + '\n')
 

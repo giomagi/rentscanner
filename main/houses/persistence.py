@@ -2,8 +2,9 @@ import shelve
 from main.houses.model import Rating
 
 class Librarian:
-    propertiesArchive = "/var/gio/rentscanner/properties.data"
-    ratingsArchive = "/var/gio/rentscanner/ratings.data"
+    def __init__(self, config):
+        self.propertiesArchive = config.propertiesArchive()
+        self.ratingsArchive = config.ratingsArchive()
 
     def archiveProperties(self, properties):
         propertiesRegister = shelve.open(self.propertiesArchive)
