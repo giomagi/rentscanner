@@ -63,25 +63,24 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def resourcePath(self):
         return os.path.join(os.path.dirname(__file__), '..' + self.path)
 
-# TODO: rename to something sensible
-class ConfigBasedResource:
+class GeneratedResource:
     def __init__(self, renderer, librarian):
         self.renderer = renderer
         self.librarian = librarian
 
-class Fragment(ConfigBasedResource):
+class Fragment(GeneratedResource):
     def newProperties(self):
         return self.renderer.renderFragment(self.librarian.retrieveNewProperties())
 
     def savedProperties(self):
         return self.renderer.renderFragment(self.librarian.retrieveSavedProperties())
 
-class FullPage(ConfigBasedResource):
+class FullPage(GeneratedResource):
     def newProperties(self):
         return self.renderer.renderFullPage(self.librarian.retrieveNewProperties())
 
 
-class UserPreferences(ConfigBasedResource):
+class UserPreferences(GeneratedResource):
     def removeProperty(self, propertyId):
         self.librarian.markAsNotInteresting(propertyId)
 

@@ -6,9 +6,7 @@ from main.houses.persistence import Librarian
 import sys
 
 class Loader:
-    # TODO: interesting zones to config
     def __init__(self, config):
-        self.interestingZones = "NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2"
         self.config = config
 
     def agents(self):
@@ -30,4 +28,4 @@ class Loader:
         return [p for p in properties if self.isInteresting(p)]
 
     def isInteresting(self, property):
-        return property.price.monthlyPrice() > 1300 and property.price.monthlyPrice() < 2200 and property.address.postcode in self.interestingZones
+        return property.price.monthlyPrice() > self.config.minMonthlyPrice() and property.price.monthlyPrice() < self.config.maxMonthlyPrice() and property.address.postcode in self.config.interestingZones()

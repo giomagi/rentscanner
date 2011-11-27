@@ -29,6 +29,15 @@ class Configuration:
     def __init__(self, props):
         self.props = props
 
+    def minMonthlyPrice(self):
+        return 1300
+
+    def maxMonthlyPrice(self):
+        return 2200
+
+    def interestingZones(self):
+        return "NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2"
+
     def propertiesArchive(self):
         return self.props['propertiesArchive']
 
