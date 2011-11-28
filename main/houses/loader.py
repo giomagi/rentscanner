@@ -1,6 +1,7 @@
 from main.houses.agents.foxtons import Foxtons
 from main.houses.agents.kfh import KFH
 from main.houses.agents.knight_frank import KnightFrank
+from main.houses.agents.lawson_rutter import LawsonRutter
 from main.houses.agents.winkworth import Winkworth
 from main.houses.persistence import Librarian
 import sys
@@ -10,7 +11,7 @@ class Loader:
         self.config = config
 
     def agents(self):
-        return [KFH, Foxtons, Winkworth, KnightFrank]
+        return [LawsonRutter, KFH, KnightFrank, Winkworth, Foxtons]
 
     def loadAll(self):
         for agent in self.agents():
