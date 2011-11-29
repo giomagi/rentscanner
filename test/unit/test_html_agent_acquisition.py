@@ -1,5 +1,5 @@
 import unittest
-from main.houses.agents.lawson_rutter import LawsonRutter
+from main.houses.agents.webdadi import LawsonRutter
 from libs.BeautifulSoup import BeautifulSoup
 
 class TestAgentAcquisition(unittest.TestCase):
