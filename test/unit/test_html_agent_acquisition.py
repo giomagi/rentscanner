@@ -36,4 +36,5 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("http://www.chard.co.uk/public/webresize.dll?filename={689159A5-D8DF-4EE2-8DC0-ACC05732996A}.jpg&amp;height=150&amp;width=200", property.image)
 
     def testGeneratesTheURIsForChard(self):
+        # TODO: make this a real test
         pass
