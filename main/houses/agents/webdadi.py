@@ -17,10 +17,13 @@ class Webdadi(PropertyExtractor):
     def breakDownIntoItems(self, resourceContent):
         return BeautifulSoup(resourceContent).findAll('table', 'lresultsrow')
 
+    def addressTagName(self):
+        return 'lresultsaddress'
+
     def propertyFrom(self, item):
         priceText = item.find('td', 'lresultspricelets').contents[0]
 
-        addressTag = (item.find('td', 'lresultsaddress')).a
+        addressTag = (item.find('td', self.addressTagName())).a
         addressMatches = self._addressPattern.findall(addressTag.string)[0]
 
         link = addressTag['href'].rstrip()
@@ -66,3 +69,13 @@ class Chard(Webdadi):
 
     def agentURIs(self):
         return ['http://www.chard.co.uk/results.dtx?from=&getdata=true&search=bycriteria&page=' + str(page) + '&branch=&_DSpropertytype={00000000-0000-0000-0000-000000000000}&_DSminprice=300&_DSmaxprice=600&_DSminbedrooms=2&areas=0&_DSareas=&x=35&y=1' for page in range(1, 21)]
+
+class Dexters(Webdadi):
+    def agentName(self):
+        return 'Dexters'
+
+    def agentURIs(self):
+        return ['http://lettings.dexters.co.uk/results.dtx?getdata=true&search=bycriteria&page=' + str(page) + '&_DSminbedrooms=0&_DSminprice=1200&_DSmaxprice=2500&_DSpropertytype={00000000-0000-0000-0000-000000000000}&lat=-0.3&long=51.4361123&zoom=6' for page in range(1, 101)]
+
+    def addressTagName(self):
+        return 'lresultsaddress1'

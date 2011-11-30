@@ -1,5 +1,5 @@
 import unittest
-from main.houses.agents.webdadi import LawsonRutter, Chard
+from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
 from libs.BeautifulSoup import BeautifulSoup
 
 class TestAgentAcquisition(unittest.TestCase):
@@ -35,6 +35,19 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("This two bedroom apartment to let is arranged on the fifth floor (with lift access) of this modern purpose built riverside.", property.description)
         self.assertEqual("http://www.chard.co.uk/public/webresize.dll?filename={689159A5-D8DF-4EE2-8DC0-ACC05732996A}.jpg&amp;height=150&amp;width=200", property.image)
 
-    def testGeneratesTheURIsForChard(self):
-        # TODO: make this a real test
-        pass
+    def testDecodesADextersItem(self):
+        properties = Dexters().properties(['File:sample_dexters.html'])
+
+        self.assertEqual(5, len(properties))
+
+        property = properties[0]
+        self.assertEqual("Myrna Close, Colliers Wood, London", property.address.address)
+        self.assertEqual("SW19", property.address.postcode)
+        self.assertEqual(1200, property.price.monthlyPrice())
+        self.assertEqual("Dexters", property.agent)
+        self.assertEqual("http://lettings.dexters.co.uk/details.dtx?propertyid=8DF3E2D7-A75F-4CB0-A9A0-069D8B688773", property.link)
+        self.assertEqual("8DF3E2D7-A75F-4CB0-A9A0-069D8B688773", property.agentId)
+        self.assertEqual(None, property.publicationDateTime)
+        self.assertEqual("A beautiful two double bedroom end of terrace house within a private cul-de-sac which is less than 1/2 a mile to Colliers.", property.description)
+        self.assertEqual("http://lettings.dexters.co.uk/public/webresize.dll?filename={80CDBCB8-CC43-48A3-AA17-3DBD6C227770}.jpg&amp;height=150&amp;width=200", property.image)
+
