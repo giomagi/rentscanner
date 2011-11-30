@@ -63,4 +63,4 @@ class Renderer:
         })
 
     def imageFor(self, agent):
-        return '/resources/' + agent.lower() + ('.gif' if agent.lower() in ('knightfrank', 'lawsonrutter') else '.jpeg')
+        return '/resources/' + agent.lower() + ('.gif' if agent.lower() in ('knightfrank', 'lawsonrutter', 'chard') else '.jpeg')

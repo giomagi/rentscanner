@@ -2,7 +2,7 @@ from datetime import datetime
 import locale
 import re
 import urllib2
-from libs.BeautifulSoup import BeautifulSoup
+from libs.BeautifulSoup import BeautifulSoup, NavigableString
 from main.houses.agents.base_extractors import PropertyExtractor
 from main.houses.model import Address, Price, Property
 
@@ -33,11 +33,17 @@ class Webdadi(PropertyExtractor):
                         link,
                         propertyId,
                         None,
-                        item.find('td', 'lresultsDescription').contents[0].rstrip(' .') + '.',
+                        self.descriptionFrom(item).rstrip(' .') + '.',
                         self.imageLink(item))
 
     def agentName(self):
         raise NotImplementedError("Must be specified by the subclass")
+
+    def descriptionFrom(self, item):
+        for child in item.find('td', 'lresultsDescription').contents:
+            if isinstance(child, NavigableString):
+                return child
+        raise Exception, 'Can\'t find the description'
 
     def imageLink(self, item):
         for imgTag in item.findAll('img'):
