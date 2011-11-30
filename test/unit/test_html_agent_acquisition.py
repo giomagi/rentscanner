@@ -1,12 +1,8 @@
 import unittest
-from main.houses.agents.webdadi import LawsonRutter
+from main.houses.agents.webdadi import LawsonRutter, Chard
 from libs.BeautifulSoup import BeautifulSoup
 
 class TestAgentAcquisition(unittest.TestCase):
-    # TODO: move to integration and check the URIs against a real page
-    def testDecodesNextPageLinkForLawsonRutter(self):
-        pass
-
     def testDecodesALawsonRutterItem(self):
         properties = LawsonRutter().properties(['File:sample_lawson_rutter.html'])
 
@@ -22,3 +18,22 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual(None, property.publicationDateTime)
         self.assertEqual("Boasting of a large open plan kitchen/reception room is this well presented first floor two double bedroom Victorian conversion.", property.description)
         self.assertEqual("http://lettings.lawsonrutter.com/public/webresize.dll?filename={76C83E9E-9636-4B62-8EFF-73133ED1DA06}.jpg&amp;height=150&amp;width=200", property.image)
+
+    def testDecodesAChardItem(self):
+        properties = Chard().properties(['File:sample_chard.html'])
+
+        self.assertEqual(5, len(properties))
+
+        property = properties[0]
+        self.assertEqual("Harbour Reach, Imperial Wharf", property.address.address)
+        self.assertEqual("SW6", property.address.postcode)
+        self.assertEqual(600 * 52 / 12, property.price.monthlyPrice())
+        self.assertEqual("Chard", property.agent)
+        self.assertEqual("http://www.chard.co.uk/Flattolet/Harbour Reach, Imperial Wharf/SW6/beds-2/property.vtx?propertyid=D3132A04-7BA4-4869-AA7F-1F5E17EB80FC", property.link)
+        self.assertEqual("D3132A04-7BA4-4869-AA7F-1F5E17EB80FC", property.agentId)
+        self.assertEqual(None, property.publicationDateTime)
+        self.assertEqual("This two bedroom apartment to let is arranged on the fifth floor (with lift access) of this modern purpose built riverside.", property.description)
+        self.assertEqual("http://www.chard.co.uk/public/webresize.dll?filename={689159A5-D8DF-4EE2-8DC0-ACC05732996A}.jpg&amp;height=150&amp;width=200", property.image)
+
+    def testGeneratesTheURIsForChard(self):
+        pass
