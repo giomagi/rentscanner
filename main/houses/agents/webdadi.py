@@ -65,4 +65,4 @@ class Chard(Webdadi):
         return 'Chard'
 
     def agentURIs(self):
-        return ['http://www.chard.co.uk/results.dtx?from=&getdata=true&search=bycriteria&page=' + str(page) + '&branch=&_DSpropertytype={00000000-0000-0000-0000-000000000000}&_DSminprice=300&_DSmaxprice=600&_DSminbedrooms=2&areas=0&_DSareas=&x=35&y=1' for page in range(1, 10)]
+        return ['http://www.chard.co.uk/results.dtx?from=&getdata=true&search=bycriteria&page=' + str(page) + '&branch=&_DSpropertytype={00000000-0000-0000-0000-000000000000}&_DSminprice=300&_DSmaxprice=600&_DSminbedrooms=2&areas=0&_DSareas=&x=35&y=1' for page in range(1, 21)]
