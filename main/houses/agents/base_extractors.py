@@ -3,7 +3,7 @@ import urllib2
 import xml.etree.ElementTree as xml
 from main.houses.model import Property, Price, Address
 
-class PropertyExtractor:
+class PropertyExtractor(object):
     def __init__(self):
         locale.setlocale(locale.LC_ALL, '')
 

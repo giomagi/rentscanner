@@ -6,7 +6,7 @@ from main.houses.agents.winkworth import Winkworth
 from main.houses.persistence import Librarian
 import sys
 
-class Loader:
+class Loader(object):
     def __init__(self, config):
         self.config = config
 

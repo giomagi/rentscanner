@@ -1,7 +1,7 @@
 import BaseHTTPServer
 from main.web.handlers.properties_handler import PropertiesHandler
 
-class Server:
+class Server(object):
     def __init__(self, config):
         self.address = config.webServerAddress()
         self.port = config.webServerPort()

@@ -1,7 +1,7 @@
 import shelve
 from main.houses.model import Rating
 
-class Librarian:
+class Librarian(object):
     def __init__(self, config):
         self.propertiesArchive = config.propertiesArchive()
         self.ratingsArchive = config.ratingsArchive()

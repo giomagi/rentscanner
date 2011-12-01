@@ -1,6 +1,6 @@
 from exceptions import Exception
 
-class Rating:
+class Rating(object):
     @classmethod
     def NOT_RATED(cls):
         return 'NOT_RATED'

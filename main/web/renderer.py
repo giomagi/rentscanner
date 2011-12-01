@@ -1,6 +1,6 @@
 from string import Template
 
-class Renderer:
+class Renderer(object):
     htmlForPage = Template('''
 <html>
     <head>

@@ -63,7 +63,7 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def resourcePath(self):
         return os.path.join(os.path.dirname(__file__), '..' + self.path)
 
-class GeneratedResource:
+class GeneratedResource(object):
     def __init__(self, renderer, librarian):
         self.renderer = renderer
         self.librarian = librarian

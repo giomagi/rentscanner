@@ -1,4 +1,4 @@
-class Configuration:
+class Configuration(object):
     @classmethod
     def dummy(cls):
         return Configuration({
