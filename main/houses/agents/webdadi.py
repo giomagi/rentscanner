@@ -75,7 +75,7 @@ class Dexters(Webdadi):
         return 'Dexters'
 
     def agentURIs(self):
-        return ['http://lettings.dexters.co.uk/results.dtx?getdata=true&search=bycriteria&page=' + str(page) + '&_DSminbedrooms=0&_DSminprice=1200&_DSmaxprice=2500&_DSpropertytype={00000000-0000-0000-0000-000000000000}&lat=-0.3&long=51.4361123&zoom=6' for page in range(1, 101)]
+        return ['http://lettings.dexters.co.uk/results.dtx?getdata=true&search=bycriteria&page=' + str(page) + '&_DSminbedrooms=2&_DSminprice=1200&_DSmaxprice=2500&_DSpropertytype={00000000-0000-0000-0000-000000000000}&lat=-0.3&long=51.4361123&zoom=6' for page in range(1, 76)]
 
     def addressTagName(self):
         return 'lresultsaddress1'
