@@ -13,9 +13,13 @@ class Loader(object):
     def agents(self):
         return [Dexters, Chard, LawsonRutter, KFH, KnightFrank, Winkworth, Foxtons]
 
+    def name(self, agent):
+        asString = str(agent)
+        return asString[asString.rindex('.') + 1:asString.rindex('\'')]
+
     def loadAll(self):
         for agent in self.agents():
-            sys.stdout.write(str(agent)[str(agent).rindex('.')+1:] + ': ')
+            sys.stdout.write(self.name(agent) + ': ')
             sys.stdout.flush()
 
             agentInstance = agent()
