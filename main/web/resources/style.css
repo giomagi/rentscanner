@@ -1,0 +1,31 @@
+body {
+    font-family: sans-serif;
+    font-size: 100%;
+}
+
+.content {
+    display: table;
+    margin-top: 30px;
+}
+
+.property {
+    display: table-row;
+}
+
+div.property>div {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+div.saved>div.save {
+    display: none;
+}
+
+.agent {
+    width: 100px;
+}
+
+.image {
+    width: 200px;
+}

@@ -70,14 +70,14 @@ class GeneratedResource(object):
 
 class Fragment(GeneratedResource):
     def newProperties(self):
-        return self.renderer.renderFragment(self.librarian.retrieveNewProperties())
+        return self.renderer.renderFragment(self.librarian.retrieveNewProperties(), 'new')
 
     def savedProperties(self):
-        return self.renderer.renderFragment(self.librarian.retrieveSavedProperties())
+        return self.renderer.renderFragment(self.librarian.retrieveSavedProperties(), 'saved')
 
 class FullPage(GeneratedResource):
     def newProperties(self):
-        return self.renderer.renderFullPage(self.librarian.retrieveNewProperties())
+        return self.renderer.renderFullPage(self.librarian.retrieveNewProperties(), 'new')
 
 
 class UserPreferences(GeneratedResource):
