@@ -1,11 +1,21 @@
 body {
     font-family: sans-serif;
     font-size: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation {
+    background-color: black;
+    color: #ffffff;
+    position: fixed;
+    width: 100%;
 }
 
 div.navigation>div {
     display: inline-block;
     margin: 5px;
+    cursor: pointer;
 }
 
 .content {
