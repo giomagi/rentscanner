@@ -5,7 +5,7 @@ from main.web.renderer import Renderer
 class MockRenderer(Renderer):
     mockedResponse = ''
 
-    def renderFullPage(self, properties):
+    def renderFullPage(self, properties, type):
         return self.mockedResponse
 
 class MockLibrarian(Librarian):

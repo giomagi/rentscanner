@@ -13,12 +13,16 @@ class Renderer(object):
 
     <body>
         <div id="controls" class="navigation">
-            <button type="button" onclick="showNewProperties()">show new</button>
-            <button type="button" onclick="showSavedProperties()">show saved</button>
+            <div id="newProperties" class="clickable">View New</div>
+            <div id="savedProperties" class="clickable">View Saved</div>
         </div>
         <div id="properties" class="content">
             $properties
         </div>
+        <script>
+            $$('#newProperties').click(showNewProperties);
+            $$('#savedProperties').click(showSavedProperties);
+        </script>
     </body>
 </html>''')
 

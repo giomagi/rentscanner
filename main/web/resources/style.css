@@ -3,6 +3,11 @@ body {
     font-size: 100%;
 }
 
+div.navigation>div {
+    display: inline-block;
+    margin: 5px;
+}
+
 .content {
     display: table;
     margin-top: 30px;
