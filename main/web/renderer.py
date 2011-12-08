@@ -13,8 +13,9 @@ class Renderer(object):
 
     <body>
         <div id="controls" class="navigation">
-            <div id="newProperties" class="clickable">View New</div>
-            <div id="savedProperties" class="clickable">View Saved</div>
+            <div class="name">Rentscanner</div>
+            <div id="newProperties" class="clickable">new</div>
+            <div id="savedProperties" class="clickable">saved</div>
         </div>
         <div id="properties" class="content">
             $properties

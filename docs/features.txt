@@ -1,3 +1,5 @@
+- login screen
+- web address and port parametric
 - agent coverage: prioritise on volumes (acquisition module, add module to loader, add agent logo)
     - douglas and gordon 35 (included let agreed + under offer)
     - marsh and parsons 50? (html based)
@@ -29,22 +31,18 @@
     - carter jonas 10- (html based)
     - vantage realty 10 (html based)
     - brik 10-- (html based)
-- "most-recents" load for rss-based feeds
-- 2 page logic (new / interested)
-- undo last rating action
-- loader dynamically loads all the modules in /houses/agents
-- extract bedrooms
-- winkworth description
-- nice description
 - css and niceties
-- images for agents
-- web address and port parametric
-- separate agent and id in the key
+- separate agent and property id in the property key
+- "most-recents" load for rss-based feeds
 - look at hosting solutions
 - automate deployment
-- login screen
+- make persistence layer work on a real db (or at least keeping the shelve open)
+- extract bedrooms
+- access to deleted properties (at least deleted in the last x-days)
+- reaper process: remove properties (and associated ratings) once removed from the agent
+- loader dynamically loads all the modules in /houses/agents
+- winkworth description
+- nice description
 - make rating storage user-based
 - move to a web framework (django?)
-- allows rating of items from ui
-- remove properties (and associated ratings) once removed from the agent
-- make persistence layer work on a real db (or at least keeping the shelve open)
+- allows rating of items
