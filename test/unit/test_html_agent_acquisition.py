@@ -1,5 +1,6 @@
 import unittest
 from main.houses.agents.douglas_and_gordon import DouglasAndGordon
+from main.houses.agents.marsh_and_parsons import MarshAndParsons
 from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
 from libs.BeautifulSoup import BeautifulSoup
 
@@ -68,3 +69,18 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("A delightful split level flat situated on this quiet residential street less than ten minutes walk from East Putney underground.", property.description)
         self.assertEqual("http://images.douglasandgordon.com/property/31038/photos/219/146/photo_31038_4.jpg", property.image)
 
+    def testDecodesAMarshAndParsonsItem(self):
+        properties = MarshAndParsons().properties(['File:sample_marsh_and_parsons.html'])
+
+        self.assertEqual(15, len(properties))
+
+        property = properties[0]
+        self.assertEqual("Devonport, 23 Southwick Street", property.address.address)
+        self.assertEqual("W2", property.address.postcode)
+        self.assertEqual(550 * 52 / 12, property.price.monthlyPrice())
+        self.assertEqual("MarshAndParsons", property.agent)
+        self.assertEqual("http://www.marshandparsons.co.uk/property-to-rent-in-london/devonport-23-southwick-street-w2/property-details/22453/", property.link)
+        self.assertEqual("22453", property.agentId)
+        self.assertEqual(None, property.publicationDateTime)
+        self.assertEqual("A large two bedroom flat in a secure block.", property.description)
+        self.assertEqual("http://www.marshandparsons.co.uk/dxModules/dxPictures/dxThumbsRent/ecimage1/P022453.jpg", property.image)

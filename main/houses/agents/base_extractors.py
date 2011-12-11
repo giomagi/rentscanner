@@ -17,8 +17,7 @@ class PropertyExtractor(object):
                     allprops.append(self.propertyFrom(singleItemRepresentation))
                 except Exception, e:
                     print 'Failed extraction: %s' % e
-                    print '\tfor ' + str(singleItemRepresentation)
-                    pass
+#                    print '\tfor ' + str(singleItemRepresentation)
 
         return allprops
 
