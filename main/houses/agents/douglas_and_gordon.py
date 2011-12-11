@@ -18,7 +18,7 @@ class DouglasAndGordon(PropertyExtractor):
 
         lastPage = BeautifulSoup(content).find('div', 'pagination').findAll('a', text=re.compile(r'^\d+$'))[-1]
 
-        return [baseAddress + '&page=' + str(page) for page in range(1, locale.atoi(lastPage + 1))]
+        return [baseAddress + '&page=' + str(page) for page in range(1, locale.atoi(lastPage) + 1)]
 
     def propertyFrom(self, item):
         priceMatches = self._pricePattern.findall(item.find('span', 'highlightTurqoise').text)[0]
