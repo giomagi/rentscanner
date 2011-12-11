@@ -2,6 +2,7 @@ from main.houses.agents.douglas_and_gordon import DouglasAndGordon
 from main.houses.agents.foxtons import Foxtons
 from main.houses.agents.kfh import KFH
 from main.houses.agents.knight_frank import KnightFrank
+from main.houses.agents.marsh_and_parsons import MarshAndParsons
 from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
 from main.houses.agents.winkworth import Winkworth
 from main.houses.persistence import Librarian
@@ -12,7 +13,7 @@ class Loader(object):
         self.config = config
 
     def agents(self):
-        return [DouglasAndGordon, Dexters, Chard, LawsonRutter, KFH, KnightFrank, Winkworth, Foxtons]
+        return [MarshAndParsons, DouglasAndGordon, Dexters, Chard, LawsonRutter, KFH, KnightFrank, Winkworth, Foxtons]
 
     def name(self, agent):
         asString = str(agent)
