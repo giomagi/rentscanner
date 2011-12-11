@@ -1,3 +1,5 @@
+import commands
+
 class Configuration(object):
     @classmethod
     def dummy(cls):
@@ -13,7 +15,7 @@ class Configuration(object):
         return Configuration({
             'propertiesArchive' : '/var/gio/rentscanner/test/properties.data',
             'ratingsArchive' : '/var/gio/rentscanner/test/ratings.data',
-            'webServerAddress' : '192.168.1.77',
+            'webServerAddress' : commands.getoutput("ifconfig").split("\n")[1].split()[1][5:],
             'webServerPort' : 5678
         })
 
@@ -22,7 +24,7 @@ class Configuration(object):
         return Configuration({
             'propertiesArchive' : '/var/gio/rentscanner/properties.data',
             'ratingsArchive' : '/var/gio/rentscanner/ratings.data',
-            'webServerAddress' : '192.168.1.77',
+            'webServerAddress' : commands.getoutput("ifconfig").split("\n")[1].split()[1][5:],
             'webServerPort' : 1234
         })
 

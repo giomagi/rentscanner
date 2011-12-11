@@ -7,8 +7,8 @@ class TestRenderer(unittest.TestCase, PropertyMaker):
     def testRendersMenuControls(self):
         html = Renderer().renderFullPage([self.aProperty(link='http://some/url.go', img='http://image.link')], 'new')
 
-        self.assertTrue('View New' in html)
-        self.assertTrue('View Saved' in html)
+        self.assertTrue('new' in html)
+        self.assertTrue('saved' in html)
 
     def testRendersItemContents(self):
         html = Renderer().renderFullPage([self.aProperty(link='http://some/url.go', img='http://image.link')], 'new')
