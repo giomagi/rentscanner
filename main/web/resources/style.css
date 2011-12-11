@@ -10,7 +10,6 @@ body {
     color: #ffffff;
     position: fixed;
     width: 100%;
-    height: 20px;
 }
 
 .name {
@@ -30,7 +29,12 @@ div.navigation>div {
 
 .content {
     display: table;
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+    width: 90%;
     margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .property {
@@ -41,6 +45,16 @@ div.property>div {
     display: table-cell;
     vertical-align: middle;
     padding: 5px;
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+}
+
+div.property>div:first-child {
+    border-left: 2px solid gray;
+}
+
+div.property>div:last-child {
+    border-right: 2px solid gray;
 }
 
 div.saved>div.save {
