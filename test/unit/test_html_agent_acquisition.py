@@ -1,4 +1,5 @@
 import unittest
+from main.houses.agents.douglas_and_gordon import DouglasAndGordon
 from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
 from libs.BeautifulSoup import BeautifulSoup
 
@@ -50,4 +51,20 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual(None, property.publicationDateTime)
         self.assertEqual("A beautiful two double bedroom end of terrace house within a private cul-de-sac which is less than 1/2 a mile to Colliers.", property.description)
         self.assertEqual("http://lettings.dexters.co.uk/public/webresize.dll?filename={80CDBCB8-CC43-48A3-AA17-3DBD6C227770}.jpg&amp;height=150&amp;width=200", property.image)
+
+    def testDecodesADouglasAndGordonItem(self):
+        properties = DouglasAndGordon().properties(['File:sample_douglas_and_gordon.html'])
+
+        self.assertEqual(20, len(properties))
+
+        property = properties[0]
+        self.assertEqual("Ringford Road", property.address.address)
+        self.assertEqual("SW18", property.address.postcode)
+        self.assertEqual(300 * 52 / 12, property.price.monthlyPrice())
+        self.assertEqual("DouglasAndGordon", property.agent)
+        self.assertEqual("http://www.douglasandgordon.com/property/overview/?a=letting&b=2&min=300&max=550&id=31038", property.link)
+        self.assertEqual("31038", property.agentId)
+        self.assertEqual(None, property.publicationDateTime)
+        self.assertEqual("A delightful split level flat situated on this quiet residential street less than ten minutes walk from East Putney underground.", property.description)
+        self.assertEqual("http://images.douglasandgordon.com/property/31038/photos/219/146/photo_31038_4.jpg", property.image)
 

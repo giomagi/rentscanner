@@ -52,7 +52,7 @@ class Price:
             return int(self.amount)
 
     def _validatePeriod(self, period):
-        if period in ('week', 'p/w'):
+        if period in ('week', 'p/w', 'pw'):
             return 'week'
         elif period in ('month', 'pcm'):
             return 'month'

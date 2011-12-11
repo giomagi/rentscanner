@@ -18,6 +18,7 @@ class PropertyExtractor(object):
                 except Exception, e:
                     print 'Failed extraction: %s' % e
                     print '\tfor ' + str(singleItemRepresentation)
+                    pass
 
         return allprops
 
