@@ -1,5 +1,6 @@
 import unittest
 from main.houses.agents.douglas_and_gordon import DouglasAndGordon
+from main.houses.agents.faron_sutaria import FaronSutaria
 from main.houses.agents.marsh_and_parsons import MarshAndParsons
 from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
 from libs.BeautifulSoup import BeautifulSoup
@@ -84,3 +85,20 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual(None, property.publicationDateTime)
         self.assertEqual("A large two bedroom flat in a secure block.", property.description)
         self.assertEqual("http://www.marshandparsons.co.uk/dxModules/dxPictures/dxThumbsRent/ecimage1/P022453.jpg", property.image)
+
+    def testDecodesAFaronSutariaItem(self):
+        properties = FaronSutaria().properties(['File:sample_faron_sutaria.html'])
+
+        self.assertEqual(10, len(properties))
+
+        property = properties[0]
+        self.assertEqual("Upper Maisonette, St. Stephens Avenue, London", property.address.address)
+        self.assertEqual("W12", property.address.postcode)
+        self.assertEqual(325 * 52 / 12, property.price.monthlyPrice())
+        self.assertEqual("FaronSutaria", property.agent)
+        self.assertEqual("http://www.faronsutaria.co.uk/W12/London/Upper-Maisonette/2-bed/property.vtx?p=2458DAD8-F70D-43EC-8739-49C40C7E71B8", property.link)
+        self.assertEqual("2458DAD8-F70D-43EC-8739-49C40C7E71B8", property.agentId)
+        self.assertEqual(None, property.publicationDateTime)
+        self.assertEqual("Located close to Shepherds Bush Green and all its convenient amenities and transport links this property is ideal for professional sharers or a couple looking for lots of space. With wooden floors thr...", property.description)
+        self.assertEqual("http://www.faronsutaria.co.uk/public/webresize.dll?filename={B53B6619-6DEF-4504-B4D2-1165AD13A170}.jpg", property.image)
+
