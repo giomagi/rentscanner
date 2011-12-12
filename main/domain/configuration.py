@@ -1,4 +1,4 @@
-import commands
+import socket
 
 class Configuration(object):
     @classmethod
@@ -15,7 +15,7 @@ class Configuration(object):
         return Configuration({
             'propertiesArchive' : '/var/gio/rentscanner/test/properties.data',
             'ratingsArchive' : '/var/gio/rentscanner/test/ratings.data',
-            'webServerAddress' : commands.getoutput("ifconfig").split("\n")[1].split()[1][5:],
+            'webServerAddress' : cls.getLocalIpAddress(),
             'webServerPort' : 5678
         })
 
@@ -24,9 +24,15 @@ class Configuration(object):
         return Configuration({
             'propertiesArchive' : '/var/gio/rentscanner/properties.data',
             'ratingsArchive' : '/var/gio/rentscanner/ratings.data',
-            'webServerAddress' : commands.getoutput("ifconfig").split("\n")[1].split()[1][5:],
+            'webServerAddress' : cls.getLocalIpAddress(),
             'webServerPort' : 1234
         })
+
+    @classmethod
+    def getLocalIpAddress(cls):
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('google.com', 0))
+        return s.getsockname()[0]
 
     def __init__(self, props):
         self.props = props
@@ -51,3 +57,4 @@ class Configuration(object):
 
     def webServerPort(self):
         return self.props['webServerPort']
+
