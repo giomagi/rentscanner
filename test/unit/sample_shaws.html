@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Shaws Estate Agents</title>
+<link href="/css/search.css" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" src="/js/menu1.js"> 
+/***********************************************
+* Chrome CSS Drop Down Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+</script>
+        
+<script type="text/javascript" src="/xml/js/tpj.js"></script>
+<script type="text/javascript" src="/xml/js/prototype.js"></script>
+<script type="text/javascript" src="/xml/js/scriptaculous.js"></script>
+
+<script type="text/javascript" src="/xml/js/event.simulate.js"></script>
+<script type="text/javascript" src="/xml/js/plugin.js"></script>
+<script type="text/javascript" src="/xml/js/site.js"></script>
+<script type="text/javascript" src="/js/shawsestates.js"></script>
+<script type="text/javascript" src="/js/_search-prices.js"></script>
+
+			<!--[if lt IE 7.]>
+			<script defer type="text/javascript" src="/xml/js/pngfix.js"></script>
+			<![endif]-->
+		
+</head>
+
+<body onload="selectInstructionTypeRadio('instruction_type', 'minpricew', 'maxpricew');">
+
+<div id="container">
+
+<!--HEADER......................................................-->
+
+<div id="header">
+
+   <div class="login">
+   <!--
+  <!--  <ul>
+  <li><a href="#" class="border">Login</a></li>
+   <li><a href="#">Register</a></li>
+  </ul>-->
+  </div>
+
+  
+   <div class="tel"><img src="/images/telephone-number.gif"  title="Contact Telephone number 020 7386 9996" alt="Contact Telephone number 020 7386 9996" />   </div> <div id="nav">   <ul>
+<li><a href="/index.html" title="Go to Home page">HOME</a></li>   <li><a href="#" title="Go to Property Sales" rel="dropmenu1">SALES</a></li> 
+<li><a href="/homebuyer-centre.html" title="Go toHome Buyers Centre">HOME BUYERS CENTRE</a></li> <li><a href="#" title="Go to Property Lettings" rel="dropmenu2">LETTINGS</a></li>     
+   <li><a href="#" title="Other Property Services" rel="dropmenu3">OTHER SERVICES</a></li>     
+   <li><a href="#" title="Read About Shaws Estate Agents" rel="dropmenu4">ABOUT US</a></li>   
+   <li><a href="/news.html" title="Lastest News on Shaws Esatae Agents">NEWS</a></li>    
+   <li><a href="/contact.html" title="Go to Home page" class="navno">CONTACT US</a></li>
+
+   </ul>
+  
+  <!--SALES DROPDOWN-->
+		<div id="dropmenu1" class="dropmenudiv">
+			<div class="linkcontainer">
+				<div class="linkcolumn">
+					<ul>
+						<li><a href="/sales.html" title="Selling your Property Information">Selling your Property</a></li>       	<li><a href="/sales-search.html" title="Properties for Sale Search">Sales Search</a></li>
+
+        <li><a href="/market-appraisal.html" title="Market Appraisal">Market Appraisal</a></li>
+             
+                
+</ul>
+                    
+				</div>
+           
+				<div class="clearfix"></div>
+			</div>
+            
+		</div>
+        
+        
+         <!--LETTINGS DROPDOWN-->
+		<div id="dropmenu2" class="dropmenudiv">
+
+			<div class="linkcontainer">
+				<div class="linkcolumn">
+					<ul>
+						<li><a href="/lettings.html" title="Letting your Property Information">Letting your Property</a></li>          	<li><a href="/lettings-search.html" title="Properties for Let Search">Lettings Search</a></li>
+        <li><a href="/market-appraisal.html" title="Market Appraisal">Market Appraisal</a></li>
+             
+                
+</ul>
+                    
+				</div>
+
+           
+				<div class="clearfix"></div>
+			</div>
+            
+		</div>
+        
+        
+         <!--SERVICES DROP MENU-->
+		<div id="dropmenu3" class="dropmenudiv">
+			<div class="linkcontainer">
+				<div class="linkcolumn">
+					<ul>
+                   <li><a href="/mortgage-finance.html" title="Mortgages and Finances">Mortgages and Finances
+
+</a></li>
+             
+                
+</ul>
+                    
+				</div>
+           
+				<div class="clearfix"></div>
+			</div>
+            
+		</div>
+        
+        
+         <!--ABOUT US DROP MENU-->
+		<div id="dropmenu4" class="dropmenudiv">
+			<div class="linkcontainer">
+
+				<div class="linkcolumn">
+					<ul>
+               	<li><a href="/about-shaws.html" title="Meet the Team">The Team</a></li>
+                <li><a href="/testimonials.html" title="Testimonials">Testimonials</a></li>
+				<li><a href="/professionalism.html" title="Professional Memberships">Professional Memberships</a></li>
+       	        <li><a href="/queens-club-gardens.html" title="Queens Club Gardens">Queens Club Gardens</a></li>
+             
+                
+
+</ul>
+                    
+				</div>
+           
+				<div class="clearfix"></div>
+			</div>
+            
+		</div>
+        
+   
+   </div>
+   <a href="/index.html"><img src="/images/shaws-estate-agents.gif" alt="Shaws Estate Agents Logo" border="0" title="Shaws Estate Agents" /></a></div>
+  
+
+<!--SEARCH......................................................-->
+  
+<div id="search">
+
+<h2>Property Search</h2>
+<form method="get" action="/searchsales/" name="searchform" id="searchform">
+<input name="orderby" type="hidden" value="price desc" />
+<input name="showstc" type="hidden" value="on" />
+
+<!--Buy/rent.....-->
+<label><input type="radio" name="instruction_type" value="Sale" onclick="selectInstructionTypeRadio('instruction_type', 'minprice', 'maxprice')"/> Sale</label>
+<label><input type="radio" name="instruction_type" value="Letting" onclick="selectInstructionTypeRadio('instruction_type', 'minprice', 'maxprice')"/> Letting</label>        
+
+
+
+<!--Min Price-->                    
+                        
+
+  <label for="minprice">
+  <select name="minprice" class="dropdown" id="minprice"></select></label>
+
+                     
+
+                        
+ <!--Max Price-->                             
+                        
+
+  <label for="maxprice">
+<select name="maxprice" class="dropdown" id="maxprice"></select></label>  
+                        
+                        
+<!--Bedrooms-->  <label for="bedrooms_exact">  <select class="dropdown" name="bedrooms_exact" id="bedrooms_exact">
+
+                          <option value="" selected="selected">Bedrooms</option>
+                          <option value="0">studio</option>
+                          <option value="1">1 bedroom</option>
+
+                          <option value="2">2 bedrooms</option>
+                          <option value="3">3 bedrooms</option>
+                          <option value="4">4 bedrooms</option>
+                          <option value="5">5+ bedrooms</option>
+
+        </select></label>
+
+<input name="image" type=image src="/images/property-search.gif" onclick="$(this).up('form').action = '/search/'" alt="Search" class="submit" title="Search for Properties" value="Search"/><input name="image" type=image src="/images/property-map-search.gif" onclick="$(this).up('form').action = '/search2/'" alt="Search" class="submit" title="Search for Properties" value="Search"/>
+
+</form>
+<div class="clearfix"></div>
+</div>
+
+
+<!--CONTENT......................................................-->
+
+<div id="content">
+
+<div class="pagination">
+
+ Page  <a href='/search/1.html?n=6&amp;minprice=250&amp;maxprice=600&amp;bedrooms=2&amp;showstc=on&amp;orderby=price+desc&amp;search_price_on=price&amp;instruction_type=Letting' class='pagecontrollink active'><strong><span class="bracket">[</span>1<span class="bracket">]</span></strong></a>  <a href='/search/2.html?n=6&amp;minprice=250&amp;maxprice=600&amp;bedrooms=2&amp;showstc=on&amp;orderby=price+desc&amp;search_price_on=price&amp;instruction_type=Letting' class='pagecontrollink'>2</a> <a href="/search/2.html?n=6&amp;minprice=250&amp;maxprice=600&amp;bedrooms=2&amp;showstc=on&amp;orderby=price+desc&amp;search_price_on=price&amp;instruction_type=Letting">Next »</a>
+
+</div>
+
+
+<h1>Property Search Results</strong></h1>
+
+<div class="pagecontrols">
+<form action="/search/?orderby=price+desc&showstc=on&instruction_type=Letting&minprice=250&maxprice=600&bedrooms=2&image.x=70&image.y=5&image=Search" method="post">
+ <label for="orderby"><strong>ORDER BY:</strong></label>
+ <select name="orderby" id="orderby">
+ <option value="price desc">Price, highest first</option>
+<option value="price asc">Price, lowest first</option>
+
+	</select>
+ <input type="submit" value="Go"/>
+</form>
+<p>7</strong> properties found</p>
+<div class="clearfix"></div>
+</div>
+
+<!--Prop List.......-->
+<div id="property-list">
+  <a href="/property/22826157" title="Click the photo for more details of Tasso Road,">
+
+           <img src="/resize/22826157/0/286?show_badge=1"  title="Click the photo for more details of Tasso Road," alt="Click the photo for more details of Tasso Road,"/><h3>TO LET</h3>
+    </a>
+    <div><img src="/images/shadow_search.gif" alt="shadow" /></div>
+    <p>Tasso Road, London W6</p>
+<div id="whitebox">
+<div class="price">&pound;530 P.W</div>
+<div class="link"><a href="/property/22826157">Full Details </a></div>
+<div class="clearfix"></div>
+</div>
+
+</div><div id="property-list">
+  <img src="/images/letagreed.png" class="prop-offer" width="67" border="0" style="position: absolute"/><a href="/property/22874977" title="Click the photo for more details of Tilden House,">
+           <img src="/resize/22874977/0/286?show_badge=1"  title="Click the photo for more details of Tilden House," alt="Click the photo for more details of Tilden House,"/><h3>LET AGREED</h3>
+    </a>
+    <div><img src="/images/shadow_search.gif" alt="shadow" /></div>
+    <p>Tilden House, London W14</p>
+<div id="whitebox">
+<div class="price">&pound;450 P.W</div>
+
+<div class="link"><a href="/property/22874977">Full Details </a></div>
+<div class="clearfix"></div>
+</div>
+
+</div><div id="property-list">
+  <a href="/property/22822251" title="Click the photo for more details of Dryden Mansions,">
+           <img src="/resize/22822251/0/286?show_badge=1"  title="Click the photo for more details of Dryden Mansions," alt="Click the photo for more details of Dryden Mansions,"/><h3>TO LET</h3>
+    </a>
+    <div><img src="/images/shadow_search.gif" alt="shadow" /></div>
+    <p>Dryden Mansions, London W14</p>
+
+<div id="whitebox">
+<div class="price">&pound;450 P.W</div>
+<div class="link"><a href="/property/22822251">Full Details </a></div>
+<div class="clearfix"></div>
+</div>
+
+</div><div id="property-list">
+  <a href="/property/22814157" title="Click the photo for more details of Quain Mansions,">
+           <img src="/resize/22814157/0/286?show_badge=1"  title="Click the photo for more details of Quain Mansions," alt="Click the photo for more details of Quain Mansions,"/><h3>TO LET</h3>
+    </a>
+    <div><img src="/images/shadow_search.gif" alt="shadow" /></div>
+
+    <p>Quain Mansions, London W14</p>
+<div id="whitebox">
+<div class="price">&pound;420 P.W</div>
+<div class="link"><a href="/property/22814157">Full Details </a></div>
+<div class="clearfix"></div>
+</div>
+
+</div><div id="property-list">
+  <img src="/images/letagreed.png" class="prop-offer" width="67" border="0" style="position: absolute"/><a href="/property/22822092" title="Click the photo for more details of Comeragh Road,">
+           <img src="/resize/22822092/0/286?show_badge=1"  title="Click the photo for more details of Comeragh Road," alt="Click the photo for more details of Comeragh Road,"/><h3>LET AGREED</h3>
+
+    </a>
+    <div><img src="/images/shadow_search.gif" alt="shadow" /></div>
+    <p>Comeragh Road, London W14</p>
+<div id="whitebox">
+<div class="price">&pound;400 P.W</div>
+<div class="link"><a href="/property/22822092">Full Details </a></div>
+<div class="clearfix"></div>
+</div>
+
+</div><div id="property-list">
+  <a href="/property/22835929" title="Click the photo for more details of Hazlit Road,">
+
+           <img src="/resize/22835929/0/286?show_badge=1"  title="Click the photo for more details of Hazlit Road," alt="Click the photo for more details of Hazlit Road,"/><h3>TO LET</h3>
+    </a>
+    <div><img src="/images/shadow_search.gif" alt="shadow" /></div>
+    <p>Hazlit Road, London W14</p>
+<div id="whitebox">
+<div class="price">&pound;380 P.W</div>
+<div class="link"><a href="/property/22835929">Full Details </a></div>
+<div class="clearfix"></div>
+</div>
+
+</div><div class="clearfix"></div>
+<div class="pagination">
+ Page  <a href='/search/1.html?n=6&amp;minprice=250&amp;maxprice=600&amp;bedrooms=2&amp;showstc=on&amp;orderby=price+desc&amp;search_price_on=price&amp;instruction_type=Letting' class='pagecontrollink active'><strong><span class="bracket">[</span>1<span class="bracket">]</span></strong></a>  <a href='/search/2.html?n=6&amp;minprice=250&amp;maxprice=600&amp;bedrooms=2&amp;showstc=on&amp;orderby=price+desc&amp;search_price_on=price&amp;instruction_type=Letting' class='pagecontrollink'>2</a> <a href="/search/2.html?n=6&amp;minprice=250&amp;maxprice=600&amp;bedrooms=2&amp;showstc=on&amp;orderby=price+desc&amp;search_price_on=price&amp;instruction_type=Letting">Next</a></div>
+
+
+
+
+<div class="clearfix"></div>
+</div>
+
+ <div id="footer">
+
+  <p><a href="/homebuyer-centre.html"><img src="http://thehomebuyercentre.com/images/hbcbanner.jpg" border="0" alt="We Now Also Represent Buyers - Click here" width="193" height="102" /></a>  </p>  
+    
+    <p>  <strong>©</strong>  <strong>2011</strong> Shaws  All rights reserved. <a href="/terms.html" title="Go to Terms of Use"><br />
+    Terms of Use</a> | <a href="/privacy.html" title="Go to Privacy Policy">Privacy Policy</a> | Site by <a href="http://www.thepropertyjungle.com" target="_blank" title="Visit the Property Jungle">The Property Jungle</a>  </p>     
+
+<div class="clearfix"></div>
+</div>
+</div>   
+
+
+
+
+  <script type="text/javascript"> 
+	cssdropdown.startchrome("nav")
+</script>
+</body>
+</html>

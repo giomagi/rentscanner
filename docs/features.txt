@@ -6,7 +6,7 @@
     - shaws 35 (incl. let agreed + under offer) - specialised w14 (html-based)
     - john d wood 30 (html based)
     - aspire 30 (html based)
-    - faron sutaria 25 (html based) - difficult to parse
+    - faron sutaria 25 (html based) - difficult to parse... REALLY???
     - we! westbourne estates (rss based)
     - brompton 20? (html based) - positional parsing
     - john hollingsworth 20 (html based)
