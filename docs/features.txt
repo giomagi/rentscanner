@@ -40,7 +40,6 @@
 - reaper process: remove properties (and associated ratings) once removed from the agent
 - loader dynamically loads all the modules in /houses/agents
 - winkworth description
-- nice description
 - make rating storage user-based
 - move to a web framework (django?)
 - allows rating of items

@@ -4,28 +4,28 @@ class Configuration(object):
     @classmethod
     def dummy(cls):
         return Configuration({
-            'propertiesArchive' : '',
-            'ratingsArchive' : '',
-            'webServerAddress' : '',
-            'webServerPort' : ''
+            'propertiesArchive': '',
+            'ratingsArchive': '',
+            'webServerAddress': '',
+            'webServerPort': ''
         })
 
     @classmethod
     def test(cls):
         return Configuration({
-            'propertiesArchive' : '/var/gio/rentscanner/test/properties.data',
-            'ratingsArchive' : '/var/gio/rentscanner/test/ratings.data',
-            'webServerAddress' : cls.getLocalIpAddress(),
-            'webServerPort' : 5678
+            'propertiesArchive': '/var/gio/rentscanner/test/properties.data',
+            'ratingsArchive': '/var/gio/rentscanner/test/ratings.data',
+            'webServerAddress': '127.0.0.1',
+            'webServerPort': 5678
         })
 
     @classmethod
     def prod(cls):
         return Configuration({
-            'propertiesArchive' : '/var/gio/rentscanner/properties.data',
-            'ratingsArchive' : '/var/gio/rentscanner/ratings.data',
-            'webServerAddress' : cls.getLocalIpAddress(),
-            'webServerPort' : 1234
+            'propertiesArchive': '/var/gio/rentscanner/properties.data',
+            'ratingsArchive': '/var/gio/rentscanner/ratings.data',
+            'webServerAddress': cls.getLocalIpAddress(),
+            'webServerPort': 1234
         })
 
     @classmethod

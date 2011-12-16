@@ -12,6 +12,7 @@ class TestFullPage(unittest.TestCase):
 
         self.assertEqual(actualHtml, expectedHtml)
 
+
 class TestUserPreferences(unittest.TestCase):
     def testARemoveRequestIsPassedThroughToTheLibrarian(self):
         librarian = MockLibrarian()

@@ -4,10 +4,9 @@ from main.houses.loader import Loader
 from test.support.test_utils import PropertyMaker
 
 class TestLoader(unittest.TestCase, PropertyMaker):
-
     def setUp(self):
         super(TestLoader, self).setUp()
-        self.loader = Loader(Configuration.test())
+        self.loader = Loader(Configuration.dummy())
 
     def testInterestingValidationReturnsTrueForAGoodProperty(self):
         self.assertEqual(self.loader.isInteresting(self.aProperty(price=1800, postcode='SW6')), True)
