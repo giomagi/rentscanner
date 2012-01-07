@@ -10,7 +10,7 @@ class Server(object):
         server_class = BaseHTTPServer.HTTPServer
         webserver = server_class((self.address, self.port), PropertiesHandler)
 
-        print "Web Server UP"
+        print "Web Server UP @ " + self.address + ":" + str(self.port)
         try:
             webserver.serve_forever()
         except KeyboardInterrupt:
