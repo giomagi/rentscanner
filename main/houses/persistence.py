@@ -25,15 +25,18 @@ class Librarian(object):
         return res
 
     def retrieveSavedProperties(self):
+        return self.retrievePropertiesWithRating(Rating.INTERESTING())
+
+    def retrieveDiscardedProperties(self):
+        return self.retrievePropertiesWithRating(Rating.NOT_INTERESTING())
+
+    def retrievePropertiesWithRating(self, desiredRating):
         propertiesRegister = shelve.open(self.propertiesArchive)
         ratingsRegister = shelve.open(self.ratingsArchive)
-
-        interestingIds = [id for id, rating in ratingsRegister.iteritems() if rating == Rating.INTERESTING()]
+        interestingIds = [id for id, rating in ratingsRegister.iteritems() if rating == desiredRating]
         res = [p for p in propertiesRegister.values() if p.key() in interestingIds]
-
         propertiesRegister.close()
         ratingsRegister.close()
-
         return res
 
     def markAsNotInteresting(self, propertyId):

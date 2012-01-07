@@ -57,7 +57,7 @@ div.property>div:last-child {
     border-right: 2px solid gray;
 }
 
-div.saved>div.save {
+div.saved>div.save, div.trashed>div.remove {
     display: none;
 }
 

@@ -6,7 +6,6 @@ from main.domain.configuration import Configuration
 from main.web.handlers.properties_handler import PropertiesHandler
 
 class Server(threading.Thread):
-
     def __init__(self, config, group=None, target=None, name=None, args=(), kwargs=None, verbose=None):
         super(Server, self).__init__(group, target, name, args, kwargs, verbose)
         server_class = BaseHTTPServer.HTTPServer
@@ -40,6 +39,7 @@ class TestWebServer(unittest.TestCase):
         conn = httplib.HTTPConnection(self.address, self.port)
         self.assertEqual(self.statusFor(conn, 'GET', '/newProperties'), httplib.OK)
         self.assertEqual(self.statusFor(conn, 'GET', '/savedProperties'), httplib.OK)
+        self.assertEqual(self.statusFor(conn, 'GET', '/discardedProperties'), httplib.OK)
 
     #noinspection PyArgumentEqualDefault
     def testAGetRequestOnTheRootReturnsOk(self):
@@ -66,9 +66,9 @@ class TestWebServer(unittest.TestCase):
         self.assertEqual(self.statusFor(conn, 'TRACE'), httplib.NOT_IMPLEMENTED)
         self.assertEqual(self.statusFor(conn, 'CONNECT'), httplib.NOT_IMPLEMENTED)
 
-    def statusFor(self, conn, method, path = '/'):
+    def statusFor(self, conn, method, path='/'):
         return self.responseFor(conn, method, path).status
 
-    def responseFor(self, conn, method, path = '/'):
+    def responseFor(self, conn, method, path='/'):
         conn.request(method, path)
         return conn.getresponse()

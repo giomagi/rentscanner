@@ -1,30 +1,30 @@
 function removeProperty(propertykey) {
     $.ajax({
-      type: 'POST',
-      url: '/rate/' + propertykey + '/remove',
-      success: handleSuccessFor(propertykey)
+        type:'POST',
+        url:'/rate/' + propertykey + '/remove',
+        success:handleSuccessFor(propertykey)
     });
 }
 
 function saveProperty(propertykey) {
     $.ajax({
-      type: 'POST',
-      url: '/rate/' + propertykey + '/save',
-      success: handleSuccessFor(propertykey)
+        type:'POST',
+        url:'/rate/' + propertykey + '/save',
+        success:handleSuccessFor(propertykey)
     });
 }
 
 function handleSuccessFor(propertykey) {
-    return function(data) {
+    return function (data) {
         $('#' + propertykey).remove();
     }
 }
 
 function showNewProperties() {
     $.ajax({
-      type: 'GET',
-      url: '/newProperties',
-      success: function(data) {
+        type:'GET',
+        url:'/newProperties',
+        success:function (data) {
             $('#properties').replaceWith(data);
         }
     });
@@ -32,9 +32,19 @@ function showNewProperties() {
 
 function showSavedProperties() {
     $.ajax({
-      type: 'GET',
-      url: '/savedProperties',
-      success: function(data) {
+        type:'GET',
+        url:'/savedProperties',
+        success:function (data) {
+            $('#properties').replaceWith(data);
+        }
+    });
+}
+
+function showDiscardedProperties() {
+    $.ajax({
+        type:'GET',
+        url:'/discardedProperties',
+        success:function (data) {
             $('#properties').replaceWith(data);
         }
     });

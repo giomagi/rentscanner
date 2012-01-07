@@ -8,7 +8,7 @@ from main.web.renderer import Renderer
 class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     # TODO: inject this
     config = Configuration.prod()
-    
+
     def do_GET(self):
         reqPath = self.path.lower()
 
@@ -18,6 +18,8 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.success(Fragment(Renderer(), Librarian(self.config)).newProperties())
         elif reqPath == '/savedproperties':
             self.success(Fragment(Renderer(), Librarian(self.config)).savedProperties())
+        elif reqPath == '/discardedproperties':
+            self.success(Fragment(Renderer(), Librarian(self.config)).discardedProperties())
         elif reqPath.startswith('/resources/'):
             resourcePath = self.resourcePath()
 
@@ -42,10 +44,10 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             else:
                 self.badRequest('Unsupported request, allowed: /rate/PROPERTY_ID/[save|remove]')
 
-    def notFound(self, reason = ''):
+    def notFound(self, reason=''):
         self.sendResponse(httplib.NOT_FOUND, reason)
 
-    def badRequest(self, reason = ''):
+    def badRequest(self, reason=''):
         self.sendResponse(httplib.BAD_REQUEST, reason)
 
     def success(self, result):
@@ -63,10 +65,12 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def resourcePath(self):
         return os.path.join(os.path.dirname(__file__), '..' + self.path)
 
+
 class GeneratedResource(object):
     def __init__(self, renderer, librarian):
         self.renderer = renderer
         self.librarian = librarian
+
 
 class Fragment(GeneratedResource):
     def newProperties(self):
@@ -74,6 +78,10 @@ class Fragment(GeneratedResource):
 
     def savedProperties(self):
         return self.renderer.renderFragment(self.librarian.retrieveSavedProperties(), 'saved')
+
+    def discardedProperties(self):
+        return self.renderer.renderFragment(self.librarian.retrieveDiscardedProperties(), 'trashed')
+
 
 class FullPage(GeneratedResource):
     def newProperties(self):

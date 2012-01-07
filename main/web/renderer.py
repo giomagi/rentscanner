@@ -16,6 +16,7 @@ class Renderer(object):
             <div class="name">Rentscanner</div>
             <div id="newProperties" class="clickable">new</div>
             <div id="savedProperties" class="clickable">saved</div>
+            <div id="discardedProperties" class="clickable">trashed</div>
         </div>
         <div id="properties" class="content">
             $properties
@@ -23,6 +24,7 @@ class Renderer(object):
         <script>
             $$('#newProperties').click(showNewProperties);
             $$('#savedProperties').click(showSavedProperties);
+            $$('#discardedProperties').click(showDiscardedProperties);
         </script>
     </body>
 </html>''')
@@ -58,15 +60,15 @@ class Renderer(object):
 
     def _renderProperty(self, property, type):
         return self.htmlForItem.substitute({
-            'key' : property.key(),
-            'agentimage' : self.imageFor(property.agent),
-            'agent' : property.agent,
-            'price' : property.price.monthlyPrice(),
-            'address' : property.address,
-            'agentlink' : property.link,
-            'description' : property.description,
-            'imagelink' : property.image,
-            'type' : type
+            'key': property.key(),
+            'agentimage': self.imageFor(property.agent),
+            'agent': property.agent,
+            'price': property.price.monthlyPrice(),
+            'address': property.address,
+            'agentlink': property.link,
+            'description': property.description,
+            'imagelink': property.image,
+            'type': type
         })
 
     def imageFor(self, agent):
