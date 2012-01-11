@@ -26,8 +26,7 @@ class FaronSutaria(PropertyExtractor):
         addressMatches = self._addressPattern.findall(addressTag.string)[0]
 
         priceText = item.find('td', 'plistimg_price').string.strip()
-        priceMatches = ('0', 'month') if priceText.startswith('Price on application') else
-        self._pricePattern.findall(priceText)[0]
+        priceMatches = ('0', 'month') if priceText.startswith('Price on application') else self._pricePattern.findall(priceText)[0]
 
         imageTag = item.find('img', 'imagelist')
         imageLink = 'resources/sorry_no_image.jpeg&' if imageTag is None else imageTag['src']
