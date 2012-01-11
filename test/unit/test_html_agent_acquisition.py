@@ -3,7 +3,6 @@ from main.houses.agents.douglas_and_gordon import DouglasAndGordon
 from main.houses.agents.faron_sutaria import FaronSutaria
 from main.houses.agents.marsh_and_parsons import MarshAndParsons
 from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
-from libs.BeautifulSoup import BeautifulSoup
 
 class TestAgentAcquisition(unittest.TestCase):
     def testDecodesALawsonRutterItem(self):
@@ -16,11 +15,17 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("W6", property.address.postcode)
         self.assertEqual(1235, property.price.monthlyPrice())
         self.assertEqual("LawsonRutter", property.agent)
-        self.assertEqual("http://lettings.lawsonrutter.com/Delorme-Street/homes/beds-2/details.dtx?propertyid=0E8B7552-5381-401A-B202-C7101B8F2E75", property.link)
+        self.assertEqual(
+            "http://lettings.lawsonrutter.com/Delorme-Street/homes/beds-2/details.dtx?propertyid=0E8B7552-5381-401A-B202-C7101B8F2E75"
+            , property.link)
         self.assertEqual("0E8B7552-5381-401A-B202-C7101B8F2E75", property.agentId)
         self.assertEqual(None, property.publicationDateTime)
-        self.assertEqual("Boasting of a large open plan kitchen/reception room is this well presented first floor two double bedroom Victorian conversion.", property.description)
-        self.assertEqual("http://lettings.lawsonrutter.com/public/webresize.dll?filename={76C83E9E-9636-4B62-8EFF-73133ED1DA06}.jpg&amp;height=150&amp;width=200", property.image)
+        self.assertEqual(
+            "Boasting of a large open plan kitchen/reception room is this well presented first floor two double bedroom Victorian conversion."
+            , property.description)
+        self.assertEqual(
+            "http://lettings.lawsonrutter.com/public/webresize.dll?filename={76C83E9E-9636-4B62-8EFF-73133ED1DA06}.jpg&amp;height=150&amp;width=200"
+            , property.image)
 
     def testDecodesAChardItem(self):
         properties = Chard().properties(['File:sample_chard.html'])
@@ -32,11 +37,17 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("SW6", property.address.postcode)
         self.assertEqual(600 * 52 / 12, property.price.monthlyPrice())
         self.assertEqual("Chard", property.agent)
-        self.assertEqual("http://www.chard.co.uk/Flattolet/Harbour Reach, Imperial Wharf/SW6/beds-2/property.vtx?propertyid=D3132A04-7BA4-4869-AA7F-1F5E17EB80FC", property.link)
+        self.assertEqual(
+            "http://www.chard.co.uk/Flattolet/Harbour Reach, Imperial Wharf/SW6/beds-2/property.vtx?propertyid=D3132A04-7BA4-4869-AA7F-1F5E17EB80FC"
+            , property.link)
         self.assertEqual("D3132A04-7BA4-4869-AA7F-1F5E17EB80FC", property.agentId)
         self.assertEqual(None, property.publicationDateTime)
-        self.assertEqual("This two bedroom apartment to let is arranged on the fifth floor (with lift access) of this modern purpose built riverside.", property.description)
-        self.assertEqual("http://www.chard.co.uk/public/webresize.dll?filename={689159A5-D8DF-4EE2-8DC0-ACC05732996A}.jpg&amp;height=150&amp;width=200", property.image)
+        self.assertEqual(
+            "This two bedroom apartment to let is arranged on the fifth floor (with lift access) of this modern purpose built riverside."
+            , property.description)
+        self.assertEqual(
+            "http://www.chard.co.uk/public/webresize.dll?filename={689159A5-D8DF-4EE2-8DC0-ACC05732996A}.jpg&amp;height=150&amp;width=200"
+            , property.image)
 
     def testDecodesADextersItem(self):
         properties = Dexters().properties(['File:sample_dexters.html'])
@@ -48,11 +59,16 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("SW19", property.address.postcode)
         self.assertEqual(1200, property.price.monthlyPrice())
         self.assertEqual("Dexters", property.agent)
-        self.assertEqual("http://lettings.dexters.co.uk/details.dtx?propertyid=8DF3E2D7-A75F-4CB0-A9A0-069D8B688773", property.link)
+        self.assertEqual("http://lettings.dexters.co.uk/details.dtx?propertyid=8DF3E2D7-A75F-4CB0-A9A0-069D8B688773",
+            property.link)
         self.assertEqual("8DF3E2D7-A75F-4CB0-A9A0-069D8B688773", property.agentId)
         self.assertEqual(None, property.publicationDateTime)
-        self.assertEqual("A beautiful two double bedroom end of terrace house within a private cul-de-sac which is less than 1/2 a mile to Colliers.", property.description)
-        self.assertEqual("http://lettings.dexters.co.uk/public/webresize.dll?filename={80CDBCB8-CC43-48A3-AA17-3DBD6C227770}.jpg&amp;height=150&amp;width=200", property.image)
+        self.assertEqual(
+            "A beautiful two double bedroom end of terrace house within a private cul-de-sac which is less than 1/2 a mile to Colliers."
+            , property.description)
+        self.assertEqual(
+            "http://lettings.dexters.co.uk/public/webresize.dll?filename={80CDBCB8-CC43-48A3-AA17-3DBD6C227770}.jpg&amp;height=150&amp;width=200"
+            , property.image)
 
     def testDecodesADouglasAndGordonItem(self):
         properties = DouglasAndGordon().properties(['File:sample_douglas_and_gordon.html'])
@@ -64,11 +80,15 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("SW18", property.address.postcode)
         self.assertEqual(300 * 52 / 12, property.price.monthlyPrice())
         self.assertEqual("DouglasAndGordon", property.agent)
-        self.assertEqual("http://www.douglasandgordon.com/property/overview/?a=letting&b=2&min=300&max=550&id=31038", property.link)
+        self.assertEqual("http://www.douglasandgordon.com/property/overview/?a=letting&b=2&min=300&max=550&id=31038",
+            property.link)
         self.assertEqual("31038", property.agentId)
         self.assertEqual(None, property.publicationDateTime)
-        self.assertEqual("A delightful split level flat situated on this quiet residential street less than ten minutes walk from East Putney underground.", property.description)
-        self.assertEqual("http://images.douglasandgordon.com/property/31038/photos/219/146/photo_31038_4.jpg", property.image)
+        self.assertEqual(
+            "A delightful split level flat situated on this quiet residential street less than ten minutes walk from East Putney underground."
+            , property.description)
+        self.assertEqual("http://images.douglasandgordon.com/property/31038/photos/219/146/photo_31038_4.jpg",
+            property.image)
 
     def testDecodesAMarshAndParsonsItem(self):
         properties = MarshAndParsons().properties(['File:sample_marsh_and_parsons.html'])
@@ -80,25 +100,30 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual("W2", property.address.postcode)
         self.assertEqual(550 * 52 / 12, property.price.monthlyPrice())
         self.assertEqual("MarshAndParsons", property.agent)
-        self.assertEqual("http://www.marshandparsons.co.uk/property-to-rent-in-london/devonport-23-southwick-street-w2/property-details/22453/", property.link)
+        self.assertEqual(
+            "http://www.marshandparsons.co.uk/property-to-rent-in-london/devonport-23-southwick-street-w2/property-details/22453/"
+            , property.link)
         self.assertEqual("22453", property.agentId)
         self.assertEqual(None, property.publicationDateTime)
         self.assertEqual("A large two bedroom flat in a secure block.", property.description)
-        self.assertEqual("http://www.marshandparsons.co.uk/dxModules/dxPictures/dxThumbsRent/ecimage1/P022453.jpg", property.image)
+        self.assertEqual("http://www.marshandparsons.co.uk/dxModules/dxPictures/dxThumbsRent/ecimage1/P022453.jpg",
+            property.image)
 
     def testDecodesAFaronSutariaItem(self):
         properties = FaronSutaria().properties(['File:sample_faron_sutaria.html'])
 
-        self.assertEqual(10, len(properties))
+        self.assertEqual(5, len(properties))
 
         property = properties[0]
-        self.assertEqual("Upper Maisonette, St. Stephens Avenue, London", property.address.address)
-        self.assertEqual("W12", property.address.postcode)
-        self.assertEqual(325 * 52 / 12, property.price.monthlyPrice())
+        self.assertEqual("Elsham Road, West Kensington", property.address.address)
+        self.assertEqual("W14", property.address.postcode)
+        self.assertEqual(195 * 52 / 12, property.price.monthlyPrice())
         self.assertEqual("FaronSutaria", property.agent)
-        self.assertEqual("http://www.faronsutaria.co.uk/W12/London/Upper-Maisonette/2-bed/property.vtx?p=2458DAD8-F70D-43EC-8739-49C40C7E71B8", property.link)
-        self.assertEqual("2458DAD8-F70D-43EC-8739-49C40C7E71B8", property.agentId)
+        self.assertEqual(
+            "http://www.faronsutaria.co.uk/W14/West-Kensington/Elsham-Road/1-bed/property.vtx?p=C2FA2BB2-BBA1-4DB2-BF4C-78809C3C08C8"
+            , property.link)
+        self.assertEqual("C2FA2BB2-BBA1-4DB2-BF4C-78809C3C08C8", property.agentId)
         self.assertEqual(None, property.publicationDateTime)
-        self.assertEqual("Located close to Shepherds Bush Green and all its convenient amenities and transport links this property is ideal for professional sharers or a couple looking for lots of space. With wooden floors thr...", property.description)
-        self.assertEqual("http://www.faronsutaria.co.uk/public/webresize.dll?filename={B53B6619-6DEF-4504-B4D2-1165AD13A170}.jpg", property.image)
-
+        self.assertEqual(
+            "http://www.faronsutaria.co.uk/public/webresize.dll?filename={25B0C018-9D9A-4D0D-9C79-6820C87826F7}.jpg",
+            property.image)

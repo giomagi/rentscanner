@@ -1,9 +1,10 @@
 from main.houses.agents.douglas_and_gordon import DouglasAndGordon
+from main.houses.agents.faron_sutaria import FaronSutaria
 from main.houses.agents.foxtons import Foxtons
 from main.houses.agents.kfh import KFH
 from main.houses.agents.knight_frank import KnightFrank
 from main.houses.agents.marsh_and_parsons import MarshAndParsons
-from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
+from main.houses.agents.webdadi import Chard, Dexters, LawsonRutter
 from main.houses.agents.winkworth import Winkworth
 from main.houses.persistence import Librarian
 import sys
@@ -13,7 +14,8 @@ class Loader(object):
         self.config = config
 
     def agents(self):
-        return [MarshAndParsons, DouglasAndGordon, Dexters, Chard, LawsonRutter, KFH, KnightFrank, Winkworth, Foxtons]
+        return [FaronSutaria, MarshAndParsons, DouglasAndGordon, Dexters, Chard, LawsonRutter, KFH, KnightFrank,
+                Winkworth, Foxtons]
 
     def name(self, agent):
         asString = str(agent)
@@ -35,4 +37,4 @@ class Loader(object):
         return [p for p in properties if self.isInteresting(p)]
 
     def isInteresting(self, property):
-        return property.price.monthlyPrice() > self.config.minMonthlyPrice() and property.price.monthlyPrice() < self.config.maxMonthlyPrice() and property.address.postcode in self.config.interestingZones()
+        return self.config.minMonthlyPrice() < property.price.monthlyPrice() < self.config.maxMonthlyPrice() and property.address.postcode in self.config.interestingZones()
