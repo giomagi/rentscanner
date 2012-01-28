@@ -4,8 +4,7 @@ class Configuration(object):
     @classmethod
     def dummy(cls):
         return Configuration({
-            'propertiesArchive': '',
-            'ratingsArchive': '',
+            'env': '',
             'webServerAddress': '',
             'webServerPort': ''
         })
@@ -13,8 +12,7 @@ class Configuration(object):
     @classmethod
     def test(cls):
         return Configuration({
-            'propertiesArchive': '/var/gio/rentscanner/test/properties.data',
-            'ratingsArchive': '/var/gio/rentscanner/test/ratings.data',
+            'env': 'test',
             'webServerAddress': '127.0.0.1',
             'webServerPort': 5678
         })
@@ -22,8 +20,7 @@ class Configuration(object):
     @classmethod
     def prod(cls):
         return Configuration({
-            'propertiesArchive': '/var/gio/rentscanner/properties.data',
-            'ratingsArchive': '/var/gio/rentscanner/ratings.data',
+            'env' : 'prod',
             'webServerAddress': cls.getLocalIpAddress(),
             'webServerPort': 1234
         })
@@ -46,11 +43,14 @@ class Configuration(object):
     def interestingZones(self):
         return "NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2"
 
-    def propertiesArchive(self):
-        return self.props['propertiesArchive']
+    def awsRegion(self):
+        return 'eu-west-1'
 
-    def ratingsArchive(self):
-        return self.props['ratingsArchive']
+    def propertiesDomain(self):
+        return self.props['env'] + 'properties'
+
+    def ratingsDomain(self):
+        return self.props['env'] + 'ratings'
 
     def webServerAddress(self):
         return self.props['webServerAddress']

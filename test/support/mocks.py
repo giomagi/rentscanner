@@ -8,12 +8,9 @@ class MockRenderer(Renderer):
     def renderFullPage(self, properties, type):
         return self.mockedResponse
 
-class MockLibrarian(Librarian):
+class MockLibrarian(object):
     mockedPropertiesList = []
     capturedRequest = None
-
-    def __init__(self):
-        Librarian.__init__(self, Configuration.dummy())
 
     def retrieveNewProperties(self):
         return self.mockedPropertiesList

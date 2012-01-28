@@ -1,4 +1,8 @@
 from exceptions import Exception
+import locale
+import datetime
+
+TIME_FORMAT = '%Y%m%d %H%M%S'
 
 class Rating(object):
     @classmethod
@@ -24,11 +28,37 @@ class Property:
         self.description = description
         self.image = image
 
+    @classmethod
+    def unmarshal(cls, propertyAsDictionary):
+        return Property(propertyAsDictionary['agent'],
+                        Price(locale.atoi(propertyAsDictionary['price']), 'month'),
+                        Address(propertyAsDictionary['fulladdress'], propertyAsDictionary['postcode']),
+                        propertyAsDictionary['link'],
+                        propertyAsDictionary['agentId'],
+                        datetime.datetime.strptime(propertyAsDictionary['publicationDateTime'], TIME_FORMAT),
+                        propertyAsDictionary['description'],
+                        propertyAsDictionary['image'],)
+
+    def marshal(self):
+        return {'price' : self.price.monthlyPrice(),
+                'fulladdress' : self.address.address,
+                'postcode' : self.address.postcode,
+                'agent' : self.agent,
+                'agentId' : self.agentId,
+                'publicationDateTime' : self.publicationDateTime.strftime(TIME_FORMAT),
+                'link' : self.link,
+                'description' : self.description,
+                'image' : self.image}
+
+    @classmethod
+    def _key_from(cls, propertyAsDictionary):
+        return propertyAsDictionary['agent'] + '_' + propertyAsDictionary['agentId']
+
     def key(self):
-        return self.agent + "_" + str(self.agentId)
+        return self.agent + '_' + str(self.agentId)
 
     def __str__(self):
-        return str(self.address) + " at " + str(self.price)
+        return str(self.address) + ' at ' + str(self.price)
 
     # TODO: add a valuetype superclass that provides equality methods
     def __eq__(self, other):
@@ -39,6 +69,7 @@ class Property:
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
 
 class Price:
     def __init__(self, amount, period):
@@ -79,7 +110,7 @@ class Address:
         self.address = address
 
     def __str__(self):
-        return self.address + " (" + self.postcode + ")"
+        return self.address + ' (' + self.postcode + ')'
 
     def _validate(self, postcode):
         return postcode if postcode[len(postcode) - 1:].isdigit() else postcode[:len(postcode) - 1]

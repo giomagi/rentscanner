@@ -1,6 +1,8 @@
 from datetime import datetime
 import os
 import unittest
+import boto.sdb
+import time
 from main.domain.configuration import Configuration
 from main.houses.persistence import Librarian
 from test.support.test_utils import PropertyMaker
@@ -8,15 +10,23 @@ from test.support.test_utils import PropertyMaker
 class TestPersistence(unittest.TestCase, PropertyMaker):
     def setUp(self):
         config = Configuration.test()
-        self.removeIfExists(config.propertiesArchive())
-        self.removeIfExists(config.ratingsArchive())
-
+        self._cleanupTestDb(config)
         self.librarian = Librarian(config)
+
+    def _cleanupTestDb(self, config):
+        connection = boto.sdb.connect_to_region(config.awsRegion())
+        for d in [connection.get_domain(config.propertiesDomain()), connection.get_domain(config.ratingsDomain())]:
+            for i in d.select('select * from ' + d.name):
+                d.delete_item(i)
+
+    def _aLittlePauseToAllowForEventualConsistency(self):
+        time.sleep(1)
 
     def testRoundtripsAProperty(self):
         aProperty = self.aProperty()
 
         self.librarian.archiveProperties([aProperty])
+        self._aLittlePauseToAllowForEventualConsistency()
         properties = self.librarian.retrieveNewProperties()
 
         self.assertEqual(1, len(properties))
@@ -31,6 +41,7 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
 
         self.librarian.archiveProperties([propertyTwo])
 
+        self._aLittlePauseToAllowForEventualConsistency()
         properties = self.librarian.retrieveNewProperties()
 
         self.assertEqual(1, len(properties))
@@ -43,6 +54,8 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
 
         self.librarian.archiveProperties([propertyOne, propertyTwo])
         self.librarian.archiveProperties([propertyThree])
+
+        self._aLittlePauseToAllowForEventualConsistency()
         properties = self.librarian.retrieveNewProperties()
 
         self.assertEqual([], self.librarian.retrieveDiscardedProperties())
@@ -59,6 +72,7 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
         self.librarian.archiveProperties([property])
         self.librarian.markAsNotInteresting(property.key())
 
+        self._aLittlePauseToAllowForEventualConsistency()
         self.assertEqual([], self.librarian.retrieveNewProperties())
         self.assertEqual([], self.librarian.retrieveSavedProperties())
 
@@ -71,6 +85,8 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
 
         self.librarian.archiveProperties([aProperty])
         self.librarian.markAsInteresting(aProperty.key())
+
+        self._aLittlePauseToAllowForEventualConsistency()
         properties = self.librarian.retrieveSavedProperties()
 
         self.assertEqual([], self.librarian.retrieveNewProperties())
@@ -87,9 +103,6 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
 
         self.librarian.archiveProperties([(self.aProperty())])
 
+        self._aLittlePauseToAllowForEventualConsistency()
         properties = self.librarian.retrieveNewProperties()
         self.assertEqual(0, len(properties))
-
-    def removeIfExists(self, file):
-        if os.path.exists(file):
-            os.remove(file)
