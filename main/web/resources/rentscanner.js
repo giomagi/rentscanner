@@ -21,29 +21,29 @@ function handleSuccessFor(propertykey) {
 }
 
 function showNewProperties() {
-    $.ajax({
-        type:'GET',
-        url:'/newProperties',
-        success:function (data) {
-            $('#properties').replaceWith(data);
-        }
-    });
+    showProperties('/newProperties');
 }
 
-function showSavedProperties() {
-    $.ajax({
-        type:'GET',
-        url:'/savedProperties',
-        success:function (data) {
-            $('#properties').replaceWith(data);
-        }
-    });
+function showGioLikesProperties() {
+    showProperties('/gioLikes');
+}
+
+function showSaraLikesProperties() {
+    showProperties('/saraLikes');
+}
+
+function showBothLikeProperties() {
+    showProperties('/bothLike');
 }
 
 function showDiscardedProperties() {
+    showProperties('/discardedProperties');
+}
+
+function showProperties(retrievalUrl) {
     $.ajax({
         type:'GET',
-        url:'/discardedProperties',
+        url:retrievalUrl,
         success:function (data) {
             $('#properties').replaceWith(data);
         }

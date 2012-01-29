@@ -27,6 +27,12 @@ div.navigation>div {
     border-right: 1px solid #ffffff;
 }
 
+div.navigation>div:last-child {
+    border-right: none;
+    padding: 20px 10px 20px 100px;
+    font-weight: bold;
+}
+
 .content {
     display: table;
     border-collapse: separate;

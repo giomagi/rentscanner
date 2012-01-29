@@ -11,7 +11,7 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     config = Configuration.prod()
 
     def _userFromCookie(self):
-        return Cookie.SimpleCookie(self.headers['Cookie'])['user'].value if 'Cookie' in self.headers and 'user' in Cookie.SimpleCookie(self.headers['Cookie']) else None
+        return Cookie.SimpleCookie(self.headers['Cookie'])['user'].value.lower() if 'Cookie' in self.headers and 'user' in Cookie.SimpleCookie(self.headers['Cookie']) else None
 
     def do_GET(self):
         reqPath = self.path.lower()

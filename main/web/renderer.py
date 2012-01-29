@@ -27,7 +27,9 @@ class Renderer(object):
         </div>
         <script>
             $$('#newProperties').click(showNewProperties);
-            $$('#savedProperties').click(showSavedProperties);
+            $$('#saraLikes').click(showSaraLikesProperties);
+            $$('#gioLikes').click(showGioLikesProperties);
+            $$('#bothLike').click(showBothLikeProperties);
             $$('#discardedProperties').click(showDiscardedProperties);
         </script>
     </body>
