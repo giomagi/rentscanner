@@ -16,9 +16,9 @@ class Renderer(object):
         <div id="controls" class="navigation">
             <div class="name">Rentscanner</div>
             <div id="newProperties" class="clickable">new</div>
-            <div id="saraLikes" class="clickable">Sara likes these</div>
-            <div id="gioLikes" class="clickable">Gio likes these</div>
-            <div id="bothLike" class="clickable">these are really good</div>
+            <div id="saraLikes" class="clickable">Sara liked</div>
+            <div id="gioLikes" class="clickable">Gio liked</div>
+            <div id="bothLike" class="clickable">everyone liked</div>
             <div id="discardedProperties" class="clickable">trashed</div>
             <div id="user">$userwelcome</div>
         </div>
@@ -52,8 +52,8 @@ class Renderer(object):
     ''')
 
     htmlForPropertyButtons = Template('''
-                <div class="save"><button type="button" onclick="saveProperty('$key')">interested</button></div>
-                <div class="remove"><button type="button" onclick="removeProperty('$key')">not interested</button></div>
+                <div class="save"><button type="button" onclick="saveProperty('$key')">$user likes</button></div>
+                <div class="remove"><button type="button" onclick="removeProperty('$key')">$user doesn't like</button></div>
     ''')
 
     def __init__(self, user=None):
@@ -81,7 +81,7 @@ class Renderer(object):
             'agentlink': property.link,
             'description': property.description,
             'imagelink': property.image,
-            'buttons': self.htmlForPropertyButtons.substitute({'key': property.key()}) if self.user in ['gio', 'sara'] else '&nbsp;',
+            'buttons': self.htmlForPropertyButtons.substitute({'key': property.key(), 'user': self.user}) if self.user in ['gio', 'sara'] else '&nbsp;',
             'type': type
         })
 

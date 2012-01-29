@@ -7,7 +7,9 @@ class TestRenderer(unittest.TestCase, PropertyMaker):
         html = Renderer().renderFullPage([self.aProperty(link='http://some/url.go', img='http://image.link')], 'new')
 
         self.assertTrue('new' in html)
-        self.assertTrue('saved' in html)
+        self.assertTrue('Sara liked' in html)
+        self.assertTrue('Gio liked' in html)
+        self.assertTrue('everyone liked' in html)
         self.assertTrue('discarded' in html)
 
     def testRendersItemContents(self):
@@ -23,7 +25,7 @@ class TestRenderer(unittest.TestCase, PropertyMaker):
         self.assertTrue('<img src="http://image.link" width="200" />' in html)
 
     def testRendersRatingButtons(self):
-        html = Renderer().renderFullPage([self.aProperty(agent='AG', propId='xy')], 'new')
+        html = Renderer('gio').renderFullPage([self.aProperty(agent='AG', propId='xy')], 'new')
 
         # TODO: use xpath
         self.assertTrue('removeProperty(\'AG_xy\')' in html)

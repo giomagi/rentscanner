@@ -1,4 +1,3 @@
-- close property box in the trashed page
 - order preferences on inverse preference time
 - login screen
 - use page resolution logic from d&g for other html based agents
@@ -30,8 +29,6 @@
     - carter jonas 10- (html based)
     - vantage realty 10 (html based)
     - brik 10-- (html based)
-- css and niceties
-- "most-recents" load for rss-based feeds
 - automate deployment
 - extract bedrooms
 - access to deleted properties (at least deleted in the last x-days)
