@@ -7,9 +7,9 @@ class TestRenderer(unittest.TestCase, PropertyMaker):
         html = Renderer().renderFullPage([self.aProperty(link='http://some/url.go', img='http://image.link')], 'new')
 
         self.assertTrue('new' in html)
-        self.assertTrue('Sara liked' in html)
-        self.assertTrue('Gio liked' in html)
-        self.assertTrue('everyone liked' in html)
+        self.assertTrue('she likes' in html)
+        self.assertTrue('he likes' in html)
+        self.assertTrue('they like' in html)
         self.assertTrue('discarded' in html)
 
     def testRendersItemContents(self):

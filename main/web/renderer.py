@@ -16,9 +16,9 @@ class Renderer(object):
         <div id="controls" class="navigation">
             <div class="name">Rentscanner</div>
             <div id="newProperties" class="clickable">new</div>
-            <div id="saraLikes" class="clickable">Sara liked</div>
-            <div id="gioLikes" class="clickable">Gio liked</div>
-            <div id="bothLike" class="clickable">everyone liked</div>
+            <div id="saraLikes" class="clickable">she likes</div>
+            <div id="gioLikes" class="clickable">he likes</div>
+            <div id="bothLike" class="clickable">they like</div>
             <div id="discardedProperties" class="clickable">trashed</div>
             <div id="user">$userwelcome</div>
         </div>
