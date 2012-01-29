@@ -49,3 +49,9 @@ function showDiscardedProperties() {
         }
     });
 }
+
+function setUser() {
+    user = $('#username').val()
+    $.cookie('user', user, {expires : 365});
+    $('#user').replaceWith('Hi ' + user)
+}

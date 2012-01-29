@@ -8,6 +8,7 @@ class Renderer(object):
         <link rel="shortcut icon" href="/resources/favicon.jpg" />
         <link rel="stylesheet" href="/resources/style.css" type="text/css" />
 		<script type="text/javascript" src="/resources/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="/resources/jquery.cookie.js"></script>
 		<script type="text/javascript" src="/resources/rentscanner.js"></script>
     </head>
 
@@ -17,6 +18,7 @@ class Renderer(object):
             <div id="newProperties" class="clickable">new</div>
             <div id="savedProperties" class="clickable">saved</div>
             <div id="discardedProperties" class="clickable">trashed</div>
+            <div id="user">$userwelcome</div>
         </div>
         <div id="properties" class="content">
             $properties
@@ -46,6 +48,9 @@ class Renderer(object):
             </div>
     ''')
 
+    def __init__(self, user=None):
+        self.user = user
+
     def renderFullPage(self, properties, type):
         return self.renderPropertiesOnTemplate(self.htmlForPage, properties, type)
 
@@ -53,10 +58,10 @@ class Renderer(object):
         return self.renderPropertiesOnTemplate(self.htmlForFragment, properties, type)
 
     def renderPropertiesOnTemplate(self, template, properties, type):
-        if not len(properties):
-            return template.substitute({'properties': 'No properties found'})
-        else:
-            return template.substitute({'properties': ''.join([self._renderProperty(p, type) for p in properties])})
+        return template.substitute({
+            'properties': ''.join([self._renderProperty(p, type) for p in properties]) if properties else 'No properties found',
+            'userwelcome' : 'Hi ' + self.user if self.user else 'Who are you?<input type="text" id="username" name="username" /><button type="button" onclick="setUser()">Set</button>'
+        })
 
     def _renderProperty(self, property, type):
         return self.htmlForItem.substitute({
