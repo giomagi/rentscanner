@@ -67,6 +67,10 @@ div.saved>div.save, div.trashed>div.remove {
     display: none;
 }
 
+button {
+    width: 150px;
+}
+
 .agent {
     width: 100px;
 }
