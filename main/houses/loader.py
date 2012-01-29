@@ -14,8 +14,7 @@ class Loader(object):
         self.config = config
 
     def agents(self):
-        return [FaronSutaria, MarshAndParsons, DouglasAndGordon, Dexters, Chard, LawsonRutter, KFH, KnightFrank,
-                Winkworth, Foxtons]
+        return [FaronSutaria, MarshAndParsons, DouglasAndGordon, Dexters, Chard, LawsonRutter, KFH, KnightFrank, Winkworth, Foxtons]
 
     def name(self, agent):
         asString = str(agent)

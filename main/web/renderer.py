@@ -47,9 +47,13 @@ class Renderer(object):
                 <div class="address"><a href="$agentlink">$address</a></div>
                 <div class="image"><img src="$imagelink" width="200" /></div>
                 <div class="description">$description</div>
+                <div class="buttons">$buttons</div>
+            </div>
+    ''')
+
+    htmlForPropertyButtons = Template('''
                 <div class="save"><button type="button" onclick="saveProperty('$key')">interested</button></div>
                 <div class="remove"><button type="button" onclick="removeProperty('$key')">not interested</button></div>
-            </div>
     ''')
 
     def __init__(self, user=None):
@@ -77,6 +81,7 @@ class Renderer(object):
             'agentlink': property.link,
             'description': property.description,
             'imagelink': property.image,
+            'buttons': self.htmlForPropertyButtons.substitute({'key': property.key()}) if self.user in ['gio', 'sara'] else '&nbsp;',
             'type': type
         })
 

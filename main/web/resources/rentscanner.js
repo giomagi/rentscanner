@@ -53,5 +53,5 @@ function showProperties(retrievalUrl) {
 function setUser() {
     user = $('#username').val()
     $.cookie('user', user, {expires : 365});
-    $('#user').replaceWith('Hi ' + user)
+    $('#user').replaceWith('<div id="user">Ciao ' + user + '</div>')
 }

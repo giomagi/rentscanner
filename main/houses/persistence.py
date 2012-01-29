@@ -9,7 +9,8 @@ class Librarian(object):
         self.ratings = connection.get_domain(config.ratingsDomain())
 
     def archiveProperties(self, properties):
-        self.properties.batch_put_attributes(dict((p.key(), p.marshal()) for p in properties))
+        for i in xrange(0, len(properties), 25):
+            self.properties.batch_put_attributes(dict((p.key(), p.marshal()) for p in properties[i : i + 25]))
 
     def retrieveNewProperties(self):
         return [Property.unmarshal(p) for p in self.properties.select('select * from ' + self.properties.name) if not self.ratings.get_item(Property._key_from(p))]
