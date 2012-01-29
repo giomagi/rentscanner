@@ -22,8 +22,12 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.success(FullPage(Renderer(user), Librarian(self.config)).newProperties())
         elif reqPath == '/newproperties':
             self.success(Fragment(Renderer(user), Librarian(self.config)).newProperties())
-        elif reqPath == '/savedproperties':
-            self.success(Fragment(Renderer(user), Librarian(self.config)).savedProperties())
+        elif reqPath == '/giolikes':
+            self.success(Fragment(Renderer(user), Librarian(self.config)).savedProperties('gio'))
+        elif reqPath == '/saralikes':
+            self.success(Fragment(Renderer(user), Librarian(self.config)).savedProperties('sara'))
+        elif reqPath == '/bothlike':
+            self.success(Fragment(Renderer(user), Librarian(self.config)).savedProperties('both'))
         elif reqPath == '/discardedproperties':
             self.success(Fragment(Renderer(user), Librarian(self.config)).discardedProperties())
         elif reqPath.startswith('/resources/'):
@@ -47,7 +51,7 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 UserPreferences(Renderer(user), Librarian(self.config)).removeProperty(callArgs[1])
                 self.sendResponse(httplib.OK, '')
             elif callArgs[2] == 'save':
-                UserPreferences(Renderer(user), Librarian(self.config)).saveProperty(callArgs[1])
+                UserPreferences(Renderer(user), Librarian(self.config)).saveProperty(callArgs[1], user)
                 self.sendResponse(httplib.OK, '')
             else:
                 self.badRequest('Unsupported request, allowed: /rate/PROPERTY_ID/[save|remove]')
@@ -84,8 +88,8 @@ class Fragment(GeneratedResource):
     def newProperties(self):
         return self.renderer.renderFragment(self.librarian.retrieveNewProperties(), 'new')
 
-    def savedProperties(self):
-        return self.renderer.renderFragment(self.librarian.retrieveSavedProperties(), 'saved')
+    def savedProperties(self, who):
+        return self.renderer.renderFragment(self.librarian.retrieveSavedProperties(who), 'saved')
 
     def discardedProperties(self):
         return self.renderer.renderFragment(self.librarian.retrieveDiscardedProperties(), 'trashed')
@@ -100,5 +104,5 @@ class UserPreferences(GeneratedResource):
     def removeProperty(self, propertyId):
         self.librarian.markAsNotInteresting(propertyId)
 
-    def saveProperty(self, propertyId):
-        self.librarian.markAsInteresting(propertyId)
+    def saveProperty(self, propertyId, who):
+        self.librarian.markAsInteresting(propertyId, who)

@@ -59,7 +59,7 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
         properties = self.librarian.retrieveNewProperties()
 
         self.assertEqual([], self.librarian.retrieveDiscardedProperties())
-        self.assertEqual([], self.librarian.retrieveSavedProperties())
+        self.assertEqual([], self.librarian.retrieveSavedProperties('both'))
 
         self.assertEqual(3, len(properties))
         self.assertTrue(propertyOne in properties)
@@ -74,7 +74,7 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
 
         self._aLittlePauseToAllowForEventualConsistency()
         self.assertEqual([], self.librarian.retrieveNewProperties())
-        self.assertEqual([], self.librarian.retrieveSavedProperties())
+        self.assertEqual([], self.librarian.retrieveSavedProperties('both'))
 
         properties = self.librarian.retrieveDiscardedProperties()
         self.assertEqual(1, len(properties))
@@ -84,13 +84,28 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
         aProperty = self.aProperty()
 
         self.librarian.archiveProperties([aProperty])
-        self.librarian.markAsInteresting(aProperty.key())
+        self.librarian.markAsInteresting(aProperty.key(), 'gio')
 
         self._aLittlePauseToAllowForEventualConsistency()
-        properties = self.librarian.retrieveSavedProperties()
+        properties = self.librarian.retrieveSavedProperties('gio')
 
         self.assertEqual([], self.librarian.retrieveNewProperties())
         self.assertEqual([], self.librarian.retrieveDiscardedProperties())
+        self.assertEqual([], self.librarian.retrieveSavedProperties('sara'))
+        self.assertEqual([], self.librarian.retrieveSavedProperties('both'))
+
+        self.assertEqual(1, len(properties))
+        self.assertEqual(aProperty, properties[0])
+
+        self.librarian.markAsInteresting(aProperty.key(), 'sara')
+        self._aLittlePauseToAllowForEventualConsistency()
+
+        properties = self.librarian.retrieveSavedProperties('both')
+
+        self.assertEqual([], self.librarian.retrieveNewProperties())
+        self.assertEqual([], self.librarian.retrieveDiscardedProperties())
+        self.assertEqual([], self.librarian.retrieveSavedProperties('sara'))
+        self.assertEqual([], self.librarian.retrieveSavedProperties('gio'))
 
         self.assertEqual(1, len(properties))
         self.assertEqual(aProperty, properties[0])

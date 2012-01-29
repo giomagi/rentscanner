@@ -17,8 +17,8 @@ class Librarian(object):
     def retrievePropertiesWithRating(self, desiredRating):
         return [Property.unmarshal(p) for p in self.properties.select('select * from ' + self.properties.name) if self.ratings.get_item(Property._key_from(p)) and self.ratings.get_item(Property._key_from(p))['rating'] == desiredRating]
 
-    def retrieveSavedProperties(self):
-        return self.retrievePropertiesWithRating(Rating.INTERESTING())
+    def retrieveSavedProperties(self, who):
+        return self.retrievePropertiesWithRating(who)
 
     def retrieveDiscardedProperties(self):
         return self.retrievePropertiesWithRating(Rating.NOT_INTERESTING())
@@ -29,5 +29,5 @@ class Librarian(object):
     def markAsNotInteresting(self, propertyId):
         self.markAs(propertyId, Rating.NOT_INTERESTING())
 
-    def markAsInteresting(self, propertyId):
-        self.markAs(propertyId, Rating.INTERESTING())
+    def markAsInteresting(self, propertyId, who):
+        self.markAs(propertyId, who if not self.ratings.get_item(propertyId) or self.ratings.get_item(propertyId)['rating'] == who else 'both')

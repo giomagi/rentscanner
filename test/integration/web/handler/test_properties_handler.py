@@ -38,7 +38,9 @@ class TestWebServer(unittest.TestCase):
     def testAGetRequestOnAValidSubpathReturnsOk(self):
         conn = httplib.HTTPConnection(self.address, self.port)
         self.assertEqual(self.statusFor(conn, 'GET', '/newProperties'), httplib.OK)
-        self.assertEqual(self.statusFor(conn, 'GET', '/savedProperties'), httplib.OK)
+        self.assertEqual(self.statusFor(conn, 'GET', '/saraLikes'), httplib.OK)
+        self.assertEqual(self.statusFor(conn, 'GET', '/gioLikes'), httplib.OK)
+        self.assertEqual(self.statusFor(conn, 'GET', '/bothLike'), httplib.OK)
         self.assertEqual(self.statusFor(conn, 'GET', '/discardedProperties'), httplib.OK)
 
     #noinspection PyArgumentEqualDefault
