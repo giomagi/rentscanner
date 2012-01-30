@@ -35,7 +35,7 @@ class Property:
                         Address(propertyAsDictionary['fulladdress'], propertyAsDictionary['postcode']),
                         propertyAsDictionary['link'],
                         propertyAsDictionary['agentId'],
-                        datetime.datetime.strptime(propertyAsDictionary['publicationDateTime'], TIME_FORMAT),
+                        datetime.datetime.strptime(propertyAsDictionary['publicationDateTime'], TIME_FORMAT) if propertyAsDictionary['publicationDateTime'] else '',
                         propertyAsDictionary['description'],
                         propertyAsDictionary['image'],)
 
@@ -45,7 +45,7 @@ class Property:
                 'postcode' : self.address.postcode,
                 'agent' : self.agent,
                 'agentId' : self.agentId,
-                'publicationDateTime' : self.publicationDateTime.strftime(TIME_FORMAT),
+                'publicationDateTime' : self.publicationDateTime.strftime(TIME_FORMAT) if self.publicationDateTime else None,
                 'link' : self.link,
                 'description' : self.description,
                 'image' : self.image}
