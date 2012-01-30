@@ -22,7 +22,7 @@ class Configuration(object):
         return Configuration({
             'env' : 'prod',
             'webServerAddress': cls.getLocalIpAddress(),
-            'webServerPort': 1234
+            'webServerPort': 80
         })
 
     @classmethod
