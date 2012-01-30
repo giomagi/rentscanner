@@ -45,7 +45,7 @@ class Property:
                 'postcode' : self.address.postcode,
                 'agent' : self.agent,
                 'agentId' : self.agentId,
-                'publicationDateTime' : self.publicationDateTime.strftime(TIME_FORMAT) if self.publicationDateTime else None,
+                'publicationDateTime' : self.publicationDateTime.strftime(TIME_FORMAT) if self.publicationDateTime else '',
                 'link' : self.link,
                 'description' : self.description,
                 'image' : self.image}
