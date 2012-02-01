@@ -6,16 +6,19 @@ function saveProperty(propertykey) {
     actionOnProperty(propertykey, 'save');
 }
 
+function changeCursor(busy) {
+    $('body').css('cursor', busy ? 'wait' : 'default');
+    $('.clickable').css('cursor', busy ? 'wait' : 'pointer');
+}
+
 function actionOnProperty(propertyKey, action) {
-    $('body').css('cursor', 'wait');
-    $('.navigation').css('cursor', 'wait');
+    changeCursor(true);
     $.ajax({
         type : 'POST',
         url : '/rate/' + propertykey + '/' + action,
         success : function (data) {
             $('#' + propertykey).remove();
-            $('body').css('cursor', 'default');
-            $('.navigation').css('cursor', 'pointer');
+            changeCursor(false);
         }
     });
 }
@@ -41,16 +44,14 @@ function showDiscardedProperties() {
 }
 
 function showProperties(retrievalUrl) {
-    $('body').css('cursor', 'wait');
-    $('.navigation').css('cursor', 'wait');
+    changeCursor(true);
     $('.selected').removeClass('selected');
     $.ajax({
         type : 'GET',
         url : retrievalUrl,
         success : function (data) {
             $('#properties').replaceWith(data);
-            $('body').css('cursor', 'default');
-            $('.navigation').css('cursor', 'pointer');
+            changeCursor(false);
             $('#' + retrievalUrl.substring(1)).addClass('selected');
         }
     });
