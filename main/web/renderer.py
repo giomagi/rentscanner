@@ -4,7 +4,7 @@ class Renderer(object):
     htmlForPage = Template('''
 <html>
     <head>
-        <title>Gio's little experiment for flat search</title>
+        <title>Sara and Gio magical home finder</title>
         <link rel="shortcut icon" href="/resources/favicon.jpg" />
         <link rel="stylesheet" href="/resources/style.css" type="text/css" />
 		<script type="text/javascript" src="/resources/jquery-1.6.4.min.js"></script>
@@ -19,7 +19,7 @@ class Renderer(object):
             <div id="saraLikes" class="clickable">she likes</div>
             <div id="gioLikes" class="clickable">he likes</div>
             <div id="bothLike" class="clickable">they like</div>
-            <div id="discardedProperties" class="clickable">trashed</div>
+            <div id="discardedProperties" class="clickable">no one likes</div>
             <div id="user">$userwelcome</div>
         </div>
         <div id="properties" class="content">
