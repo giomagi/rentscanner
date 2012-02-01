@@ -1,23 +1,21 @@
 function removeProperty(propertykey) {
-    $.ajax({
-        type:'POST',
-        url:'/rate/' + propertykey + '/remove',
-        success:handleSuccessFor(propertykey)
-    });
+    actionOnProperty(propertykey, 'remove');
 }
 
 function saveProperty(propertykey) {
-    $.ajax({
-        type:'POST',
-        url:'/rate/' + propertykey + '/save',
-        success:handleSuccessFor(propertykey)
-    });
+    actionOnProperty(propertykey, 'save');
 }
 
-function handleSuccessFor(propertykey) {
-    return function (data) {
-        $('#' + propertykey).remove();
-    }
+function actionOnProperty(propertyKey, action) {
+    $('body').css('cursor', 'wait');
+    $.ajax({
+        type : 'POST',
+        url : '/rate/' + propertykey + '/' + action,
+        success : function (data) {
+            $('#' + propertykey).remove();
+            $('body').css('cursor', 'default');
+        }
+    });
 }
 
 function showNewProperties() {
@@ -41,11 +39,13 @@ function showDiscardedProperties() {
 }
 
 function showProperties(retrievalUrl) {
+    $('body').css('cursor', 'wait');
     $.ajax({
-        type:'GET',
-        url:retrievalUrl,
-        success:function (data) {
+        type : 'GET',
+        url : retrievalUrl,
+        success : function (data) {
             $('#properties').replaceWith(data);
+            $('body').css('cursor', 'default');
         }
     });
 }
