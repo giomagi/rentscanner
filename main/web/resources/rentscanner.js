@@ -45,13 +45,13 @@ function showDiscardedProperties() {
 
 function showProperties(retrievalUrl) {
     changeCursor(true);
-    $('.selected').removeClass('selected');
     $.ajax({
         type : 'GET',
         url : retrievalUrl,
         success : function (data) {
             $('#properties').replaceWith(data);
             changeCursor(false);
+            $('.selected').removeClass('selected');
             $('#' + retrievalUrl.substring(1)).addClass('selected');
         }
     });
