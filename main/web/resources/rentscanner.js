@@ -40,12 +40,14 @@ function showDiscardedProperties() {
 
 function showProperties(retrievalUrl) {
     $('body').css('cursor', 'wait');
+    $('.selected').removeClass('selected');
     $.ajax({
         type : 'GET',
         url : retrievalUrl,
         success : function (data) {
             $('#properties').replaceWith(data);
             $('body').css('cursor', 'default');
+            $('#' + retrievalUrl.substring(1)).addClass('selected');
         }
     });
 }

@@ -12,6 +12,11 @@ body {
     width: 100%;
 }
 
+.selected {
+    font-style: italic;
+    color: red;
+}
+
 .name {
     font-style: italic;
     font-weight: bold;

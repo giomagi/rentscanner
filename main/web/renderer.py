@@ -15,7 +15,7 @@ class Renderer(object):
     <body>
         <div id="controls" class="navigation">
             <div class="name">Rentscanner</div>
-            <div id="newProperties" class="clickable">new</div>
+            <div id="newProperties" class="clickable selected">new</div>
             <div id="saraLikes" class="clickable">she likes</div>
             <div id="gioLikes" class="clickable">he likes</div>
             <div id="bothLike" class="clickable">they like</div>
