@@ -15,9 +15,9 @@ function actionOnProperty(propertyKey, action) {
     changeCursor(true);
     $.ajax({
         type : 'POST',
-        url : '/rate/' + propertykey + '/' + action,
+        url : '/rate/' + propertyKey + '/' + action,
         success : function (data) {
-            $('#' + propertykey).remove();
+            $('#' + propertyKey).remove();
             changeCursor(false);
         }
     });
