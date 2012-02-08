@@ -46,7 +46,7 @@ class Webdadi(PropertyExtractor):
         for child in item.find('td', 'lresultsDescription').contents:
             if isinstance(child, NavigableString):
                 return child
-        raise Exception, 'Can\'t find the description'
+        return 'No description found'
 
     def imageLink(self, item):
         for imgTag in item.findAll('img'):

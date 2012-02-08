@@ -40,7 +40,7 @@ class TestAgentAcquisition(unittest.TestCase):
     def testDecodesADextersItem(self):
         properties = Dexters().properties(['File:sample_dexters.html'])
 
-        self.assertEqual(5, len(properties))
+        self.assertEqual(6, len(properties))
 
         property = properties[0]
         self.assertEqual('Myrna Close, Colliers Wood, London', property.address.address)
