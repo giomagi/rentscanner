@@ -1,11 +1,12 @@
 import cookielib
 import locale
+import os
 import urllib2
 import xml.etree.ElementTree as xml
 
 class PropertyExtractor(object):
     def __init__(self):
-        locale.setlocale(locale.LC_ALL, 'en_GB')
+        locale.setlocale(locale.LC_ALL, 'en_GB.utf8' if os.name == 'posix' else 'eng_gbr')
         urllib2.install_opener(urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.LWPCookieJar())))
         self.urlopen = urllib2.urlopen
 

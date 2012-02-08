@@ -42,4 +42,4 @@ class Librarian(object):
         self.markAs(propertyId, Rating.NOT_INTERESTING())
 
     def markAsInteresting(self, propertyId, who):
-        self.markAs(propertyId, who if not self.ratings.get_item(propertyId) or self.ratings.get_item(propertyId)['rating'] == who else 'both')
+        self.markAs(propertyId, who if who == 'seen' or propertyId not in ratingsCache or ratingsCache[propertyId] == who else 'both')

@@ -39,6 +39,10 @@ function showBothLikeProperties() {
     showProperties('/bothLike');
 }
 
+function showSeenProperties() {
+    showProperties('/seen');
+}
+
 function showDiscardedProperties() {
     showProperties('/discardedProperties');
 }

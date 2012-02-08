@@ -28,6 +28,8 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.success(Fragment(Renderer(user), Librarian(self.config)).savedProperties('sara'))
         elif reqPath == '/bothlike':
             self.success(Fragment(Renderer(user), Librarian(self.config)).savedProperties('both'))
+        elif reqPath == '/seen':
+            self.success(Fragment(Renderer(user), Librarian(self.config)).savedProperties('seen'))
         elif reqPath == '/discardedproperties':
             self.success(Fragment(Renderer(user), Librarian(self.config)).discardedProperties())
         elif reqPath.startswith('/resources/'):

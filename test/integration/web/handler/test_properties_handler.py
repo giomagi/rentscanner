@@ -41,6 +41,7 @@ class TestWebServer(unittest.TestCase):
         self.assertEqual(self.statusFor(conn, 'GET', '/saraLikes'), httplib.OK)
         self.assertEqual(self.statusFor(conn, 'GET', '/gioLikes'), httplib.OK)
         self.assertEqual(self.statusFor(conn, 'GET', '/bothLike'), httplib.OK)
+        self.assertEqual(self.statusFor(conn, 'GET', '/seen'), httplib.OK)
         self.assertEqual(self.statusFor(conn, 'GET', '/discardedProperties'), httplib.OK)
 
     #noinspection PyArgumentEqualDefault

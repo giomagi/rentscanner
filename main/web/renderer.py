@@ -19,6 +19,7 @@ class Renderer(object):
             <div id="saraLikes" class="clickable">she likes</div>
             <div id="gioLikes" class="clickable">he likes</div>
             <div id="bothLike" class="clickable">they like</div>
+            <div id="seen" class="clickable">they've seen</div>
             <div id="discardedProperties" class="clickable">no one likes</div>
             <div id="user">$userwelcome</div>
         </div>
@@ -30,6 +31,7 @@ class Renderer(object):
             $$('#saraLikes').click(showSaraLikesProperties);
             $$('#gioLikes').click(showGioLikesProperties);
             $$('#bothLike').click(showBothLikeProperties);
+            $$('#seen').click(showSeenProperties);
             $$('#discardedProperties').click(showDiscardedProperties);
         </script>
     </body>
