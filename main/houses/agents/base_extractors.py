@@ -5,7 +5,7 @@ import xml.etree.ElementTree as xml
 
 class PropertyExtractor(object):
     def __init__(self):
-        locale.setlocale(locale.LC_ALL, '')
+        locale.setlocale(locale.LC_ALL, 'en_GB')
         urllib2.install_opener(urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.LWPCookieJar())))
         self.urlopen = urllib2.urlopen
 
