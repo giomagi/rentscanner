@@ -3,6 +3,7 @@ import os
 import unittest
 import boto.sdb
 import time
+import main.houses.persistence as persistence
 from main.domain.configuration import Configuration
 from main.houses.persistence import Librarian
 from test.support.test_utils import PropertyMaker
@@ -14,6 +15,7 @@ class TestPersistence(unittest.TestCase, PropertyMaker):
         self.librarian = Librarian(config)
 
     def _cleanupTestDb(self, config):
+        persistence.ratingsCache = {}
         connection = boto.sdb.connect_to_region(config.awsRegion())
         for d in [connection.get_domain(config.propertiesDomain()), connection.get_domain(config.ratingsDomain())]:
             for i in d.select('select * from ' + d.name):
