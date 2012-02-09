@@ -12,6 +12,8 @@ class PropertyExtractor(object):
 
     def properties(self, uris):
         allprops = []
+        errors = []
+
         for uri in uris:
             content = self.urlopen(urllib2.Request(uri)).read()
 
@@ -19,10 +21,9 @@ class PropertyExtractor(object):
                 try:
                     allprops.append(self.propertyFrom(singleItemRepresentation))
                 except Exception, e:
-                    print 'Failed extraction: %s' % e
-                    print '\tfor ' + str(singleItemRepresentation)
+                    errors.append(str(singleItemRepresentation))
 
-        return allprops
+        return allprops, errors
 
     def agentURIs(self):
         raise NotImplementedError("Must be specified by the subclass")

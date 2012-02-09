@@ -1,6 +1,5 @@
 import boto.sdb
 import sys
-from main.domain.configuration import Configuration
 from main.houses.model import Rating, Property
 
 ratingsCache = {}
@@ -13,6 +12,17 @@ def initRatingsCacheIfEmpty(propertiesDomain, ratingsDomain):
         ratingsCache = dict([(propKey, ratingsDomain.get_item(propKey)['rating']) for propKey in [Property._key_from(prop) for prop in propertiesDomain.select('select * from ' + propertiesDomain.name)] if ratingsDomain.get_item(propKey)])
         sys.stdout.write('done\n')
         sys.stdout.flush()
+
+class LoadLogger(object):
+    def __init__(self, config):
+        self.loggingDomain = boto.sdb.connect_to_region(config.awsRegion()).get_domain(config.loggingDomain())
+
+    def log(self, stats):
+        self.loggingDomain.put_attributes('latest', stats)
+        self.loggingDomain.put_attributes(stats['startTime'].strftime('%Y%m%d%H%M'), stats)
+
+    def lastLoad(self):
+        return self.loggingDomain.get_item('latest')
 
 
 class Librarian(object):

@@ -1,13 +1,10 @@
 import sys
-import datetime
 from main.domain.configuration import Configuration
 from main.houses.loader import Loader
 from main.web.web_server import Server
 
 def startDataAcquisition():
-    print 'Start Data Acquisition @ ' + str(datetime.datetime.now())
     Loader(Configuration.prod()).loadAll()
-    print 'Data Acquisition Completed @ ' + str(datetime.datetime.now())
 
 def startWeb():
     Server(Configuration.prod()).start()

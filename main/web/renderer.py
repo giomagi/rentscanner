@@ -1,3 +1,4 @@
+import pprint
 from string import Template
 
 class Renderer(object):
@@ -90,3 +91,16 @@ class Renderer(object):
 
     def imageFor(self, agent):
         return '/resources/' + agent.lower() + '.jpeg'
+
+
+class LogRenderer(object):
+    htmlForLogPage = Template('''
+<html>
+    <head>
+        <title>The crappy load logger for Sara and Gio magical home finder</title>
+    </head>
+    <body>$stats</body>
+</html>''')
+
+    def renderLogPage(self, loadStats):
+        return self.htmlForLogPage.substitute({'stats' : pprint.pprint(loadStats)})

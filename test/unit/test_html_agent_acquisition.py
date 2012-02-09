@@ -6,7 +6,7 @@ from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
 
 class TestAgentAcquisition(unittest.TestCase):
     def testDecodesALawsonRutterItem(self):
-        properties = LawsonRutter().properties(['File:sample_lawson_rutter.html'])
+        properties, errors = LawsonRutter().properties(['File:sample_lawson_rutter.html'])
 
         self.assertEqual(2, len(properties))
 
@@ -22,7 +22,7 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual('http://lettings.lawsonrutter.com/public/webresize.dll?filename={76C83E9E-9636-4B62-8EFF-73133ED1DA06}.jpg&amp;height=150&amp;width=200' , property.image)
 
     def testDecodesAChardItem(self):
-        properties = Chard().properties(['File:sample_chard.html'])
+        properties, errors = Chard().properties(['File:sample_chard.html'])
 
         self.assertEqual(5, len(properties))
 
@@ -38,7 +38,7 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual('http://www.chard.co.uk/public/webresize.dll?filename={689159A5-D8DF-4EE2-8DC0-ACC05732996A}.jpg&amp;height=150&amp;width=200' , property.image)
 
     def testDecodesADextersItem(self):
-        properties = Dexters().properties(['File:sample_dexters.html'])
+        properties, errors = Dexters().properties(['File:sample_dexters.html'])
 
         self.assertEqual(6, len(properties))
 
@@ -54,7 +54,7 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual('http://lettings.dexters.co.uk/public/webresize.dll?filename={80CDBCB8-CC43-48A3-AA17-3DBD6C227770}.jpg&amp;height=150&amp;width=200' , property.image)
 
     def testDecodesADouglasAndGordonItem(self):
-        properties = DouglasAndGordon().properties(['File:sample_douglas_and_gordon.html'])
+        properties, errors = DouglasAndGordon().properties(['File:sample_douglas_and_gordon.html'])
 
         self.assertEqual(20, len(properties))
 
@@ -70,7 +70,7 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual('http://images.douglasandgordon.com/property/31038/photos/219/146/photo_31038_4.jpg', property.image)
 
     def testDecodesAMarshAndParsonsItem(self):
-        properties = MarshAndParsons().properties(['File:sample_marsh_and_parsons.html'])
+        properties, errors = MarshAndParsons().properties(['File:sample_marsh_and_parsons.html'])
 
         self.assertEqual(15, len(properties))
 
@@ -86,7 +86,7 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual('http://www.marshandparsons.co.uk/dxModules/dxPictures/dxThumbsRent/ecimage1/P022453.jpg', property.image)
 
     def testDecodesAFaronSutariaItem(self):
-        properties = FaronSutaria().properties(['File:sample_faron_sutaria.html'])
+        properties, errors = FaronSutaria().properties(['File:sample_faron_sutaria.html'])
 
         self.assertEqual(5, len(properties))
 

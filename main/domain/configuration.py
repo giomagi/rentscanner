@@ -41,7 +41,7 @@ class Configuration(object):
         return 2200
 
     def interestingZones(self):
-        return "NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "SW11", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2"
+        return "NW1", "NW3", "NW8", "SW1", "SW3", "SW5", "SW6", "SW7", "SW10", "W1", "W2", "W8", "W11", "W14", "WC1", "WC2"
 
     def awsRegion(self):
         return 'eu-west-1'
@@ -51,6 +51,9 @@ class Configuration(object):
 
     def ratingsDomain(self):
         return self.props['env'] + 'ratings'
+
+    def loggingDomain(self):
+        return self.props['env'] + 'logging'
 
     def webServerAddress(self):
         return self.props['webServerAddress']
