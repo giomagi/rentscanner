@@ -52,6 +52,9 @@ class Configuration(object):
     def ratingsDomain(self):
         return self.props['env'] + 'ratings'
 
+    def loggingDomain(self):
+        return self.props['env'] + 'logging'
+
     def webServerAddress(self):
         return self.props['webServerAddress']
 
