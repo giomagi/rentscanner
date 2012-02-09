@@ -15,7 +15,7 @@ def initRatingsCacheIfEmpty(propertiesDomain, ratingsDomain):
 
 class LoadLogger(object):
     def __init__(self, config):
-        self.loggingDomain = boto.sdb.connect_to_region(config.awsRegion()).get_domain(config.logginDomain())
+        self.loggingDomain = boto.sdb.connect_to_region(config.awsRegion()).get_domain(config.loggingDomain())
 
     def log(self, stats):
         self.loggingDomain.put_attributes('latest', stats)
