@@ -1,4 +1,5 @@
 import boto.sdb
+import sys
 from main.domain.configuration import Configuration
 from main.houses.model import Rating, Property
 
@@ -7,8 +8,11 @@ ratingsCache = {}
 def initRatingsCacheIfEmpty(propertiesDomain, ratingsDomain):
     global ratingsCache
     if not ratingsCache:
-        print 'Loading ratings cache, you should see this message in the logs only once per run'
+        sys.stdout.write('Loading ratings cache, you should see this message in the logs only once per run... ')
+        sys.stdout.flush()
         ratingsCache = dict([(propKey, ratingsDomain.get_item(propKey)['rating']) for propKey in [Property._key_from(prop) for prop in propertiesDomain.select('select * from ' + propertiesDomain.name)] if ratingsDomain.get_item(propKey)])
+        sys.stdout.write('done')
+        sys.stdout.flush()
 
 
 class Librarian(object):
@@ -42,4 +46,7 @@ class Librarian(object):
         self.markAs(propertyId, Rating.NOT_INTERESTING())
 
     def markAsInteresting(self, propertyId, who):
-        self.markAs(propertyId, who if who == 'seen' or propertyId not in ratingsCache or ratingsCache[propertyId] == who else 'both')
+        self.markAs(propertyId, who if propertyId not in ratingsCache or ratingsCache[propertyId] == who else 'both')
+
+    def markAsSeen(self, propertyId):
+        self.markAs(propertyId, 'seen')

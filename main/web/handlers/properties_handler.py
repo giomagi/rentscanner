@@ -55,6 +55,9 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             elif callArgs[2] == 'save':
                 UserPreferences(Renderer(user), Librarian(self.config)).saveProperty(callArgs[1], user)
                 self.sendResponse(httplib.OK, '')
+            elif callArgs[2] == 'seen':
+                UserPreferences(Renderer(user), Librarian(self.config)).archiveProperty(callArgs[1], user)
+                self.sendResponse(httplib.OK, '')
             else:
                 self.badRequest('Unsupported request, allowed: /rate/PROPERTY_ID/[save|remove]')
 
@@ -108,3 +111,6 @@ class UserPreferences(GeneratedResource):
 
     def saveProperty(self, propertyId, who):
         self.librarian.markAsInteresting(propertyId, who)
+
+    def archiveProperty(self, propertyId, who):
+        self.librarian.markAsSeen(propertyId)

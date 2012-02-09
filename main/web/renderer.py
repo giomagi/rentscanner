@@ -53,13 +53,14 @@ class Renderer(object):
             </div>
     ''')
 
-    htmlForPropertyButtons = Template('''
-                <div class="save"><button type="button" onclick="saveProperty('$key')">$user likes</button></div>
-                <div class="remove"><button type="button" onclick="removeProperty('$key')">$user doesn't like</button></div>
-    ''')
-
     def __init__(self, user=None):
         self.user = user
+
+    htmlForPropertyButtons = Template('''
+                <div class="saveButton"><button type="button" onclick="saveProperty('$key')">$user likes</button></div>
+                <div class="seenButton" style="display:none"><button type="button" onclick="archiveProperty('$key')">seen</button></div>
+                <div class="removeButton"><button type="button" onclick="removeProperty('$key')">$user doesn't like</button></div>
+    ''')
 
     def renderFullPage(self, properties, type):
         return self.renderPropertiesOnTemplate(self.htmlForPage, properties, type)
@@ -70,7 +71,7 @@ class Renderer(object):
     def renderPropertiesOnTemplate(self, template, properties, type):
         return template.substitute({
             'properties': ''.join([self._renderProperty(p, type) for p in properties]) if properties else 'No properties found',
-            'userwelcome' : 'Hi ' + self.user if self.user else 'Who are you?<input type="text" id="username" name="username" /><button type="button" onclick="setUser()">Set</button>'
+            'userwelcome' : 'Ciao ' + self.user if self.user else 'Who are you?<input type="text" id="username" name="username" /><button type="button" onclick="setUser()">Set</button>'
         })
 
     def _renderProperty(self, property, type):
