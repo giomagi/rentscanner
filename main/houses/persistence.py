@@ -21,6 +21,9 @@ class LoadLogger(object):
         self.loggingDomain.put_attributes('latest', stats)
         self.loggingDomain.put_attributes(stats['startTime'].strftime('%Y%m%d%H%M'), stats)
 
+    def lastLoad(self):
+        return self.loggingDomain.get_item('latest')
+
 
 class Librarian(object):
     def __init__(self, config):

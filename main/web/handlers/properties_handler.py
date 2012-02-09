@@ -3,8 +3,8 @@ import Cookie
 import httplib
 import os
 from main.domain.configuration import Configuration
-from main.houses.persistence import Librarian
-from main.web.renderer import Renderer
+from main.houses.persistence import Librarian, LoadLogger
+from main.web.renderer import Renderer, LogRenderer
 
 class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     # TODO: inject this
@@ -32,6 +32,8 @@ class PropertiesHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.success(Fragment(Renderer(user), Librarian(self.config)).savedProperties('seen'))
         elif reqPath == '/discardedproperties':
             self.success(Fragment(Renderer(user), Librarian(self.config)).discardedProperties())
+        elif reqPath == '/loadlog':
+            self.success(LoadLogPage(LogRenderer(), LoadLogger(self.config)).log())
         elif reqPath.startswith('/resources/'):
             resourcePath = self.resourcePath()
 
@@ -103,6 +105,15 @@ class Fragment(GeneratedResource):
 class FullPage(GeneratedResource):
     def newProperties(self):
         return self.renderer.renderFullPage(self.librarian.retrieveNewProperties(), 'new')
+
+
+class LoadLogPage(object):
+    def __init__(self, logRenderer, loadLogger):
+        self.logRenderer = logRenderer
+        self.loadLogger = loadLogger
+
+    def log(self):
+        return self.logRenderer.renderLogPage(self.loadLogger.lastLoad())
 
 
 class UserPreferences(GeneratedResource):

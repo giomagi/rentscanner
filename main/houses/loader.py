@@ -21,7 +21,7 @@ class Loader(object):
         return asString[asString.rindex('.') + 1:asString.rindex('\'')]
 
     def loadAll(self):
-        loadingStats = {'startTime' : datetime.datetime.now()}
+        loadingStats = {'startTime' : datetime.datetime.now(), 'agents' : {}}
 
         for agent in self.agents():
             agentInstance = agent()
@@ -29,9 +29,9 @@ class Loader(object):
             filteredProperties = self.filter(allProperties)
             Librarian(self.config).archiveProperties(filteredProperties)
 
-            loadingStats[self.name(agent)] = {'found' : len(allProperties),
-                                              'loaded' : len(filteredProperties),
-                                              'errors' : errors}
+            loadingStats['agents'][self.name(agent)] = {'found' : len(allProperties),
+                                                        'loaded' : len(filteredProperties),
+                                                        'errors' : errors}
 
         loadingStats['endTime'] = datetime.datetime.now()
         LoadLogger(self.config).log(loadingStats)

@@ -1,6 +1,5 @@
 - persist and web-expose loading stats
 - web server on amazon on port 80
-- show/hide buttons depending on current tab
 - use page resolution logic from d&g for other html based agents
 - agent coverage: prioritise on volumes (acquisition module, add module to loader, add agent logo)
     - sequence 60-all london (barnard marcus) (html based) NO POST CODE IN LISTINGS --- SHIT
