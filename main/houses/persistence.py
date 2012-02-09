@@ -10,7 +10,7 @@ def initRatingsCacheIfEmpty(propertiesDomain, ratingsDomain):
         sys.stdout.write('Loading ratings cache, you should see this message in the logs only once per run... ')
         sys.stdout.flush()
         ratingsCache = dict([(propKey, ratingsDomain.get_item(propKey)['rating']) for propKey in [Property._key_from(prop) for prop in propertiesDomain.select('select * from ' + propertiesDomain.name)] if ratingsDomain.get_item(propKey)])
-        sys.stdout.write('done')
+        sys.stdout.write('done\n')
         sys.stdout.flush()
 
 class LoadLogger(object):
