@@ -22,7 +22,7 @@ class Configuration(object):
         return Configuration({
             'env' : 'prod',
             'webServerAddress': 'ec2-46-137-39-213.eu-west-1.compute.amazonaws.com',
-            'webServerPort': 1234
+            'webServerPort': 80
         })
 
     @classmethod
