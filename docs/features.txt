@@ -1,4 +1,3 @@
-- web server on amazon on port 80
 - agent coverage: prioritise on volumes (acquisition module, add module to loader, add agent logo)
     - sequence 60-all london (barnard marcus) (html based) NO POST CODE IN LISTINGS --- SHIT
     - tates 40 (html based)
@@ -27,9 +26,8 @@
     - carter jonas 10- (html based)
     - vantage realty 10 (html based)
     - brik 10-- (html based)
-- automate deployment
-- extract bedrooms
-- reaper process: remove properties (and associated ratings) once removed from the agent
-- winkworth description
-- move to a web framework (django?)
 - allow rating of items
+- extract bedrooms
+- winkworth description
+- reaper process: remove properties (and associated ratings) once removed from the agent
+- move to a web framework (django?)

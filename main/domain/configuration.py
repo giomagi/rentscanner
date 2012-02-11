@@ -21,7 +21,9 @@ class Configuration(object):
     def prod(cls):
         return Configuration({
             'env' : 'prod',
-            'webServerAddress': 'ec2-46-137-39-213.eu-west-1.compute.amazonaws.com',
+            # change true with a condition that is true when the machine name starts with gio
+            # return cls.getLocalIpAddress()
+            'webServerAddress': cls.getLocalIpAddress() if socket.gethostname().startswith('gio') else 'ec2-46-137-39-213.eu-west-1.compute.amazonaws.com',
             'webServerPort': 8080
         })
 
@@ -60,4 +62,3 @@ class Configuration(object):
 
     def webServerPort(self):
         return self.props['webServerPort']
-

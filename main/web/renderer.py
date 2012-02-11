@@ -108,25 +108,8 @@ class LogRenderer(object):
         return self.htmlForLogPage.substitute({'stats' : self.niceTextFrom(loadStats)})
 
     def niceTextFrom(self, stats):
-        return 'started   @ ' + stats['startTime'] + '\n' + 'completed @ ' + stats['endTime'] + '\n\n' + self.formatDictionaryAsString(stats['agents'])
+        return 'started   @ ' + stats['startTime'] + '\n' + 'completed @ ' + stats['endTime'] + '\n\n' + self.formatAgentStats(stats['agents'])
 
-    def formatDictionaryAsString(self, dictAsString):
-        res = ''
-        indent = 0
-
-        for char in dictAsString[1 : len(dictAsString) - 1]:
-            if char == '{':
-                indent += 1
-            elif  char == '}':
-                indent -= 1
-            elif char == ':':
-                res += '\t'
-            elif char == ',':
-                res += '\n' + ('\t' * indent * 2)
-            elif char == '\'' or char == ' ':
-                pass
-            else:
-                res += char
-
-        return res + '\n'
-
+    def formatAgentStats(self, dictAsString):
+        # in a nicer way with a regex
+        return dictAsString.replace('\'', '').replace(':', '\t').replace('{', '').replace('}', '') + '\n'
