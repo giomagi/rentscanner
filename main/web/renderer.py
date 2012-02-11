@@ -112,4 +112,4 @@ class LogRenderer(object):
 
     def formatAgentStats(self, dictAsString):
         # in a nicer way with a regex
-        return dictAsString.replace('\'', '').replace(':', '\t').replace('{', '').replace('}', '') + '\n'
+        return dictAsString.replace('\'', '').replace(':', '\t').replace('{', '').replace('}', '').replace(',', '').replace('"', '') + '\n'
