@@ -1,4 +1,3 @@
-import pprint
 from string import Template
 
 class Renderer(object):
@@ -98,9 +97,19 @@ class LogRenderer(object):
 <html>
     <head>
         <title>The crappy load logger for Sara and Gio magical home finder</title>
+        <link rel="stylesheet" href="/resources/style.css" type="text/css" />
     </head>
-    <body>$stats</body>
+    <body>
+        <pre>$stats</pre>
+    </body>
 </html>''')
 
     def renderLogPage(self, loadStats):
-        return self.htmlForLogPage.substitute({'stats' : pprint.pprint(loadStats)})
+        return self.htmlForLogPage.substitute({'stats' : self.niceTextFrom(loadStats)})
+
+    def niceTextFrom(self, stats):
+        return 'started   @ ' + stats['startTime'] + '\n' + 'completed @ ' + stats['endTime'] + '\n\n' + self.formatAgentStats(stats['agents'])
+
+    def formatAgentStats(self, dictAsString):
+        # in a nicer way with a regex
+        return dictAsString.replace('\'', '').replace(':', '\t').replace('{', '').replace('}', '').replace(',', '').replace('"', '') + '\n'

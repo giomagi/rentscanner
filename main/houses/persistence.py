@@ -1,3 +1,4 @@
+import json
 import boto.sdb
 import sys
 from main.houses.model import Rating, Property
@@ -13,11 +14,14 @@ def initRatingsCacheIfEmpty(propertiesDomain, ratingsDomain):
         sys.stdout.write('done\n')
         sys.stdout.flush()
 
+
 class LoadLogger(object):
     def __init__(self, config):
         self.loggingDomain = boto.sdb.connect_to_region(config.awsRegion()).get_domain(config.loggingDomain())
 
     def log(self, stats):
+        stats['agents'] = json.dumps(stats['agents'], indent = 2)
+
         self.loggingDomain.put_attributes('latest', stats)
         self.loggingDomain.put_attributes(stats['startTime'].strftime('%Y%m%d%H%M'), stats)
 

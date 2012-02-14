@@ -2,6 +2,7 @@ import unittest
 from main.houses.agents.douglas_and_gordon import DouglasAndGordon
 from main.houses.agents.faron_sutaria import FaronSutaria
 from main.houses.agents.marsh_and_parsons import MarshAndParsons
+from main.houses.agents.shaws import Shaws
 from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
 
 class TestAgentAcquisition(unittest.TestCase):
@@ -99,3 +100,18 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual('C2FA2BB2-BBA1-4DB2-BF4C-78809C3C08C8', property.agentId)
         self.assertEqual(None, property.publicationDateTime)
         self.assertEqual('resources/sorry_no_image.jpeg', property.image)
+
+    def testDecodesAShawsItem(self):
+        properties, errors = Shaws().properties(['File:sample_shaws.html'])
+
+        self.assertEqual(6, len(properties))
+
+        property = properties[0]
+        self.assertEqual('Tasso Road, London', property.address.address)
+        self.assertEqual('W6', property.address.postcode)
+        self.assertEqual(530 * 52 / 12, property.price.monthlyPrice())
+        self.assertEqual('Shaws', property.agent)
+        self.assertEqual('http://www.shawsestateagents.com/property/22826157' , property.link)
+        self.assertEqual('22826157', property.agentId)
+        self.assertEqual(None, property.publicationDateTime)
+        self.assertEqual('http://www.shawsestateagents.com/resize/22826157/0/286?show_badge=1', property.image)
