@@ -36,7 +36,8 @@ class Sandersons(PropertyExtractor):
             link,
             propIdPlusParams[:propIdPlusParams.find('?')],
             None,
-            propContent.p.contents[0],
+            ' '.join([piece.strip() for piece in propContent.findAll('p')[1].contents if isinstance(piece, unicode)]),
             self.rootAddress + item.find('div', 'prop_image').a.img['src'])
+
     def breakDownIntoItems(self, resourceContent):
         return BeautifulSoup(resourceContent).findAll('div', {'id' : 'prop_details'})

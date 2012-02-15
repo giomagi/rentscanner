@@ -130,4 +130,5 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual('http://www.sandersonslondon.co.uk/property/2432715?instruction_type=Letting&address_keyword=&minpricew=350&maxpricew=550&bedrooms=2&image_x=52&image_y=12&part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&orderby=price+desc' , property.link)
         self.assertEqual('2432715', property.agentId)
         self.assertEqual(None, property.publicationDateTime)
+        self.assertEqual('A Superb 2 bedroom top floor split level apartment set within this delightful period conversion just off Westbourne Park Road. The property comprises a large reception room, separate...', property.description)
         self.assertEqual('http://www.sandersonslondon.co.uk/resize/2432715/0/296?show_badge=1', property.image)
