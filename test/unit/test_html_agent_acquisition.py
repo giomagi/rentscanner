@@ -2,6 +2,7 @@ import unittest
 from main.houses.agents.douglas_and_gordon import DouglasAndGordon
 from main.houses.agents.faron_sutaria import FaronSutaria
 from main.houses.agents.marsh_and_parsons import MarshAndParsons
+from main.houses.agents.sandersons import Sandersons
 from main.houses.agents.shaws import Shaws
 from main.houses.agents.webdadi import LawsonRutter, Chard, Dexters
 
@@ -115,3 +116,18 @@ class TestAgentAcquisition(unittest.TestCase):
         self.assertEqual('22826157', property.agentId)
         self.assertEqual(None, property.publicationDateTime)
         self.assertEqual('http://www.shawsestateagents.com/resize/22826157/0/286?show_badge=1', property.image)
+
+    def testDecodesASandersonsItem(self):
+        properties, errors = Sandersons().properties(['File:sample_sandersons.html'])
+
+        self.assertEqual(5, len(properties))
+
+        property = properties[0]
+        self.assertEqual('Leamington Road Villas, Notting Hill', property.address.address)
+        self.assertEqual('W11', property.address.postcode)
+        self.assertEqual(550 * 52 / 12, property.price.monthlyPrice())
+        self.assertEqual('Sandersons', property.agent)
+        self.assertEqual('http://www.sandersonslondon.co.uk/property/2432715?instruction_type=Letting&address_keyword=&minpricew=350&maxpricew=550&bedrooms=2&image_x=52&image_y=12&part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&orderby=price+desc' , property.link)
+        self.assertEqual('2432715', property.agentId)
+        self.assertEqual(None, property.publicationDateTime)
+        self.assertEqual('http://www.sandersonslondon.co.uk/resize/2432715/0/296?show_badge=1', property.image)

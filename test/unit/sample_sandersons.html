@@ -1,0 +1,838 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+<title>Letting Agents Central London, Letting Estate Agents – Sandersons </title>
+
+<meta name="description" content="Search for rental properties in Holland Park, Notting Hill, Bayswater, Kensinghton, South kensington. Find a property to rent, make a right move." />
+
+<meta name="keywords" content="Sandersons Holland Park, notting hill estate agency offers flats and houses for sale and to let in kensington, south Kensington, Bayswater, earls court, chelsea, knightsbridge, Queensway. find a property to buy make a right move, sanderson buy, sandersons sale, holland park lettings, holland park sale,estate agents lettings holland park, estate agent sale notting hill, new home in central London, house valuation sandersons, sandersons Holland park sale rental management. House to Buy in Notting Hill. buy a property in Notting Hill. Flat to Rent in Notting Hill. Holland Park Avenue, W11,W8,W2,SW7,SW3." />
+
+
+<link href="/css/search.css" rel="stylesheet" type="text/css" />
+<link href="/css/prop_list.css" rel="stylesheet" type="text/css" />
+<link href="/css/slider2.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="/js/menu1.js">
+    /***********************************************
+     * Chrome CSS Drop Down Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+     * This notice MUST stay intact for legal use
+     * Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+     ***********************************************/
+</script>
+
+<script type="text/javascript" src="/xml/js/jquery/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="/xml/js/jquery/jquery.utils.min.js"></script>
+<script type="text/javascript" src="/xml/js/jquery/jquery.livequery.js"></script>
+<script type="text/javascript" src="/xml/js/jquery/site.js"></script><script type="text/javascript">
+    jQuery.noConflict()
+</script>
+
+<script type="text/javascript" src="/js/jquery.infinite-carousel.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        jQuery('#slider-stage').carousel('#previous', '#next');
+        jQuery('#viewport').carousel('#simplePrevious', '#simpleNext');
+    });
+</script>
+<script type="text/javascript" src="/xml/js/tpj.js"></script>
+<script type="text/javascript" src="/xml/js/prototype.js"></script>
+<script type="text/javascript" src="/xml/js/scriptaculous.js"></script>
+<script type="text/javascript" src="/xml/js/event.simulate.js"></script>
+<script type="text/javascript" src="/xml/js/plugin.js"></script>
+<script type="text/javascript" src="/xml/js/site.js"></script>
+<script type="text/javascript" src="/js/sandersons.js"></script>
+
+<script type="text/javascript" src="/js/_search-prices.js"></script>
+<script type="text/javascript">
+    // <![CDATA[
+    if (typeof Array.prototype.strInArray != "function") {
+        Array.prototype.strInArray = function (value) {
+            // Returns true if the passed string is found in the
+            // array. Returns false if it is not.
+            var i;
+            for (i=0; i < this.length; i++) {
+                if (this[i]==value) {
+                    return true;
+                }
+            }
+            return false;
+        };
+    }
+    function restore_search(_opt) {
+        var opt = {
+            focus: true,
+            scrollTop: false,
+            afterfinish: function(restored) {}
+        };
+        if (typeof _opt == "object") for (var k in _opt)
+            opt[k] = _opt[k]
+        var request = {"instruction_type":"Letting","address_keyword":"","minpricew":"350","maxpricew":"550","bedrooms":"2","image_x":"52","image_y":"12","part_postcode":["W10,W11,W2,W8,SW1X,SW3,W14,SW5,SW6,W1,W9"],"orderby":"price desc","n":5};
+        var texts = [];
+        var inputs = document.getElementsByTagName("input");
+        var inputsl = inputs.length;
+        for (var i = 0; i < inputsl; i++)
+            texts.push(inputs[i]);
+        var textareas = document.getElementsByTagName("textarea");
+        var textareasl = textareas.length;
+        for (var i = 0; i < textareasl; i++)
+            texts.push(textareas[i]);
+        var textsl = texts.length;
+        delete inputs, textareas;
+
+        var restored = false;
+
+        for (var i = 0; i < textsl; i++) {
+            var input = texts[i];
+            if (input.className.indexOf("restore-search-skip") >= 0)
+                continue;
+            var names = String(input.name).split(",");
+            var namesl = names.length;
+            for (var j = 0; j < namesl; j++) {
+                var name = origname = names[j];
+                if (name.substring(name.length-2) == "[]") // Array
+                    name = name.substring(0, name.length-2);
+                if (!request.hasOwnProperty(name))
+                    continue;
+                var value = request[name];
+                restored = true;
+                if (typeof value == "string" && value.indexOf(",") > -1) {
+                    var avalue = value.split(",");
+                    avalue.push(value);
+                    value = avalue;
+                }
+                if (input.type == "checkbox") {
+                    if (typeof(value) == "string" && value) {
+                        if (value == input.value)
+                            input.checked = "checked";
+                        else
+                            input.checked = "";
+                    } else if (value.strInArray(input.value))
+                        input.checked = "checked";
+                } else {
+                    if (input.type == "radio") {
+                        if (typeof(value) == "string") {
+                            if (value && value == input.value)
+                                input.click();
+                        } else if (value.strInArray(input.value))
+                            input.checked = "checked";
+                        else continue;
+                    } else {
+                        if (typeof(value) == "object")
+                            value = value[0];
+                        input.value = value;
+                    }
+                }
+                if (input.type != "hidden") {
+                    if (opt.focus) try {
+                        input.focus(); input.blur();
+                    } catch (e) {}
+                }
+                //input.name = origname; // XXX commented this out for Taylor Gibbs exclude sold/let search on thumbs
+                restore_search_fire_events(input);
+                break;
+            }
+        }
+        var _selects = document.getElementsByTagName("select");
+        var _selectsl = _selects.length;
+        var selects = [];
+        for (var i = 0; i < _selectsl; i++)
+            selects[i] = _selects[i];
+        selects.sort(function(a, b) {
+            var va = Number(Boolean(a.getAttribute("onchange") || a.getAttribute("onclick")));
+            var vb = Number(Boolean(b.getAttribute("onchange") || b.getAttribute("onclick")));
+            return vb - va;
+        });
+        var selectsl = selects.length;
+        for (var i = 0; i < selectsl; i++) {
+            var select = selects[i];
+            if (select.className.indexOf("restore-search-skip") >= 0)
+                continue;
+            var name = select.name.toLowerCase();
+            if (name.substring(name.length-2) == "[]") // Array
+                name = name.substring(0, name.length-2);
+            if (!request[name])
+                continue;
+            restored = true;
+            var value = request[name];
+            if (typeof(value) == "object")
+                var values = value;
+            else
+                var values = [value];
+            for (var n = 0; n < values.length; n++) {
+                value = values[n];
+                var optionsl = select.options.length;
+                for (var o = 0; o < optionsl; o++) {
+                    /*
+                     var selval = select.options[o].value;
+                     if (selval.indexOf(",") >= 0) {
+                     var selvals = selval.split(",");
+                     for (var p = 0; p < selvals.length; p++) {
+                     if (selvals[p].trim() == value) {
+                     select.selectedIndex = o;
+                     try {
+                     select.focus(); select.blur();
+                     } catch (e) {}
+                     break;
+                     }
+                     }
+                     } else */
+                    if (select.options[o].value == value) {
+                        select.selectedIndex = o;
+                        try {
+                            select.focus(); select.blur();
+                        } catch (e) {}
+                        break;
+                    }
+                }
+            }
+            restore_search_fire_events(select);
+        }
+        if (typeof on_restore_search == "function")
+            on_restore_search(request);
+        opt.afterfinish(restored);
+        if (opt.scrollTop)
+            window.scroll(0, 0);
+    }
+
+    function restore_search_fire_events(el) {
+        if (el.name == "orderby" || el.name == "n" || el.type == "image" || el.type == "submit" || el.className.indexOf("restore-search-skip-events") >= 0) return;
+        if (el.onclick) el.onclick();
+        if (el.onchange) el.onchange();
+        if (typeof(el.onrestore) == "function") el.onrestore();
+    }
+
+    if (typeof(Array.prototype.strInArray) == "undefined") {
+        Array.prototype.strInArray = function (value) {
+            // Returns true if the passed string is found in the
+            // array. Returns false if it is not.
+            var i;
+            var tl = this.length;
+            for (i=0; i < tl; i++) {
+                if (this[i]==value) {
+                    return true;
+                }
+            }
+            return false;
+        };
+    }
+
+    var restoreSearch = restore_search;
+
+    // ]]>
+</script>
+
+</head>
+<body onload="selectInstructionType('instruction_type', 'minprice', 'maxprice'); restore_search({focus: false, scrollTop: true})">
+<div id="container">
+
+<!--HEADER...................................-->
+
+<div id="header">
+
+    <div id="nav">
+        <ul>
+            <li><a href="/index.html" title="Go Home">Home</a></li>            <li><a href="/search/?ShowSTC=on&instruction_type=Letting" title="Go to Rent">Rent</a></li>    <li><a href="/search/?ShowSTC=on&instruction_type=Sale" title="Go to Sales">Sales</a></li>
+            <!-- <li><a href="/investment.html" title="Go to Investments">Investments</a></li>    -->
+            <li><a href="/about_us.html" title="Go About us">About us</a></li>
+            <li><a href="/contact.html" title="Contact us">Contact us</a></li>
+
+            <li><a href="/my-sandersons.html" class="mysandersons" rel="dropmenu1">My Sandersons</a></li>
+        </ul>
+
+        <!--ABOUT US DROP MENU-->
+        <div id="dropmenu1" class="dropmenudiv">
+            <div><img src="/images/nav_shadow.png" alt="Nav shadow" /></div>
+            <div class="linkcontainer">
+                <div class="linkcolumn">
+                    <ul>
+
+                        <li><a href="/my-sandersons.html" title="Login">Login</a></li>
+                        <li><a href="/vericheck.html" title="Tenant Referencing">Tenant Referencing</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div><img src="/images/nav_bottom.png" width="138" height="8" alt="Nav Bottom" /></div>
+
+        </div>
+    </div>        <a href="/index.html" title="Go to Home Page"><img src="/images/sandersons_property.gif" alt="Sandersons" title="Go to Home Page" border="0" class="logo" /></a>
+    <div id="address">Call us on: <strong>020  7602 6725<br />   <a href="mailto:info@sandersonslondon.co.uk">info@sandersonslondon.co.uk</a></strong></div>
+    <div class="clearfix"></div>
+</div>
+
+
+<div id="content-container">
+
+
+
+
+<div id="left_col">
+    <!--Pagination........................................................-->
+
+    <div id="pagination_container">
+
+        <div class="prop_number"><p><strong>27</strong></strong> properties found</p></div>
+
+        <div class="prop_order">
+            <form action="/search/" method="get">
+                <input type="hidden" name="instruction_type" value="Letting" class="restore-search-skip"/><input type="hidden" name="address_keyword" value="" class="restore-search-skip"/><input type="hidden" name="minpricew" value="350" class="restore-search-skip"/><input type="hidden" name="maxpricew" value="550" class="restore-search-skip"/><input type="hidden" name="bedrooms" value="2" class="restore-search-skip"/><input type="hidden" name="image_x" value="52" class="restore-search-skip"/><input type="hidden" name="image_y" value="12" class="restore-search-skip"/><input type="hidden" name="part_postcode[]" value="W10,W11,W2,W8,SW1X,SW3,W14,SW5,SW6,W1,W9" class="restore-search-skip"/><input type="hidden" name="orderby" value="price desc" class="restore-search-skip"/><input type="hidden" name="n" value="5" class="restore-search-skip"/>
+                <select name="orderby" id="orderby" onchange="$(this).up('form').submit();">
+                    <option value="price desc">High to Low</option>
+                    <option value="price asc">Low to High</option>
+                </select>
+
+            </form>
+        </div>
+        <div class="list-map"><a href="/search2/?instruction_type=Letting&address_keyword=&minpricew=350&maxpricew=550&bedrooms=2&image_x=52&image_y=12&part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&orderby=price+desc&n=5">Map View</a></div>
+
+        <div id="page"><p> Page  <a href='/search/1.html?n=5&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;orderby=price+desc&amp;search_price_on=price&amp;part_postcode[]=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;instruction_type=Letting' class='pagecontrollink active'><strong><span class="bracket">[</span>1<span class="bracket">]</span></strong></a>  <a href='/search/2.html?n=5&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;orderby=price+desc&amp;search_price_on=price&amp;part_postcode[]=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;instruction_type=Letting' class='pagecontrollink'>2</a> <span class="hellip"> ... </span> <a href='/search/6.html?n=5&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;orderby=price+desc&amp;search_price_on=price&amp;part_postcode[]=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;instruction_type=Letting' class='pagecontrollink'>6</a> <a href="/search/2.html?n=5&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;orderby=price+desc&amp;search_price_on=price&amp;part_postcode[]=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;instruction_type=Letting">Next »</a></p></div>
+
+
+        <div class="clearfix"></div>
+    </div>
+
+    <!--Property........................................................-->
+    <div id="prop_details">
+
+        <div class="prop_image">
+
+            <a href="/property/2432715?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Leamington Road Villas">
+
+                <img src="/resize/2432715/0/296?show_badge=1" alt="Click the photo for more details of Leamington Road Villas" border="0"/>
+            </a>
+        </div>
+
+        <div class="prop_content">
+            <div class="price">&pound;550 P.W </div>
+            <h2><a href="/property/2432715?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Leamington Road Villas">Leamington Road Villas,<br />
+                Notting Hill, W11</a></h2>
+
+
+            <p>       <img src="/images/bedroomnew.gif" alt="bedrooms" border="0" class="icons" /><span> 2</span>
+                <img src="/images/bathroomnew.gif" alt="Bedroom" border="0" class="icons" /><span> </span>
+
+                <img src="/images/receptionlrg.gif" alt="Reception Rooms" border="0" class="icons" /><span>  </span>
+                <img src="/images/garagelrg.gif" alt="Garages" border="0" class="icons" /><span>  </span>
+                <img src="/images/gardenlrg.gif" alt="Gardens" border="0" class="icons" /><span>  </span></p>
+
+            <p>A Superb 2 bedroom top floor split level apartment set within this delightful period conversion just off Westbourne Park Road.<br/><br/>The property comprises a large reception room, separate...<a href="/property/2432715?instruction_type=Letting&address_keyword=&minpricew=350&maxpricew=550&bedrooms=2&image_x=52&image_y=12&part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&orderby=price+desc&amp;page=1" class="more_details" title="Find out more about Leamington Road Villas">More Details</a></p>
+        </div><div class="clearfix"></div>
+
+    </div>
+    <div id="prop_details">
+
+        <div class="prop_image">
+
+            <a href="/property/2032387?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Castletown Road">
+                <img src="/resize/2032387/0/296?show_badge=1" alt="Click the photo for more details of Castletown Road" border="0"/>
+            </a>
+        </div>
+
+        <div class="prop_content">
+            <div class="price">&pound;550 P.W </div>
+            <h2><a href="/property/2032387?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Castletown Road">Castletown Road,<br />
+
+                Barons Court / West Kensington, W14</a></h2>
+
+
+            <p>       <img src="/images/bedroomnew.gif" alt="bedrooms" border="0" class="icons" /><span> 2</span>
+                <img src="/images/bathroomnew.gif" alt="Bedroom" border="0" class="icons" /><span> </span>
+
+                <img src="/images/receptionlrg.gif" alt="Reception Rooms" border="0" class="icons" /><span>  </span>
+                <img src="/images/garagelrg.gif" alt="Garages" border="0" class="icons" /><span>  </span>
+
+                <img src="/images/gardenlrg.gif" alt="Gardens" border="0" class="icons" /><span>  </span></p>
+
+            <p>Set within this elegant period property is this contemporary designed two bedroom apartment on the lower ground floor. The apartment is presented to a high standard and benefits from a stylish open...<a href="/property/2032387?instruction_type=Letting&address_keyword=&minpricew=350&maxpricew=550&bedrooms=2&image_x=52&image_y=12&part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&orderby=price+desc&amp;page=1" class="more_details" title="Find out more about Castletown Road">More Details</a></p>
+        </div><div class="clearfix"></div>
+
+    </div>
+    <div id="prop_details">
+
+        <div class="prop_image">
+
+            <a href="/property/2032182?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Queens Gardens">
+                <img src="/resize/2032182/0/296?show_badge=1" alt="Click the photo for more details of Queens Gardens" border="0"/>
+            </a>
+        </div>
+
+        <div class="prop_content">
+            <div class="price">&pound;550 P.W </div>
+            <h2><a href="/property/2032182?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Queens Gardens">Queens Gardens,<br />
+
+                Bayswater - Lancaster Gate, W2</a></h2>
+
+
+            <p>       <img src="/images/bedroomnew.gif" alt="bedrooms" border="0" class="icons" /><span> 2</span>
+                <img src="/images/bathroomnew.gif" alt="Bedroom" border="0" class="icons" /><span> </span>
+
+                <img src="/images/receptionlrg.gif" alt="Reception Rooms" border="0" class="icons" /><span>  </span>
+                <img src="/images/garagelrg.gif" alt="Garages" border="0" class="icons" /><span>  </span>
+
+                <img src="/images/gardenlrg.gif" alt="Gardens" border="0" class="icons" /><span>  </span></p>
+
+            <p>Ideally located for the open spaces of Hyde Park, this stunning two bedroom apartment is presented to a high standard.<br/><br/>The property comprises spacious open plan reception room which...<a href="/property/2032182?instruction_type=Letting&address_keyword=&minpricew=350&maxpricew=550&bedrooms=2&image_x=52&image_y=12&part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&orderby=price+desc&amp;page=1" class="more_details" title="Find out more about Queens Gardens">More Details</a></p>
+        </div><div class="clearfix"></div>
+
+    </div>
+    <div id="prop_details">
+
+        <div class="prop_image">
+
+            <a href="/property/SHP0003FF?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Finstock Road">
+                <img src="/images/awaiting_image.gif" border="0" width="296" height="198" alt="Awaiting Image" />  </a>
+        </div>
+
+        <div class="prop_content">
+            <div class="price">&pound;540 P.W </div>
+            <h2><a href="/property/SHP0003FF?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Finstock Road">Finstock Road,<br />
+
+                Ladbroke Grove, W10</a></h2>
+
+
+            <p>       <img src="/images/bedroomnew.gif" alt="bedrooms" border="0" class="icons" /><span> 2</span>
+                <img src="/images/bathroomnew.gif" alt="Bedroom" border="0" class="icons" /><span> </span>
+
+                <img src="/images/receptionlrg.gif" alt="Reception Rooms" border="0" class="icons" /><span>  </span>
+                <img src="/images/garagelrg.gif" alt="Garages" border="0" class="icons" /><span>  </span>
+
+                <img src="/images/gardenlrg.gif" alt="Gardens" border="0" class="icons" /><span>  </span></p>
+
+            <p>Newly refurbished 2 bed 2 bath split level maisonette set on the top 2 floors of an attractive victorian building.  <BR><BR>Ideally located on a quiet residential street this charming two bedroomed...<a href="/property/SHP0003FF?instruction_type=Letting&address_keyword=&minpricew=350&maxpricew=550&bedrooms=2&image_x=52&image_y=12&part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&orderby=price+desc&amp;page=1" class="more_details" title="Find out more about Finstock Road">More Details</a></p>
+        </div><div class="clearfix"></div>
+
+    </div>
+    <div id="prop_details">
+
+        <div class="prop_image">
+
+            <a href="/property/1981425?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Delaford Street">
+                <img src="/resize/1981425/0/296?show_badge=1" alt="Click the photo for more details of Delaford Street" border="0"/>
+            </a>
+        </div>
+
+        <div class="prop_content">
+            <div class="price">&pound;520 P.W </div>
+
+            <h2><a href="/property/1981425?instruction_type=Letting&amp;address_keyword=&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;image_x=52&amp;image_y=12&amp;part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;orderby=price+desc" title="Find out more about Delaford Street">Delaford Street,<br />
+                Fulham, SW6</a></h2>
+
+
+            <p>       <img src="/images/bedroomnew.gif" alt="bedrooms" border="0" class="icons" /><span> 2</span>
+                <img src="/images/bathroomnew.gif" alt="Bedroom" border="0" class="icons" /><span> </span>
+
+                <img src="/images/receptionlrg.gif" alt="Reception Rooms" border="0" class="icons" /><span>  </span>
+
+                <img src="/images/garagelrg.gif" alt="Garages" border="0" class="icons" /><span>  </span>
+                <img src="/images/gardenlrg.gif" alt="Gardens" border="0" class="icons" /><span>  </span></p>
+
+            <p>A spacious split level maisonette, comprising reception room, separate kitchen/breakfast rooms with lovely high ceilings, two double bedrooms, two bathrooms, a south facing patio/garden. Delaford...<a href="/property/1981425?instruction_type=Letting&address_keyword=&minpricew=350&maxpricew=550&bedrooms=2&image_x=52&image_y=12&part_postcode%5B0%5D=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&orderby=price+desc&amp;page=1" class="more_details" title="Find out more about Delaford Street">More Details</a></p>
+        </div><div class="clearfix"></div>
+
+    </div>
+    <p><a href="http://www.dezrez.com/" target="_blank">Dezrez: Estate Agency Software </a></p>
+
+    <!--Pagination........................................................-->
+
+    <div id="pagination_container">
+        <div id="page"><p> Page  <a href='/search/1.html?n=5&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;orderby=price+desc&amp;search_price_on=price&amp;part_postcode[]=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;instruction_type=Letting' class='pagecontrollink active'><strong><span class="bracket">[</span>1<span class="bracket">]</span></strong></a>  <a href='/search/2.html?n=5&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;orderby=price+desc&amp;search_price_on=price&amp;part_postcode[]=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;instruction_type=Letting' class='pagecontrollink'>2</a> <span class="hellip"> ... </span> <a href='/search/6.html?n=5&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;orderby=price+desc&amp;search_price_on=price&amp;part_postcode[]=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;instruction_type=Letting' class='pagecontrollink'>6</a> <a href="/search/2.html?n=5&amp;minpricew=350&amp;maxpricew=550&amp;bedrooms=2&amp;orderby=price+desc&amp;search_price_on=price&amp;part_postcode[]=W10%2CW11%2CW2%2CW8%2CSW1X%2CSW3%2CW14%2CSW5%2CSW6%2CW1%2CW9&amp;instruction_type=Letting">Next »</a></p></div>
+
+        <div class="clearfix"></div>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+</div>
+
+<!--Right col...................................-->
+
+<div id="right_col">
+<form action="/search/" method="get" id="property_search">
+
+<h2 class="prop_search_head">Refine Search</h2>
+
+<h4>Property Type</h4>
+<p><input name="property_type" id="property_type" type="checkbox" value="!Apartment" />
+    House
+    <input name="property_type" id="property_type" type="checkbox" value="Apartment" />
+    Flat </p>
+<hr />
+<h4>Outside Features</h4>
+<p>
+
+    <input type="checkbox" name="part_postcode[]" value="(7A)" />
+    Private Garden
+    <input  type="checkbox" name="part_postcode[]" value="(7B)" />
+    Balcony/ Terrace
+    <br />
+    <input type="checkbox" name="part_postcode[]" value="(7C)" />
+    Communal Gardens </p>
+
+<hr />
+
+<h4>Additional Features</h4>
+<p>
+
+    <input type="checkbox" name="part_postcode[]" value="(7D)" />
+    Garage
+    <input type="checkbox" name="part_postcode[]" value="(7E)" />
+    Street parking
+    <input type="checkbox" name="part_postcode[]" value="(7F)" />
+    Porter  <br />
+    <input type="checkbox" name="part_postcode[]" value="(7G)" />
+    Lift
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  type="checkbox" name="part_postcode[]" value="(7H)" />
+    Pool
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  type="checkbox" name="part_postcode[]" value="(7G)" />
+
+    Gym
+</p>
+<hr />
+
+<h4>Furnished or Not Furnished</h4>
+<p><input name="furnishing" type="checkbox" value="furnished" />
+    Furnished
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="furnishing" type="checkbox" value="Unfurnished"  />
+    Unfurnished</p>
+<hr />
+
+<div class="clearfix"></div>
+
+<!--AREA 1...................................-->
+
+<div class="areapanel">
+    <div><img src="/images/panel_top.gif" alt="Decorative image for area panel" /></div>
+    <ul class="row1">
+        <li><input rel="hollandpark" name="part_postcode[]" type="checkbox" value="W11" />
+            Holland Park</li>
+        <li><input rel="nottinghill" name="part_postcode[]" type="checkbox" value="W11" />
+            Notting Hill</li>
+
+        <li><input rel="ladbroke" name="part_postcode[]" type="checkbox" value="W10" />
+            Ladbroke Grove</li>
+        <li><input rel="ladbroke" name="part_postcode[]" type="checkbox" value="W10,W11" />
+            North Kensington</li>
+        <li><input rel="portobello" name="part_postcode[]" type="checkbox" value="W11" />
+            Westbourne Grove</li>
+        <li class="allareas"><input type="checkbox" class="all-areas"/>
+            All Areas</li>
+
+    </ul>
+
+    <div><img src="/images/panel_bottom.gif" alt="Decorative image for area panel" /></div>
+</div>
+
+<!--AREA 2...................................-->
+
+<div class="areapanel-r">
+    <div><img src="/images/panel_top.gif" alt="Decorative image for area panel" /></div>
+    <ul class="row1">
+
+        <li>
+            <input rel="bayswater" name="part_postcode[]" type="checkbox" value="W2" />
+            Bayswater</li>
+        <li>
+            <input rel="lancaster" name="part_postcode[]" type="checkbox" value="W2" />
+            Lancaster Gate</li>
+        <li>
+            <input rel="paddington" name="part_postcode[]" type="checkbox" value="W2" />
+
+            Paddington</li>
+        <li>
+            <input rel="hydepark" name="part_postcode[]" type="checkbox" value="SW1X" />
+            Hyde Park Estate</li>
+        <li>
+            <input rel="marbelarch" name="part_postcode[]" type="checkbox" value="W1N" />
+            Marble Arch</li>
+
+        <li  class="allareas"><input type="checkbox" class="all-areas"/>
+            All Areas</li>
+    </ul>
+    <div><img src="/images/panel_bottom.gif" alt="Decorative image for area panel" /></div>
+</div>
+
+<div class="clearfix"></div>
+<!--AREA 3...................................-->
+
+<div class="areapanel">
+    <div><img src="/images/panel_top.gif" alt="Decorative image for area panel" /></div>
+    <ul class="row2">
+        <li>
+            <input rel="Kensington" name="part_postcode[]" type="checkbox" value="W8" />
+            Kensington</li>
+        <li>
+            <input rel="southkensington" name="part_postcode[]" type="checkbox" value="SW7" />
+
+            South Kensington</li>
+        <li>
+            <input rel="brompton" name="part_postcode[]" type="checkbox" value="SW3" />
+            Brompton</li>
+        <li>
+            <input rel="chelsea" name="part_postcode[]" type="checkbox" value="SW3" />
+            Chelsea</li>
+
+        <li>
+            <input rel="belgravia" name="part_postcode[]" type="checkbox" value="SW1X,SW1W" />
+            Belgravia</li>
+        <li>
+            <input rel="knightsbridge" name="part_postcode[]" type="checkbox" value="SW1X, SW3, SW7" />
+            Knightsbridge</li>
+        <li>
+            <input rel="victoria" name="part_postcode[]" type="checkbox" value="SW1" />
+
+            Victoria</li>
+        <li>
+            <input rel="mayfair" name="part_postcode[]" type="checkbox" value="W1" />
+            Mayfair</li>
+        <li class="allareas"><input type="checkbox" class="all-areas"/>
+            All Areas</li>
+    </ul>
+
+    <div><img src="/images/panel_bottom.gif" alt="Decorative image for area panel" /></div>
+</div>
+
+<!--AREA 4...................................-->
+
+<div class="areapanel-r">
+    <div><img src="/images/panel_top.gif" alt="Decorative image for area panel" /></div>
+    <ul class="row2">
+        <li>
+            <input rel="earlscourt" name="part_postcode[]" type="checkbox" value="SW5,SW10" />
+
+            Earl's Court</li>
+        <li>
+            <input rel="fulham" name="part_postcode[]" type="checkbox" value="SW6" />
+            Fulham</li>
+        <li>
+            <input rel="baronscourt" name="part_postcode[]" type="checkbox" value="W6" />
+            Barons Court</li>
+
+        <li>
+            <input rel="wkensington" name="part_postcode[]" type="checkbox" value="w14" />
+            West Kensington</li>
+        <li>
+            <input rel="Olympia<" name="part_postcode[]" type="checkbox" value="W14" />
+            Olympia</li>
+        <li class="allareas2"><input type="checkbox" class="all-areas"/>
+            All Areas</li>
+
+    </ul>
+    <div><img src="/images/panel_bottom.gif" alt="Decorative image for area panel" /></div>
+</div>
+
+<div class="clearfix"></div>
+<!--AREA 5...................................-->
+
+<div class="areapanel">
+    <div><img src="/images/panel_top.gif" alt="Decorative image for area panel" /></div>
+    <ul class="row3">
+
+        <li>
+            <input rel="ShepherdsBush" name="part_postcode[]" type="checkbox" value="W12)" />
+            Shepherd's Bush</li>
+        <li>
+            <input rel="Hammersmith" name="part_postcode[]" type="checkbox" value="W6" />
+            Hammersmith</li>
+        <li>
+            <input rel="BrookGreen" name="part_postcode[]" type="checkbox" value="W14,W6" />
+
+            Brook Green</li>
+        <li>
+            <input rel="Chiswick" name="part_postcode[]" type="checkbox" value="W4" />
+            Chiswick</li>
+        <li>
+            <input rel="Ealing" name="part_postcode[]" type="checkbox" value="W5,W13" />
+            Ealing & Acton</li>
+
+        <li class="allareas2"><input type="checkbox" class="all-areas"/>
+            All Areas</li>
+    </ul>
+    <div><img src="/images/panel_bottom.gif" alt="Decorative image for area panel" /></div>
+</div>
+
+<!--AREA 6...................................-->
+
+<div class="areapanel-r">
+
+    <div><img src="/images/panel_top.gif" alt="Decorative image for area panel" /></div>
+    <ul class="row3">
+        <li>
+            <input rel="hollandpark" name="part_postcode[]" type="checkbox" value="W8,W11,W14" />
+            Maida Vale</li>
+        <li>
+            <input rel="warwickAvenue" name="part_postcode[]" type="checkbox" value="W9" />
+            Warwick Avenue</li>
+
+        <li>
+            <input rel="marylebone" name="part_postcode[]" type="checkbox" value="W1" />
+            Marylebone</li>
+        <li>
+            <input rel="bakerstreet" name="part_postcode[]" type="checkbox" value="W1U" />
+            Baker Street</li>
+        <li>
+            <input rel="fitzrovia" name="part_postcode[]" type="checkbox" value="WC1" />
+
+            Fitzrovia</li>
+        <li>
+            <input rel="stjohnswood" name="part_postcode[]" type="checkbox" value="NW8" />
+            St. John's Wood</li>
+        <li>
+            <input rel="regentspark" name="part_postcode[]" type="checkbox" value="NW1" />
+            Regent's Park</li>
+
+        <li>
+            <input rel="camden" name="part_postcode[]" type="checkbox" value="NW1" />
+            Camden</li>
+        <li class="allareas"><input type="checkbox" class="all-areas"/>
+            All Areas</li>
+    </ul>
+    <div><img src="/images/panel_bottom.gif" alt="Decorative image for area panel" /></div>
+</div>
+
+<div class="clearfix"></div>
+
+<!--  <h2  class="price_head">Number of bedrooms:</h2>
+<br />
+<select name="bedrooms">
+<option value="" selected="selected">Studio +</option>
+         <option value="1">1+ bedrooms</option>
+         <option value="2">2+ bedrooms</option>
+         <option value="3">3+ bedrooms</option>
+         <option value="4">4+ bedrooms</option>
+         <option value="5">5+ bedrooms</option>
+
+</select>
+-->
+<div class="clearfix"></div>
+
+<!--PRICE RANGE...................................-->
+<h2 class="price_head">Price range</h2>
+
+<input type="hidden" name="instruction_type" id="instruction_type" value="Letting"/>
+<input type="hidden" name="bedrooms" id="bedrooms"/>
+
+<p>
+
+    <label>Min price:
+        <select name="minpricew" id="minprice" class="price-minmax"></select></label></p>
+
+<p>
+    <label>Max price:
+        <select name="maxpricew" id="maxprice"  class="price-minmax"></select></label></p>
+
+<p>
+    <label>Bedrooms:
+        <select name="bedrooms" id="bedrooms"  class="price-minmax">
+            <option value="" selected="selected">Studio +</option>
+
+            <option value="1">1+ bedrooms</option>
+            <option value="2">2+ bedrooms</option>
+            <option value="3">3+ bedrooms</option>
+            <option value="4">4+ bedrooms</option>
+            <option value="5">5+ bedrooms</option>
+        </select></label></p>
+
+<div class="clearfix"></div>
+
+<p><strong>Sort By</strong>
+    <input name="orderby" type="radio" value="price asc" checked="checked"/>
+    Low to High <input name="orderby" type="radio" value="price desc"/> High to Low</p>
+<input type="hidden" name="map_area" value=""/>
+<input type="hidden" name="instruction_type" value="Letting"/>
+
+<input name="image" type=image src="/images/search_list2.gif" onclick="$(this).up('form').action = '/search/'" alt="Search" class="submit" title="Search for Properties" value="Search"/>&nbsp;&nbsp;<input name="image" type=image src="/images/search_map2.gif" alt="Search" class="submit" title="Search for Properties" value="Search" onclick="$(this).up('form').action = '/search2/'"/>
+<input type="hidden" name="ajax_location" value="" />
+</form>
+<div class="clearfix"></div>
+</div>
+
+<div class="clearfix"></div>
+</div>
+
+</div>
+
+<!--END CONTENT.......................................-->
+<div id="footer-container">
+
+    <div id="footer">
+
+        <!--Valuation.....................-->
+        <div class="valuation">
+            <h2>REQUEST PROPERTY DETAILS<br />
+                <strong>REGISTER WITH US</strong><br />
+
+            </h2>
+            <form action="/formmail" method="post" id="contactForm">
+                <input name="html" type="hidden" value="1" />
+                <input name="subject" type="hidden" id="subject" value="Registration form from the website" />
+                <input name="recipient" type="hidden" id="recipient" value="info@sandersonslondon.co.uk"/>
+                <input name="redirect" type="hidden" id="redirect" value="/register_thanks.html" />
+
+
+                <div class="l_col">
+                    <input name="Name" type="text" value="Name" />
+
+                    <textarea name="Address" cols="" rows="5">Address</textarea>
+
+                </div>
+
+                <div class="r_col">  <input name="Telephone" type="text" value="Telephone" />
+                    <input name="Email" type="text" value="Email" />  <select name="valuation type" >    <option value="Property to Buy" selected="selected">Property to Buy</option>
+                        <option value="Property to Rent">Property to Rent</option>
+                    </select>
+                    <input name="submit" type="image" src="/images/submit.png" class="submit" alt="Send" value="Submit" />
+                </div>
+
+
+                <div class="clearfix"></div>
+            </form>
+
+        </div>
+
+        <!--Premier Letting.....................-->
+
+        <div class="prem_lettings">
+            <h2>PREMIER LETTING SERVICE </h2>
+
+            <ul>
+
+                <li><strong>FREE</strong> Rent guarantee <br />
+                    &amp; legal cover</li>
+                <li><strong>FREE</strong> Professional Inventory</li>
+                <li><strong>FREE</strong> Gas Safety Certificate</li>  <li><strong>FREE </strong>Energy Performance Certricate</li>
+
+            </ul>
+
+        </div>
+
+        <div class="copyright"> <p><a href="http://www.facebook.com/pages/Sandersons/164680240261382" target="_blank"><img src="/images/facebook.gif" alt="Facebook" width="44" height="44" border="0" /></a> <a href="http://twitter.com/#!/sandersonsw11" target="_blank"><img src="/images/twitter.gif" alt="Twitter" width="43" height="44" border="0" /></a> <a href="mailto:info@sandersonslondon.co.uk"><img src="/images/email.gif" alt="Email us" width="45" height="42" border="0" /></a></p>
+            <p>©2010 Sandersons. All rights reserved <br />
+                <a href="terms.html">Terms of Use</a> |  <a href="privacy_policy.html">Privacy Policy</a> | Site by <a href="http://www.thepropertyjungle.com">The Property Jungle</a><br />
+
+                <br />
+            </p>
+            <p><img src="/images/property-ombudsman-lettings.gif" alt="Property Ombudsman Lettings" title="Property Ombudsman Lettings" /> <img src="/images/property-ombudsman-sales.gif" alt="Property Ombudsman Sales" title="Property Ombudsman Sales" /> <img src="/images/oft.gif"  title="Office of fair Trade" alt="Office of fair Trade" /></p><p><img src="/images/mydeposit.gif" alt="My Depoit.co.uk - Veri-check" width="230" height="32" border="0" usemap="#Map" />
+            <map name="Map" id="Map">
+                <area shape="rect" coords="141,2,236,36" href="vericheck.html" />
+            </map></p>
+
+        </div>
+
+
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    cssdropdown.startchrome("nav")
+</script>
+</body>
+</html>
