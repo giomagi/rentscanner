@@ -1,7 +1,7 @@
 - agent coverage: prioritise on volumes (acquisition module, add module to loader, add agent logo)
     - sequence 60-all london (barnard marcus) (html based) NO POST CODE IN LISTINGS --- SHIT
+    - bushells 10 (html based)
     - tates 40 (html based)
-    - shaws 35 (incl. let agreed + under offer) - specialised w14 (html-based)
     - john d wood 30 (html based)
     - aspire 30 (html based)
     - we! westbourne estates (rss based)
@@ -16,7 +16,6 @@
     - benham and reeves 10 (html based)
     - jac stratton 10? (html based)
     - coutts de lisle 10 (html based)
-    - bushells 10 (html based)
     - may and co 10 (html based)
     - mountgrange heritage 10? (html based)
     - lhh residential 10- (html based) positional parsing
