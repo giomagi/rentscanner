@@ -5,6 +5,7 @@ from main.houses.agents.foxtons import Foxtons
 from main.houses.agents.kfh import KFH
 from main.houses.agents.knight_frank import KnightFrank
 from main.houses.agents.marsh_and_parsons import MarshAndParsons
+from main.houses.agents.sandersons import Sandersons
 from main.houses.agents.shaws import Shaws
 from main.houses.agents.webdadi import Chard, Dexters, LawsonRutter
 from main.houses.agents.winkworth import Winkworth
@@ -15,7 +16,7 @@ class Loader(object):
         self.config = config
 
     def agents(self):
-        return [Shaws,  FaronSutaria, MarshAndParsons, DouglasAndGordon, Dexters, Chard, LawsonRutter, KFH, KnightFrank, Winkworth, Foxtons]
+        return [Sandersons, Shaws,  FaronSutaria, MarshAndParsons, DouglasAndGordon, Dexters, Chard, LawsonRutter, KFH, KnightFrank, Winkworth, Foxtons]
 
     def name(self, agent):
         asString = str(agent)
